@@ -3,6 +3,7 @@ package com.michaelszymczak.livingdocumentation;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
+import static org.junit.Assert.*;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.web.WebAppConfiguration;
 
@@ -11,8 +12,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 public class AppScenario {
     @Given("^I am on the welcome page$")
     public void i_am_on_the_welcome_page() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+        assertTrue(true);
     }
 
     @Then("^I can see some text$")

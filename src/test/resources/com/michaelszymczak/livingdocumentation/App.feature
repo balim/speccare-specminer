@@ -6,3 +6,6 @@ Feature:
 Scenario: Page displays text
   Given I am on the welcome page
   Then I can see some text
+
+Scenario: Page displays text
+  Given I am on the welcome page
