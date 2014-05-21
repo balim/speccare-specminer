@@ -1,4 +1,4 @@
-package com.michaelszymczak.livingdocumentation;
+package com.michaelszymczak.livingdocumentation.sandbox;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class HelloController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String printWelcome(ModelMap model) {
-		model.addAttribute("message", "Hello world!");
+		model.addAttribute("message", "Hello world! It's com.michaelszymczak.livingdocumentation.sandbox.HelloController!");
 		return "hello";
 	}
 }

@@ -1,4 +1,4 @@
-package com.michaelszymczak.livingdocumentation;
+package com.michaelszymczak.livingdocumentation.sandbox;
 
 import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
@@ -17,7 +17,6 @@ public class AppScenario {
 
     @Then("^I can see some text$")
     public void i_can_see_some_text() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+        assertTrue(true);
     }
 }
