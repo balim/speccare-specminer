@@ -162,6 +162,20 @@
                 </executions>
             </plugin>
 
+            <plugin>
+                <groupId>org.pitest</groupId>
+                <artifactId>pitest-maven</artifactId>
+                <version>1.0.0</version>
+                <configuration>
+                    <targetClasses>
+                        <param>com.michaelszymczak.livingdocumentation*</param>
+                    </targetClasses>
+                    <targetTests>
+                        <param>com.michaelszymczak.livingdocumentation*</param>
+                    </targetTests>
+                </configuration>
+            </plugin>
+
 
         </plugins>
     </build>
