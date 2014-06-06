@@ -1,0 +1,9 @@
+# see http://docs.travis-ci.com/user/languages/java/ for more hints
+language: java
+
+jdk:
+  - oraclejdk7
+  - openjdk7
+  - openjdk6
+
+script: mvn clean verify
