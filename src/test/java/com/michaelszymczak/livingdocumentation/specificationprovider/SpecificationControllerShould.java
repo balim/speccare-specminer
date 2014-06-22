@@ -14,7 +14,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration("file:src/test/resources/applicationTestContext.xml")
+@ContextConfiguration("/applicationTestContext.xml")
 public class SpecificationControllerShould {
 
 
