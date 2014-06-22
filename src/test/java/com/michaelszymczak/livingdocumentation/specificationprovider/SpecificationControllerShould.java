@@ -19,7 +19,6 @@ public class SpecificationControllerShould {
 
 
     @Test public void nothing() throws Exception {
-
     }
 
     private MockMvc mockMvc;
