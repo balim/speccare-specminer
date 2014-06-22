@@ -8,7 +8,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 @WebAppConfiguration
-@ContextConfiguration("file:src/main/webapp/WEB-INF/applicationTestContext.xml")
+@ContextConfiguration("file:src/test/resources/applicationTestContext.xml")
 public class AppScenario {
     @Given("^I am on the welcome page$")
     public void i_am_on_the_welcome_page() throws Throwable {

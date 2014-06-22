@@ -5,7 +5,8 @@
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <import resource="mvc-dispatcher-servlet.xml"/>
+    <!--<import resource="file:../../main/webapp/WEB-INF/mvc-dispatcher-servlet.xml"/>-->
+    <import resource="classpath:mvc-dispatcher-servlet.xml"/>
     <context:property-placeholder location="classpath:app.test.properties" order="-1"/>
 
 </beans>
