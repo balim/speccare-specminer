@@ -23,12 +23,17 @@ public class FeatureFileRetrieverShould {
 
     }
 
-//    TODO: Ready
-//    @Test
-//    public void findFeatureFilesBasedOnTheirExtensionAndIgnoreTheRest() throws IOException {
-//        givenFilesInDirectory(featuresDir, new String[]{"foo.feature", "bar.feature", "baz.txt"});
-//        assertThat(retriever.getFiles(), containsOnlyFilenamesInDirectory(featuresDir, new String[]{"foo.feature", "bar.feature"}));
-//    }
+    @Test
+    public void findFeatureFilesBasedOnTheirExtensionAndIgnoreTheRest() throws IOException {
+        givenFilesInDirectory(featuresDir, new String[]{"foo.feature", "bar.feature", "baz.txt"});
+        assertThat(retriever.getFiles(), containsOnlyFilenamesInDirectory(featuresDir, new String[]{"foo.feature", "bar.feature"}));
+    }
+
+    @Test
+    public void findFeatureFilesAlsoInSubdirectoriesRelativeToTheBaseDirectory() throws IOException {
+        givenFilesInDirectory(featuresDir, new String[]{"bar/foo.feature", "foo/bar/baz/bar.feature", "foo/bar/baz/baz.feature"});
+        assertThat(retriever.getFiles(), containsOnlyFilenamesInDirectory(featuresDir, new String[]{"bar/foo.feature", "foo/bar/baz/bar.feature", "foo/bar/baz/baz.feature"}));
+    }
 
 
 
@@ -52,6 +57,7 @@ public class FeatureFileRetrieverShould {
 
     private void givenFilesInDirectory(Path featuresDirectory, String[] filePaths) throws IOException {
         for (String filePath : filePaths) {
+            Files.createDirectories(featuresDirectory.resolve(filePath).getParent()).toFile().deleteOnExit();
             Files.createFile(featuresDirectory.resolve(filePath)).toFile().deleteOnExit();
         }
     }
