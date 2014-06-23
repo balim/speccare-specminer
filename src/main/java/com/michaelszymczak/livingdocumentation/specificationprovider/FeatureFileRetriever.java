@@ -1,6 +1,7 @@
 package com.michaelszymczak.livingdocumentation.specificationprovider;
 
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.*;
@@ -40,8 +41,8 @@ public class FeatureFileRetriever {
         public FileVisitResult visitFile(Path path, BasicFileAttributes attrs) throws IOException {
             Path name = path.getFileName();
             if (name != null && matcher.matches(name)) {
-//                List<String> content = Files.readAllLines(path, Charset.defaultCharset());
-                foundPaths.put(path.toFile().getAbsolutePath(), new LinkedList<String>());
+                List<String> content = Files.readAllLines(path, Charset.defaultCharset());
+                foundPaths.put(path.toFile().getAbsolutePath(), content);
             }
             return CONTINUE;
         }
