@@ -3,11 +3,13 @@ package com.michaelszymczak.livingdocumentation.specificationprovider;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Scenario {
+class Scenario {
 
-    private String name = null;
+    private String name;
+    private TextFragmentProvider tfp;
 
-    public Scenario(List<String> scenarioContent) {
+    public Scenario(TextFragmentProvider textFragmentProvider, List<String> scenarioContent) {
+        tfp = textFragmentProvider;
         name = extractName(scenarioContent);
     }
 
@@ -17,35 +19,13 @@ public class Scenario {
 
 
     private String extractName(List<String> scenarioContent) {
-        ArrayList<String> scenarioNames = extractAllPotentialScenarioNames(scenarioContent);
+        ArrayList<String> scenarioNames = tfp.getAllFragmentsThatFollows(scenarioContent, new String[]{"Scenario:", "Scenario Outline:"});
         if (scenarioNames.size() == 0) {
-            throw new InvalidScenarioContentException("No 'Scenario:' nor 'Scenario Outline:' string in scenario content: " + scenarioContent.toString());
+            throw new InvalidScenarioContentException("No 'Scenario:' nor 'Scenario Outline:' line in scenario content: " + scenarioContent.toString());
         }
         if (scenarioNames.size() > 1) {
-            throw new InvalidScenarioContentException("Too many 'Scenario:' or 'Scenario Outline:' strings in scenario content: " + scenarioContent.toString());
+            throw new InvalidScenarioContentException("Too many 'Scenario:' or 'Scenario Outline:' lines in scenario content: " + scenarioContent.toString());
         }
         return scenarioNames.get(0);
-    }
-
-    private ArrayList<String> extractAllPotentialScenarioNames(List<String> scenarioContent) {
-        ArrayList<String> scenarioNames = new ArrayList<>();
-        for(String line : scenarioContent) {
-            if (null != searchForScenarioNameInLine(line)) {
-                scenarioNames.add(searchForScenarioNameInLine(line));
-            }
-        }
-
-        return scenarioNames;
-    }
-
-    private String searchForScenarioNameInLine(String line) {
-        line = line.trim();
-        if (line.startsWith("Scenario:")) {
-            return line.substring(9).trim();
-        }
-        if (line.startsWith("Scenario Outline:")) {
-            return line.substring(17).trim();
-        }
-        return null;
     }
 }

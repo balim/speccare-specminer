@@ -8,7 +8,7 @@ import java.util.*;
 
 import static java.nio.file.FileVisitResult.CONTINUE;
 
-public class FeatureFileRetriever {
+class FeatureFileRetriever {
 
     private final Path featuresDir;
 
