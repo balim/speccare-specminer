@@ -19,38 +19,31 @@ import static org.junit.Assert.assertThat;
 
 public class FeatureFileRetrieverShould {
 
-    @Test
-    public void returnNoFileIfNoFeatureFiles() throws IOException {
+    @Test public void returnNoFileIfNoFeatureFiles() throws IOException {
         givenEmptyDirectory(featuresDir);
         assertThatNoFilenamesReturnedInGivenDirectory(retriever.getFiles(), featuresDir);
 
     }
 
-    @Test
-    public void findFeatureFilesBasedOnTheirExtensionAndIgnoreTheRest() throws IOException {
+    @Test public void findFeatureFilesBasedOnTheirExtensionAndIgnoreTheRest() throws IOException {
         givenFilesInDirectory(featuresDir, new String[]{"foo.feature", "bar.feature", "baz.txt"});
         assertThat(retriever.getFiles(), containsOnlyFilenamesInDirectory(featuresDir, new String[]{"foo.feature", "bar.feature"}));
     }
 
-    @Test
-    public void findFeatureFilesAlsoInSubdirectoriesRelativeToTheBaseDirectory() throws IOException {
+    @Test public void findFeatureFilesAlsoInSubdirectoriesRelativeToTheBaseDirectory() throws IOException {
         givenFilesInDirectory(featuresDir, new String[]{"bar/foo.feature", "foo/bar/baz/bar.feature", "foo/bar/baz/baz.feature"});
         assertThat(retriever.getFiles(), containsOnlyFilenamesInDirectory(featuresDir, new String[]{"bar/foo.feature", "foo/bar/baz/bar.feature", "foo/bar/baz/baz.feature"}));
     }
 
-    @Test
-    public void retrieveTheContentOfTheFile() throws IOException {
+    @Test public void retrieveTheContentOfTheFile() throws IOException {
         givenFilesWithContentInDirectory(featuresDir, new String[]{"foo.feature", "bar.feature"}, new String[]{"Content of foo", "Content\nOf\nBAR"});
         assertThat(retriever.getFiles(), containsFilesWithContentInDirectory(featuresDir, new String[]{"foo.feature", "bar.feature"}, new String[]{"Content of foo", "Content\nOf\nBAR"}));
     }
 
 
-
     private Path featuresDir;
     private FeatureFileRetriever retriever;
-
-    @Before
-    public void setUp() throws IOException {
+    @Before public void setUp() throws IOException {
         featuresDir = Files.createTempDirectory("LivingDocumentationFeaturesTempDir");
         featuresDir.toFile().deleteOnExit();
         retriever = new FeatureFileRetriever(featuresDir);
