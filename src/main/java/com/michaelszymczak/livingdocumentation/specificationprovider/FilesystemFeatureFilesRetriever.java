@@ -8,14 +8,15 @@ import java.util.*;
 
 import static java.nio.file.FileVisitResult.CONTINUE;
 
-class FeatureFileRetriever {
+class FilesystemFeatureFilesRetriever implements FeatureFilesRetriever {
 
     private final Path featuresDir;
 
-    public FeatureFileRetriever(Path featuresDir) {
+    public FilesystemFeatureFilesRetriever(Path featuresDir) {
         this.featuresDir = featuresDir;
     }
 
+    @Override
     public Map<String, List<String>> getFiles() throws IOException {
         Finder fileVisitor = new Finder(FileSystems.getDefault().getPathMatcher("glob:*.feature"));
         Files.walkFileTree(featuresDir, EnumSet.of(FileVisitOption.FOLLOW_LINKS), Integer.MAX_VALUE, fileVisitor);

@@ -18,7 +18,7 @@ import java.util.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
-public class FeatureFileRetrieverShould {
+public class FilesystemFeatureFilesRetrieverShould {
 
     @Test public void returnNoFileIfNoFeatureFiles() throws IOException {
         givenEmptyDirectory(featuresDir);
@@ -52,11 +52,11 @@ public class FeatureFileRetrieverShould {
 
 
     private Path featuresDir;
-    private FeatureFileRetriever retriever;
+    private FilesystemFeatureFilesRetriever retriever;
     @Before public void setUp() throws IOException {
         featuresDir = Files.createTempDirectory("LivingDocumentationFeaturesTempDir");
         featuresDir.toFile().deleteOnExit();
-        retriever = new FeatureFileRetriever(featuresDir);
+        retriever = new FilesystemFeatureFilesRetriever(featuresDir);
     }
 
     private void givenEmptyDirectory(Path featuresDirectory) {

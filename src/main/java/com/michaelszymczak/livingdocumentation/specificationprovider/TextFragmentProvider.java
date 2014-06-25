@@ -15,7 +15,7 @@ class TextFragmentProvider {
         return scenarioNames;
     }
 
-    private String returnStringFollowingAnyOf(String line, String[] startingStrings) {
+    public String returnStringFollowingAnyOf(String line, String[] startingStrings) {
         line = line.trim();
         for (String start : startingStrings) {
             if (line.startsWith(start)) {

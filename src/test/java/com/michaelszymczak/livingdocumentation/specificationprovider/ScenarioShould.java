@@ -16,6 +16,17 @@ public class ScenarioShould {
         Assert.assertSame(feature, scenario.getFeature());
     }
 
+    @Test public void provideOriginalContentOfTheScenarioSoThatItCanBeDisplayedInDocumentation() {
+        List<String> scenarioContent = Arrays.asList(
+                "Scenario: Foo title",
+                "    Given bar"
+        );
+
+        Scenario scenario = createScenarioFromContent(scenarioContent);
+
+        Assert.assertEquals(scenarioContent, scenario.getContent());
+    }
+
     @Test public void provideScenarioNameBasedOnTheContentPassedDuringCreation() {
         List<String> scenarioContent = Arrays.asList(
             "Scenario: Foo title",

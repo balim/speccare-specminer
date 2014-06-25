@@ -8,11 +8,13 @@ class Scenario {
     private final String name;
     private final TextFragmentProvider tfp;
     private final Feature feature;
+    private List<String> content;
 
     public Scenario(TextFragmentProvider textFragmentProvider, List<String> scenarioContent, Feature wrappingFeature) {
         tfp = textFragmentProvider;
-        name = extractName(scenarioContent);
         feature = wrappingFeature;
+        content = scenarioContent;
+        name = extractName(scenarioContent);
     }
 
     public String getName() {
@@ -32,5 +34,9 @@ class Scenario {
             throw new InvalidScenarioContentException("Too many 'Scenario:' or 'Scenario Outline:' lines in scenario content: " + scenarioContent.toString());
         }
         return scenarioNames.get(0);
+    }
+
+    public List<String> getContent() {
+        return content;
     }
 }

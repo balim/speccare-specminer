@@ -9,11 +9,13 @@ class Feature {
     private final String name;
     private final TextFragmentProvider tfp;
     private final String path;
+    private List<String> content;
 
     public Feature(TextFragmentProvider textFragmentProvider, String pathToFeatureFile, List<String> featureFileContent) {
         tfp = textFragmentProvider;
-        name = extractName(featureFileContent);
         path = pathToFeatureFile;
+        content = featureFileContent;
+        name = extractName(featureFileContent);
     }
 
     public String getName() {
@@ -22,6 +24,10 @@ class Feature {
 
     public String getPath() {
         return path;
+    }
+
+    public List<String> getContent() {
+        return content;
     }
 
     private String extractName(List<String> featureFileContent) {

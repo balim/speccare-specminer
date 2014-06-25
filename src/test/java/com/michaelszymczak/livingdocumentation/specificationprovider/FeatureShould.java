@@ -32,6 +32,12 @@ public class FeatureShould {
         Assert.assertEquals("/path/to/myFeature.feature", feature.getPath());
     }
 
+    @Test public void storeContentOfTheFeatureFileAsIsSoThatWeKnowTheExactContentOfTheOriginalFile() {
+        List<String> featureFileContent = Arrays.asList("Feature: My feature", "  Next line");
+        Feature feature = createFeaturePassingContent(featureFileContent);
+        Assert.assertEquals(featureFileContent, feature.getContent());
+    }
+
     @Test(expected = InvalidFeatureContentException.class)
     public void throwExceptionIfNoFeatureLine() {
         List<String> featureFileContent = Arrays.asList("Given Foo without feature name");
