@@ -5,9 +5,16 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 public class ScenarioShould {
+
+    @Test public void storeReferenceToTheWrappingFeatureSoThatOnaCanFindTheFeaturesFile() {
+        Feature feature = createWrappingFeature();
+        Scenario scenario = createScenarioPassingWrappingFeature(feature);
+        Assert.assertSame(feature, scenario.getFeature());
+    }
 
     @Test public void provideScenarioNameBasedOnTheContentPassedDuringCreation() {
         List<String> scenarioContent = Arrays.asList(
@@ -81,7 +88,15 @@ public class ScenarioShould {
     }
 
     private Scenario createScenarioFromContent(List<String> scenarioContent) {
-        return new Scenario(new TextFragmentProvider(), scenarioContent);
+        return new Scenario(new TextFragmentProvider(), scenarioContent, createWrappingFeature());
+    }
+
+    private Scenario createScenarioPassingWrappingFeature(Feature wrappingFeature) {
+        return new Scenario(new TextFragmentProvider(), Arrays.asList("Scenario: Foo"), wrappingFeature);
+    }
+
+    private Feature createWrappingFeature() {
+        return new Feature(new TextFragmentProvider(), "/path/to/Feature.feature", Arrays.asList("Feature: Foo"));
     }
 
 }

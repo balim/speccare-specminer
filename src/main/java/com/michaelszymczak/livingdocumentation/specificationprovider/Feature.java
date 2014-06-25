@@ -6,17 +6,14 @@ import java.util.List;
 
 class Feature {
 
-    private String name;
-    private TextFragmentProvider tfp;
-    private String path;
-    private List<Scenario> scenarios;
+    private final String name;
+    private final TextFragmentProvider tfp;
+    private final String path;
 
-    public Feature(TextFragmentProvider textFragmentProvider, String pathToFeatureFile, List<String> featureFileContent, List<Scenario> featureScenarios) {
+    public Feature(TextFragmentProvider textFragmentProvider, String pathToFeatureFile, List<String> featureFileContent) {
         tfp = textFragmentProvider;
         name = extractName(featureFileContent);
         path = pathToFeatureFile;
-        scenarios = featureScenarios;
-
     }
 
     private String extractName(List<String> featureFileContent) {
@@ -36,9 +33,5 @@ class Feature {
 
     public String getPath() {
         return path;
-    }
-
-    public List<Scenario> getScenarios() {
-        return scenarios;
     }
 }

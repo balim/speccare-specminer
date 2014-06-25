@@ -32,12 +32,6 @@ public class FeatureShould {
         Assert.assertEquals("/path/to/myFeature.feature", feature.getPath());
     }
 
-    @Test public void storeScenariosSoThatThenCanBeRetrievedLater() {
-        List<Scenario> myScenarios = createSampleScenarios();
-        Feature feature = createFeaturePassingScenarios(myScenarios);
-        Assert.assertSame(myScenarios, feature.getScenarios());
-    }
-
     @Test(expected = InvalidFeatureContentException.class)
     public void throwExceptionIfNoFeatureLine() {
         List<String> featureFileContent = Arrays.asList("Given Foo without feature name");
@@ -52,25 +46,15 @@ public class FeatureShould {
 
 
 
-    private Feature createFeaturePassingScenarios(List<Scenario> featureScenarios) {
-        return createFeature(featureScenarios, "/foo/bar/featureFile.feature", Arrays.asList("Feature: foo"));
-    }
-
     private Feature createFeaturePassingPathToFeatureFile(String pathToFeatureFile) {
-        return createFeature(createSampleScenarios(), pathToFeatureFile, Arrays.asList("Feature: foo"));
+        return createFeature(pathToFeatureFile, Arrays.asList("Feature: foo"));
     }
 
     private Feature createFeaturePassingContent(List<String> featureFileContent) {
-        return createFeature(createSampleScenarios(), "/foo/bar/featureFile.feature", featureFileContent);
+        return createFeature("/foo/bar/featureFile.feature", featureFileContent);
     }
 
-    private Feature createFeature(List<Scenario> featureScenarios, String pathToFeatureFile, List<String> featureFileContent) {
-        return new Feature(new TextFragmentProvider(), pathToFeatureFile, featureFileContent, featureScenarios);
+    private Feature createFeature(String pathToFeatureFile, List<String> featureFileContent) {
+        return new Feature(new TextFragmentProvider(), pathToFeatureFile, featureFileContent);
     }
-
-    private List<Scenario> createSampleScenarios() {
-        return new LinkedList<>();
-    }
-
-
 }
