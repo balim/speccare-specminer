@@ -1,16 +1,22 @@
 package com.michaelszymczak.livingdocumentation.specificationprovider;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 class Feature {
 
     private String name;
     private TextFragmentProvider tfp;
+    private String path;
+    private List<Scenario> scenarios;
 
     public Feature(TextFragmentProvider textFragmentProvider, String pathToFeatureFile, List<String> featureFileContent, List<Scenario> featureScenarios) {
         tfp = textFragmentProvider;
         name = extractName(featureFileContent);
+        path = pathToFeatureFile;
+        scenarios = featureScenarios;
+
     }
 
     private String extractName(List<String> featureFileContent) {
@@ -26,5 +32,13 @@ class Feature {
 
     public String getName() {
         return name;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public List<Scenario> getScenarios() {
+        return scenarios;
     }
 }
