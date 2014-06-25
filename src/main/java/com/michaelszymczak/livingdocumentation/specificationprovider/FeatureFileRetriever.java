@@ -22,6 +22,8 @@ class FeatureFileRetriever {
         return fileVisitor.getFoundPaths();
     }
 
+
+
     private static class Finder extends SimpleFileVisitor<Path> {
 
         private final PathMatcher matcher;

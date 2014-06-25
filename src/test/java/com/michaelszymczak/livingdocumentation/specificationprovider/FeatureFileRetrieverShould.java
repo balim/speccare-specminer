@@ -3,6 +3,7 @@ package com.michaelszymczak.livingdocumentation.specificationprovider;
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
+import static org.hamcrest.core.Is.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -39,6 +40,15 @@ public class FeatureFileRetrieverShould {
         givenFilesWithContentInDirectory(featuresDir, new String[]{"foo.feature", "bar.feature"}, new String[]{"Content of foo", "Content\nOf\nBAR"});
         assertThat(retriever.getFiles(), containsFilesWithContentInDirectory(featuresDir, new String[]{"foo.feature", "bar.feature"}, new String[]{"Content of foo", "Content\nOf\nBAR"}));
     }
+
+    @Test public void returnAbsoluteFilePathAsKeyAndListOfLinesInsideTheFileAsValue() throws IOException {
+        givenFilesWithContentInDirectory(featuresDir, new String[]{"foo/bar.feature"}, new String[]{"Content of bar"});
+        assertThat(retriever.getFiles().get(featuresDir + "/foo/bar.feature").get(0), is("Content of bar"));
+    }
+
+
+
+
 
 
     private Path featuresDir;

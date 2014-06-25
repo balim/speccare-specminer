@@ -16,6 +16,14 @@ class Feature {
         path = pathToFeatureFile;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
     private String extractName(List<String> featureFileContent) {
         ArrayList<String> names = tfp.getAllFragmentsThatFollows(featureFileContent, new String[]{"Feature:"});
         if (names.size() == 0) {
@@ -25,13 +33,5 @@ class Feature {
             throw new InvalidFeatureContentException("Too many 'Feature:' lines in feature content: " + featureFileContent.toString());
         }
         return names.get(0);
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getPath() {
-        return path;
     }
 }
