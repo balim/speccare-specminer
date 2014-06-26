@@ -4,12 +4,49 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
 public class ScenariosCreatorShould {
 
-    private ScenariosCreator sc;
+    @Test public void createAllScenariosFoundInAllFeatureFiles() throws IOException {
+        givenFeatureFilesRetrieverHasTwoFeatureFilesContainingTwoScenariosEach();
+        List<Scenario> scenarios = sc.create();
+        Assert.assertEquals(4, scenarios.size());
+    }
+
+    @Test public void createScenariosBasedOnDataReceivedFromFeatureFiles() throws IOException {
+        givenSomeFeatureFilesAndTheLastContaining(Arrays.asList(
+                "Feature: Feature3",
+                "",
+                "  Scenario: Feature 3, Scenario 1",
+                "    Given foo",
+                "  Scenario: Feature 3, Scenario 2",
+                "    Given foo",
+                "  Scenario: Feature 3, Scenario 3",
+                "    Given Feature 3, Scenario 3 precondition"
+        ));
+
+        List<Scenario> scenarios = sc.create();
+
+        assertLastScenarioCreatedWithFollowingContentAndFeatureContent(
+                scenarios,
+                Arrays.asList(
+                        "  Scenario: Feature 3, Scenario 3",
+                        "    Given Feature 3, Scenario 3 precondition"),
+                Arrays.asList(
+                        "Feature: Feature3",
+                        "",
+                        "  Scenario: Feature 3, Scenario 1",
+                        "    Given foo",
+                        "  Scenario: Feature 3, Scenario 2",
+                        "    Given foo",
+                        "  Scenario: Feature 3, Scenario 3",
+                        "    Given Feature 3, Scenario 3 precondition"
+                )
+        );
+    }
 
     @Test public void createScenariosUsingFeatureContent() {
         Feature feature = createFeatureWithContent(Arrays.asList(
@@ -20,7 +57,7 @@ public class ScenariosCreatorShould {
                 "    Then  some expected result"
         ));
 
-        List<Scenario> scenarios = sc.create(feature);
+        List<Scenario> scenarios = sc.createFromOneFeature(feature);
 
         Assert.assertEquals(Arrays.asList(
                 "  Scenario: Bar scenario",
@@ -31,7 +68,7 @@ public class ScenariosCreatorShould {
 
     @Test public void usePassedFeatureAsScenariosWrappingFeature() {
         Feature feature = createFeature();
-        List<Scenario> scenarios = sc.create(feature);
+        List<Scenario> scenarios = sc.createFromOneFeature(feature);
         Assert.assertSame(feature, scenarios.get(0).getFeature());
     }
 
@@ -47,7 +84,7 @@ public class ScenariosCreatorShould {
                 "    Given third foo"
         ));
 
-        List<Scenario> scenarios = sc.create(feature);
+        List<Scenario> scenarios = sc.createFromOneFeature(feature);
 
         Assert.assertEquals(Arrays.asList(
                 "  Scenario: Third scenario",
@@ -65,12 +102,43 @@ public class ScenariosCreatorShould {
                 "    Given second foo"
         ));
 
-        List<Scenario> scenarios = sc.create(feature);
+        List<Scenario> scenarios = sc.createFromOneFeature(feature);
 
         Assert.assertEquals(Arrays.asList(
                 "  Scenario Outline: Outline scenario",
                 "    Given second foo"
         ), scenarios.get(1).getContent());
+    }
+
+    private void assertLastScenarioCreatedWithFollowingContentAndFeatureContent(List<Scenario> scenarios, List<String> lastScenarioContent, List<String> lastScenarioFeatureContent) {
+        Scenario lastScenario = scenarios.get(scenarios.size() - 1);
+        Assert.assertEquals(lastScenarioContent, lastScenario.getContent());
+        Assert.assertEquals(lastScenarioFeatureContent, lastScenario.getFeature().getContent());
+    }
+
+    private void givenSomeFeatureFilesAndTheLastContaining(List<String> lastFeatureContent) {
+        givenFeatureFilesRetrieverHasTwoFeatureFilesContainingTwoScenariosEach();
+
+        retriever.files.put("/foo/bar/Feature3.feature", lastFeatureContent);
+    }
+
+    private void givenFeatureFilesRetrieverHasTwoFeatureFilesContainingTwoScenariosEach() {
+        retriever.files.put("Feature1.feature", Arrays.asList(
+                "Feature: Feature1",
+                "",
+                "  Scenario: Feature 1, Scenario 1",
+                "    Given foo",
+                "  Scenario: Feature 1, Scenario 2",
+                "    Given foo"
+        ));
+        retriever.files.put("foo/bar/Feature2.feature", Arrays.asList(
+                "Feature: Feature2",
+                "",
+                "  Scenario: Feature 2, Scenario 1",
+                "    Given foo",
+                "  Scenario: Feature 2, Scenario 2",
+                "    Given foo"
+        ));
     }
 
     private Feature createFeatureWithContent(List<String> content) {
@@ -87,12 +155,12 @@ public class ScenariosCreatorShould {
         ));
     }
 
-    @Test public void useProvidedFeatureAsTheWrappingFeature() {
-
-    }
+    private ScenariosCreator sc;
+    private FeatureFilesRetrieverStub retriever;
 
     @Before
     public void setUp() throws Exception {
-        sc = new ScenariosCreator(new TextFragmentProvider());
+        retriever = new FeatureFilesRetrieverStub();
+        sc = new ScenariosCreator(new TextFragmentProvider(), new FeaturesCreator(retriever));
     }
 }

@@ -1,18 +1,30 @@
 package com.michaelszymczak.livingdocumentation.specificationprovider;
 
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class ScenariosCreator {
 
     private TextFragmentProvider tfp;
+    private FeaturesCreator featuresCreator;
 
-    public ScenariosCreator(TextFragmentProvider textFragmentProvider) {
-        tfp = textFragmentProvider;
+    public ScenariosCreator(TextFragmentProvider textFragmentProvider, FeaturesCreator featuresCreator) {
+        this.tfp = textFragmentProvider;
+        this.featuresCreator = featuresCreator;
     }
 
-    public List<Scenario> create(Feature feature) {
+    public List<Scenario> create() throws IOException {
+        List<Scenario> scenarios = new ArrayList<>();
+        for (Feature feature : featuresCreator.create()) {
+            for (Scenario scenario : createFromOneFeature(feature)) {
+                scenarios.add(scenario);
+            }
+        }
+        return scenarios;
+    }
+
+    public List<Scenario> createFromOneFeature(Feature feature) {
 
         SingleScenarioCreator ssc = new SingleScenarioCreator(tfp, feature);
 
