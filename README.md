@@ -1,5 +1,6 @@
 livingDocumentation
 ===================
+[![Build Status](https://travis-ci.org/michaelszymczak/livingDocumentation.svg?branch=master)](https://travis-ci.org/michaelszymczak/livingDocumentation)
 
 Tool for creating living documentation
 
