@@ -11,7 +11,7 @@ import java.util.List;
 public class FeaturesCreatorShould {
 
     private FeatureFilesRetrieverStub retriever;
-    private FeaturesCreator featureCreator;
+    private FeaturesCreator fc;
 
     @Test public void createFeatureWithDataFromFeatureFilesRetriever() throws IOException {
         givenRetrieverReturningOneFeatureFile();
@@ -21,14 +21,14 @@ public class FeaturesCreatorShould {
 
     @Test public void createAsManyFeaturesAsFilesRetrieved() throws IOException {
         givenRetrieverReturningFiveFeatureFiles();
-        Assert.assertEquals(5, featureCreator.create().size());
+        Assert.assertEquals(5, fc.create().size());
     }
 
-    @Test public void createFeaturesRegardlesOfTheirPositionInRetrievedFiles() throws IOException {
+    @Test public void createFeaturesRegardlessOfTheirPositionInRetrievedFiles() throws IOException {
         givenRetrieverReturningFourFeatureFilesWithTheThirdContaining("/path/to/Third.feature",
                 Arrays.asList("Feature: My third feature", "  Next line of the third feature"));
 
-        assertThatOneFeatureMeetsCriteria(featureCreator.create(), "/path/to/Third.feature",
+        assertThatOneFeatureMeetsCriteria(fc.create(), "/path/to/Third.feature",
                 Arrays.asList("Feature: My third feature", "  Next line of the third feature"));
     }
 
@@ -58,7 +58,7 @@ public class FeaturesCreatorShould {
     }
 
     private Feature getFirstFeatureFeatureCreatorCreates() throws IOException {
-        return featureCreator.create().get(0);
+        return fc.create().get(0);
     }
 
     private void givenRetrieverReturningOneFeatureFile() {
@@ -75,6 +75,6 @@ public class FeaturesCreatorShould {
 
     @Before public void setUp() {
         retriever = new FeatureFilesRetrieverStub();
-        featureCreator = new FeaturesCreator(retriever);
+        fc = new FeaturesCreator(retriever);
     }
 }

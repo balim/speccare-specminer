@@ -1,8 +1,8 @@
-livingDocumentation
+Living Documentation Maintainer - WIP (not ready yet)
 ===================
 [![Build Status](https://travis-ci.org/michaelszymczak/livingDocumentation.svg?branch=master)](https://travis-ci.org/michaelszymczak/livingDocumentation)
 
-Tool for creating living documentation
+A tool for creating and maintaining living documentation.
 
 
 Future usage
