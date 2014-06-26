@@ -75,6 +75,6 @@ public class FeaturesCreatorShould {
 
     @Before public void setUp() {
         retriever = new FeatureFilesRetrieverStub();
-        fc = new FeaturesCreator(retriever);
+        fc = new FeaturesCreator(new TextFragmentProvider(), retriever);
     }
 }

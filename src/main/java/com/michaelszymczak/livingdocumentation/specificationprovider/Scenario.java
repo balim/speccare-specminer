@@ -10,7 +10,7 @@ class Scenario {
     private final String name;
     private final TextFragmentProvider tfp;
     private final Feature feature;
-    private List<String> content;
+    private final List<String> content;
 
     public Scenario(TextFragmentProvider textFragmentProvider, List<String> scenarioContent, Feature wrappingFeature) {
         tfp = textFragmentProvider;

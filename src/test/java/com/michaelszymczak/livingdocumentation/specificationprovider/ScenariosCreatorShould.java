@@ -161,6 +161,6 @@ public class ScenariosCreatorShould {
     @Before
     public void setUp() throws Exception {
         retriever = new FeatureFilesRetrieverStub();
-        sc = new ScenariosCreator(new TextFragmentProvider(), new FeaturesCreator(retriever));
+        sc = new ScenariosCreator(new TextFragmentProvider(), new FeaturesCreator(new TextFragmentProvider(), retriever));
     }
 }

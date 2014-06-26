@@ -11,7 +11,7 @@ class Feature {
     private final String name;
     private final TextFragmentProvider tfp;
     private final String path;
-    private List<String> content;
+    private final List<String> content;
 
     public Feature(TextFragmentProvider textFragmentProvider, String pathToFeatureFile, List<String> featureFileContent) {
         tfp = textFragmentProvider;
