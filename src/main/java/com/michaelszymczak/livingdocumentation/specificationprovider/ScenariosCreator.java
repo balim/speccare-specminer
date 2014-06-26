@@ -13,19 +13,54 @@ public class ScenariosCreator {
     }
 
     public List<Scenario> create(Feature feature) {
-        List<String> scenarioContent = new ArrayList<>();
-        boolean isScenarioStarted = false;
+
+        SingleScenarioCreator ssc = new SingleScenarioCreator(tfp, feature);
+
+        List<List<String>> scenariosContent = new ArrayList<>();
+        List<String> currentScenarioLines = null;
+        List<Scenario> scenarios = new ArrayList<>();
+
         for (String line : feature.getContent()) {
-            if (isCurrentLineCandidateForScenarioContent(isScenarioStarted, line)) {
-                isScenarioStarted = true;
-                scenarioContent.add(line);
+            if (isScenarioStartingLine(line)) {
+                ssc.addNewScenario(scenarios, currentScenarioLines);
+                currentScenarioLines = createPlaceholderForNewScenarioLines(scenariosContent);
+            }
+            if (null != currentScenarioLines) {
+                currentScenarioLines.add(line);
             }
         }
 
-        return Arrays.asList(new Scenario(tfp, scenarioContent, feature));
+        ssc.addNewScenario(scenarios, currentScenarioLines);
+        return scenarios;
     }
 
-    private boolean isCurrentLineCandidateForScenarioContent(boolean scenarioStarted, String line) {
-        return scenarioStarted || tfp.returnStringFollowingAnyOf(line, new String[]{"Scenario:", "Scenario Outline:"}) != null;
+    private List<String> createPlaceholderForNewScenarioLines(List<List<String>> scenariosContent) {
+        List<String> currentScenarioLines;
+        currentScenarioLines = new ArrayList<>();
+        scenariosContent.add(currentScenarioLines);
+        return currentScenarioLines;
+    }
+
+    private boolean isScenarioStartingLine(String line) {
+        return tfp.returnStringFollowingAnyOf(line, new String[]{Scenario.SCENARIO_START, Scenario.SCENARIO_OUTLINE_START}) != null;
+    }
+
+    private class SingleScenarioCreator {
+        private TextFragmentProvider tfp;
+        private Feature feature;
+        public SingleScenarioCreator(TextFragmentProvider tfp, Feature feature) {
+            this.tfp = tfp;
+            this.feature = feature;
+        }
+
+        public void addNewScenario(List<Scenario> scenarios, List<String> scenarioContent) {
+            if (null != scenarioContent) {
+                scenarios.add(create(scenarioContent));
+            }
+        }
+
+        private Scenario create(List<String> scenarioContent) {
+            return new Scenario(tfp, scenarioContent, feature);
+        }
     }
 }

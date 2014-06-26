@@ -6,6 +6,8 @@ import java.util.List;
 
 class Feature {
 
+    public static final String FEATURE_START = "Feature:";
+
     private final String name;
     private final TextFragmentProvider tfp;
     private final String path;
@@ -31,7 +33,7 @@ class Feature {
     }
 
     private String extractName(List<String> featureFileContent) {
-        ArrayList<String> names = tfp.getAllFragmentsThatFollows(featureFileContent, new String[]{"Feature:"});
+        ArrayList<String> names = tfp.getAllFragmentsThatFollows(featureFileContent, new String[]{FEATURE_START});
         if (names.size() == 0) {
             throw new InvalidFeatureContentException("No 'Feature:' line in feature content: " + featureFileContent.toString());
         }

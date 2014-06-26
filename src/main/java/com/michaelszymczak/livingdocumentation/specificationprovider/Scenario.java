@@ -5,6 +5,8 @@ import java.util.List;
 
 class Scenario {
 
+    public static final String SCENARIO_START = "Scenario:";
+    public static final String SCENARIO_OUTLINE_START = "Scenario Outline:";
     private final String name;
     private final TextFragmentProvider tfp;
     private final Feature feature;
@@ -26,7 +28,7 @@ class Scenario {
     }
 
     private String extractName(List<String> scenarioContent) {
-        ArrayList<String> scenarioNames = tfp.getAllFragmentsThatFollows(scenarioContent, new String[]{"Scenario:", "Scenario Outline:"});
+        ArrayList<String> scenarioNames = tfp.getAllFragmentsThatFollows(scenarioContent, new String[]{SCENARIO_START, SCENARIO_OUTLINE_START});
         if (scenarioNames.size() == 0) {
             throw new InvalidScenarioContentException("No 'Scenario:' nor 'Scenario Outline:' line in scenario content: " + scenarioContent.toString());
         }
