@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ScenariosCreator {
+class ScenariosCreator implements ScenariosCreatable {
 
     private TextFragmentProvider tfp;
     private FeaturesCreator featuresCreator;

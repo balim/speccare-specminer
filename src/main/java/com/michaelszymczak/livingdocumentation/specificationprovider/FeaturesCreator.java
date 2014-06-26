@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-public class FeaturesCreator {
+class FeaturesCreator {
     private FeatureFilesRetriever retriever;
 
     public FeaturesCreator(FeatureFilesRetriever retriever) {

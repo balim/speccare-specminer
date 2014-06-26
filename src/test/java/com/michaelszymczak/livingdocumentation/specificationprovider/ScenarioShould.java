@@ -17,93 +17,79 @@ public class ScenarioShould {
     }
 
     @Test public void provideOriginalContentOfTheScenarioSoThatItCanBeDisplayedInDocumentation() {
-        List<String> scenarioContent = Arrays.asList(
+        Scenario scenario = createScenarioFromContent(
                 "Scenario: Foo title",
                 "    Given bar"
         );
 
-        Scenario scenario = createScenarioFromContent(scenarioContent);
-
-        Assert.assertEquals(scenarioContent, scenario.getContent());
+        Assert.assertEquals(Arrays.asList(
+                "Scenario: Foo title",
+                "    Given bar"
+        ), scenario.getContent());
     }
 
     @Test public void provideScenarioNameBasedOnTheContentPassedDuringCreation() {
-        List<String> scenarioContent = Arrays.asList(
-            "Scenario: Foo title",
-            "    Given bar"
+        Scenario scenario = createScenarioFromContent(
+                "Scenario: Foo title",
+                "    Given bar"
         );
-
-        Scenario scenario = createScenarioFromContent(scenarioContent);
 
         Assert.assertEquals("Foo title", scenario.getName());
     }
 
     @Test public void provideScenarioNameIgnoringEmptyLinesAndTrailingSpaces() {
-        List<String> scenarioContent = Arrays.asList(
-            "    ",
-            "  Scenario: Bar title    ",
-            "    Given bar"
+        Scenario scenario = createScenarioFromContent(
+                "    ",
+                "  Scenario: Bar title    ",
+                "    Given bar"
         );
-
-        Scenario scenario = createScenarioFromContent(scenarioContent);
 
         Assert.assertEquals("Bar title", scenario.getName());
     }
 
     @Test public void treatUseScenarioTemplateAsScenarioNameAsWell() {
-        List<String> scenarioContent = Arrays.asList(
-            "  Scenario Outline: Foo scenario outline name",
-            "    Given bar"
+        Scenario scenario = createScenarioFromContent(
+                "  Scenario Outline: Foo scenario outline name",
+                "    Given bar"
         );
-
-        Scenario scenario = createScenarioFromContent(scenarioContent);
 
         Assert.assertEquals("Foo scenario outline name", scenario.getName());
     }
 
     @Test public void acceptEmptyScenarioName() {
-        List<String> scenarioContent = Arrays.asList("Scenario:");
-
-        Scenario scenario = createScenarioFromContent(scenarioContent);
+        Scenario scenario = createScenarioFromContent("Scenario:");
 
         Assert.assertEquals("", scenario.getName());
     }
 
     @Test(expected = InvalidScenarioContentException.class)
     public void throwExceptionIfNoScenarioLine() {
-        List<String> scenarioContent = Arrays.asList(
-            "Given foo"
-        );
-
-        createScenarioFromContent(scenarioContent);
+        createScenarioFromContent("Given foo");
     }
 
     @Test(expected = InvalidScenarioContentException.class)
     public void throwExceptionIfTooManyScenarioLines() {
-        List<String> scenarioContent = Arrays.asList(
+        createScenarioFromContent(
             "Scenario: Foo",
             "Scenario: Bar"
         );
-
-        createScenarioFromContent(scenarioContent);
     }
 
     @Test(expected = InvalidScenarioContentException.class)
     public void throwExceptionIfBothScenarioAndScenarioOutlinePresent() {
-        List<String> scenarioContent = Arrays.asList(
+        createScenarioFromContent(
             "Scenario: Foo",
             "Scenario Outline: Bar"
         );
 
-        createScenarioFromContent(scenarioContent);
     }
 
-    private Scenario createScenarioFromContent(List<String> scenarioContent) {
-        return new Scenario(new TextFragmentProvider(), scenarioContent, createWrappingFeature());
+    private Scenario createScenarioFromContent(String... scenarioContent) {
+        return ScenarioBuilder.use().withContent(scenarioContent).build();
     }
 
     private Scenario createScenarioPassingWrappingFeature(Feature wrappingFeature) {
-        return new Scenario(new TextFragmentProvider(), Arrays.asList("Scenario: Foo"), wrappingFeature);
+        return ScenarioBuilder.use().withWrappingFeature(wrappingFeature).build();
     }
 
     private Feature createWrappingFeature() {
