@@ -10,7 +10,7 @@ import java.io.IOException;
 
 import static org.hamcrest.CoreMatchers.containsString;
 
-public class ScenarioRepositoryShould {
+public class ObjectScenarioRepositoryShould {
 
     @Test public void findScenarioByName() throws IOException {
         givenScenarioCreatorThatReturnsScenariosAndTheirFirstLinesAreRespectively(
@@ -42,12 +42,9 @@ public class ScenarioRepositoryShould {
     }
 
 
-    @Test public void throwExceptionIfNoScenarioFound() throws IOException {
+    @Test public void returnNotFoundScenarioIfNoScenarioFound() throws IOException {
         givenScenarioCreatorThatReturnsScenariosAndTheirFirstLinesAreRespectively("Scenario: Foo");
-
-        thrown.expect(ScenarioNotFoundException.class);
-        thrown.expectMessage(containsString("Bar"));
-        repository.find("Bar");
+        Assert.assertSame(Scenario.getNotFound(), repository.find("Bar"));
     }
 
     @Test public void throwExceptionIfMoreThanOneScenarioFound() throws IOException {
@@ -75,11 +72,11 @@ public class ScenarioRepositoryShould {
     }
 
     private ScenariosCreatorStub sc;
-    private ScenarioRepository repository;
+    private ObjectScenarioRepository repository;
 
     @Rule public ExpectedException thrown = ExpectedException.none();
     @Before public void setUp() {
         sc = new ScenariosCreatorStub();
-        repository = new ScenarioRepository(sc);
+        repository = new ObjectScenarioRepository(sc);
     }
 }

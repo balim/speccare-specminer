@@ -20,7 +20,7 @@ public class NotFoundScenarioShould {
         Assert.assertSame(Scenario.getNotFound(), Scenario.getNotFound());
     }
 
-    @Test public void presetThemselfAsNotFoundScenario() {
+    @Test public void presetItselfAsNotFoundScenario() {
         NotFoundScenario scenario = Scenario.getNotFound();
 
         Assert.assertEquals("Scenario not found", scenario.getName());
