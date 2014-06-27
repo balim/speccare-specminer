@@ -21,6 +21,6 @@ public class NotFoundScenario extends Scenario {
 
     @Override
     public String toJson() {
-        return null;
+        return "{\"name\":\"Scenario not found\",\"path\":\"\",\"content\":[],\"result\":\"notfound\"}";
     }
 }

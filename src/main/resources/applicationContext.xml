@@ -8,4 +8,31 @@
     <context:component-scan base-package="com.michaelszymczak.livingdocumentation"/>
     <context:property-placeholder location="classpath:app.prod.properties" order="0"/>
 
+
+    <bean id="pathToFeatureDir" class="java.nio.file.Paths" factory-method="get">
+        <constructor-arg value="${pathToFeatureDir.absolutePath}" />
+        <constructor-arg><array /></constructor-arg>
+    </bean>
+
+    <bean id="filesystemFeatureFilesRetriever" class="com.michaelszymczak.livingdocumentation.specificationprovider.FilesystemFeatureFilesRetriever">
+        <constructor-arg ref="pathToFeatureDir"/>
+    </bean>
+
+    <bean id="textFragmentProvider" class="com.michaelszymczak.livingdocumentation.specificationprovider.TextFragmentProvider"/>
+
+    <bean id="featuresCreator" class="com.michaelszymczak.livingdocumentation.specificationprovider.FeaturesCreator">
+        <constructor-arg index="0" ref="textFragmentProvider"/>
+        <constructor-arg index="1" ref="filesystemFeatureFilesRetriever"/>
+    </bean>
+
+    <bean id="scenariosCreator" class="com.michaelszymczak.livingdocumentation.specificationprovider.ScenariosCreator">
+        <constructor-arg index="0" ref="textFragmentProvider"/>
+        <constructor-arg index="1" ref="featuresCreator"/>
+    </bean>
+
+    <bean class="com.michaelszymczak.livingdocumentation.specificationprovider.ObjectScenarioRepository">
+        <constructor-arg ref="scenariosCreator"/>
+    </bean>
+
+
 </beans>

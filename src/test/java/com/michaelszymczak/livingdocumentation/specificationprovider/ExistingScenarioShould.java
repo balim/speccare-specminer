@@ -58,20 +58,15 @@ public class ExistingScenarioShould {
         Assert.assertEquals("", scenario.getName());
     }
 
-//    @Test public void beAbleToReturnItsDataInJsonFormat() {
-//        Scenario scenario = ScenarioBuilder.use().withWrappingFeature(
-//            FeatureBuilder.use().withPath("/path/to/Foo,feature").build()
-//        ).withContent("Scenario: Bar title", "    Given baz").build();
-//
-//        String expectedJson =
-//            "{\n" +
-//            "  'name': Bar title\n" +
-//            "}";
-////                "'content': '";
-//
-//        Assert.assertEquals(expectedJson, scenario.toJson());
-//
-//    }
+    @Test public void returnItsDataInJsonFormat() {
+        Scenario scenario = ExistingScenarioBuilder.use().withWrappingFeature(
+            ExistingFeatureBuilder.use().withPath("/path/to/Foo.feature").build()
+        ).withContent("Scenario: Bar title", "    Given baz").build();
+
+        Assert.assertEquals(
+            "{\"name\":\"Bar title\",\"path\":\"/path/to/Foo.feature\",\"content\":[\"Scenario: Bar title\",\"    Given baz\"],\"result\":\"found\"}",
+            scenario.toJson());
+    }
 
     @Test(expected = InvalidScenarioContentException.class)
     public void throwExceptionIfNoScenarioLine() {

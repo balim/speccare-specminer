@@ -1,6 +1,8 @@
 package com.michaelszymczak.livingdocumentation.specificationprovider;
 
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -10,6 +12,11 @@ class ExistingScenario extends Scenario {
     private final TextFragmentProvider tfp;
     private final Feature feature;
     private final List<String> content;
+
+    // according to https://sites.google.com/site/gson :
+    // The Gson instance does not maintain any state while invoking Json operations.
+    // So, you are free to reuse the same object for multiple Json serialization and deserialization operations.
+    private static Gson gson = new Gson();
 
     public ExistingScenario(TextFragmentProvider textFragmentProvider, List<String> scenarioContent, Feature wrappingFeature) {
         tfp = textFragmentProvider;
@@ -43,6 +50,20 @@ class ExistingScenario extends Scenario {
 
     @Override
     public String toJson() {
-        return null;
+        return gson.toJson(new JsonFields(this.name, this.feature.getPath(), this.content));
+    }
+
+    private static class JsonFields {
+        private final String name;
+        private final String path;
+        private final List<String> content;
+        private final String result = "found";
+
+        public JsonFields(String name, String path, List<String> content) {
+            this.name = name;
+            this.path = path;
+            this.content = content;
+
+        }
     }
 }

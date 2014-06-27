@@ -31,4 +31,12 @@ public class NotFoundScenarioShould {
         NotFoundScenario scenario = Scenario.getNotFound();
         Assert.assertSame(Feature.getNotFound(), scenario.getFeature());
     }
+
+    @Test public void returnInformationInJsonFormat() {
+        NotFoundScenario scenario = Scenario.getNotFound();
+
+        Assert.assertEquals(
+                "{\"name\":\"Scenario not found\",\"path\":\"\",\"content\":[],\"result\":\"notfound\"}",
+                scenario.toJson());
+    }
 }
