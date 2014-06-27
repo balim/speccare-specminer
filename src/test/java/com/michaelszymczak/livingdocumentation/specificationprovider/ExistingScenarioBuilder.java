@@ -4,27 +4,27 @@ package com.michaelszymczak.livingdocumentation.specificationprovider;
 import java.util.Arrays;
 import java.util.List;
 
-public class ScenarioBuilder {
+public class ExistingScenarioBuilder {
     private TextFragmentProvider tfp = new TextFragmentProvider();
     private List<String> scenarioContent = Arrays.asList("Scenario: Default scenario");
-    private ExistingFeature wrappingFeature = FeatureBuilder.use().build();
+    private ExistingFeature wrappingFeature = ExistingFeatureBuilder.use().build();
 
-    public static ScenarioBuilder use()
+    public static ExistingScenarioBuilder use()
     {
-        return new ScenarioBuilder();
+        return new ExistingScenarioBuilder();
     }
 
-    public ScenarioBuilder withTextFragmentProvider(TextFragmentProvider tfp) {
+    public ExistingScenarioBuilder withTextFragmentProvider(TextFragmentProvider tfp) {
         this.tfp = tfp;
         return this;
     }
 
-    public ScenarioBuilder withContent(String... lines) {
+    public ExistingScenarioBuilder withContent(String... lines) {
         this.scenarioContent = Arrays.asList(lines);
         return this;
     }
 
-    public ScenarioBuilder withWrappingFeature(ExistingFeature wrappingFeature) {
+    public ExistingScenarioBuilder withWrappingFeature(ExistingFeature wrappingFeature) {
         this.wrappingFeature = wrappingFeature;
         return this;
     }

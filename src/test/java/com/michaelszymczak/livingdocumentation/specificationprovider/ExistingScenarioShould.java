@@ -7,7 +7,7 @@ import java.util.Arrays;
 public class ExistingScenarioShould {
 
     @Test public void storeReferenceToTheWrappingFeatureSoThatOnaCanFindTheFeaturesFile() {
-        ExistingFeature feature = FeatureBuilder.use().build();
+        ExistingFeature feature = ExistingFeatureBuilder.use().build();
         Scenario scenario = createScenarioPassingWrappingFeature(feature);
         Assert.assertSame(feature, scenario.getFeature());
     }
@@ -63,6 +63,13 @@ public class ExistingScenarioShould {
 //            FeatureBuilder.use().withPath("/path/to/Foo,feature").build()
 //        ).withContent("Scenario: Bar title", "    Given baz").build();
 //
+//        String expectedJson =
+//            "{\n" +
+//            "  'name': Bar title\n" +
+//            "}";
+////                "'content': '";
+//
+//        Assert.assertEquals(expectedJson, scenario.toJson());
 //
 //    }
 
@@ -89,10 +96,10 @@ public class ExistingScenarioShould {
     }
 
     private Scenario createScenarioFromContent(String... scenarioContent) {
-        return ScenarioBuilder.use().withContent(scenarioContent).build();
+        return ExistingScenarioBuilder.use().withContent(scenarioContent).build();
     }
 
     private Scenario createScenarioPassingWrappingFeature(ExistingFeature wrappingFeature) {
-        return ScenarioBuilder.use().withWrappingFeature(wrappingFeature).build();
+        return ExistingScenarioBuilder.use().withWrappingFeature(wrappingFeature).build();
     }
 }

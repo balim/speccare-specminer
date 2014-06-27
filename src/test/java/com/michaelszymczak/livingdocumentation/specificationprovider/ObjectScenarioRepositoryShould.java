@@ -67,7 +67,7 @@ public class ObjectScenarioRepositoryShould {
 
     private void givenScenarioCreatorThatReturnsScenariosAndTheirFirstLinesAreRespectively(String... firstLines) {
         for(String scenarioFirstLine : firstLines) {
-            sc.scenarios.add(ScenarioBuilder.use().withContent(scenarioFirstLine).build());
+            sc.scenarios.add(ExistingScenarioBuilder.use().withContent(scenarioFirstLine).build());
         }
     }
 

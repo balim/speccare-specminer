@@ -4,32 +4,32 @@ package com.michaelszymczak.livingdocumentation.specificationprovider;
 import java.util.Arrays;
 import java.util.List;
 
-public class FeatureBuilder {
+public class ExistingFeatureBuilder {
     private TextFragmentProvider tfp = new TextFragmentProvider();
     private String pathToFeatureFile = "/default/path/Feature.feature";
     private List<String> featureFileContent = Arrays.asList("Feature: Default feature", "  Scenario: Default scenario");
 
-    public static FeatureBuilder use()
+    public static ExistingFeatureBuilder use()
     {
-        return new FeatureBuilder();
+        return new ExistingFeatureBuilder();
     }
 
-    public FeatureBuilder withTextFragmentProvider(TextFragmentProvider tfp) {
+    public ExistingFeatureBuilder withTextFragmentProvider(TextFragmentProvider tfp) {
         this.tfp = tfp;
         return this;
     }
 
-    public FeatureBuilder withPath(String pathToFeatureFile) {
+    public ExistingFeatureBuilder withPath(String pathToFeatureFile) {
         this.pathToFeatureFile = pathToFeatureFile;
         return this;
     }
 
-    public FeatureBuilder withContent(List<String> featureFileContent) {
+    public ExistingFeatureBuilder withContent(List<String> featureFileContent) {
         this.featureFileContent = featureFileContent;
         return this;
     }
 
-    public FeatureBuilder withContent(String... featureFileContent) {
+    public ExistingFeatureBuilder withContent(String... featureFileContent) {
         this.featureFileContent = Arrays.asList(featureFileContent);
         return this;
     }

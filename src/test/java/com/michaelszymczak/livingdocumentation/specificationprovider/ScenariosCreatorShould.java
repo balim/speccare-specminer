@@ -67,7 +67,7 @@ public class ScenariosCreatorShould {
     }
 
     @Test public void usePassedFeatureAsScenariosWrappingFeature() {
-        ExistingFeature feature = FeatureBuilder.use().build();
+        ExistingFeature feature = ExistingFeatureBuilder.use().build();
         List<Scenario> scenarios = sc.createFromOneFeature(feature);
         Assert.assertSame(feature, scenarios.get(0).getFeature());
     }

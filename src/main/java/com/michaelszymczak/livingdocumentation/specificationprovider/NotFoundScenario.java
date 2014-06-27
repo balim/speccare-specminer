@@ -18,4 +18,9 @@ public class NotFoundScenario extends Scenario {
     public List<String> getContent() {
         return new ArrayList<>();
     }
+
+    @Override
+    public String toJson() {
+        return null;
+    }
 }

@@ -40,4 +40,9 @@ class ExistingScenario extends Scenario {
     public List<String> getContent() {
         return content;
     }
+
+    @Override
+    public String toJson() {
+        return null;
+    }
 }

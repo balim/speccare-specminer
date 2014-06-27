@@ -15,4 +15,5 @@ abstract class Scenario {
     public abstract String getName();
     public abstract Feature getFeature();
     public abstract List<String> getContent();
+    public abstract String toJson();
 }
