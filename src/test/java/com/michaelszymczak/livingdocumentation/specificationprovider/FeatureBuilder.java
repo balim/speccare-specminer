@@ -7,7 +7,7 @@ import java.util.List;
 public class FeatureBuilder {
     private TextFragmentProvider tfp = new TextFragmentProvider();
     private String pathToFeatureFile = "/default/path/Feature.feature";
-    private List<String> featureFileContent = Arrays.asList("Feature: Default feature");
+    private List<String> featureFileContent = Arrays.asList("Feature: Default feature", "  Scenario: Default scenario");
 
     public static FeatureBuilder use()
     {

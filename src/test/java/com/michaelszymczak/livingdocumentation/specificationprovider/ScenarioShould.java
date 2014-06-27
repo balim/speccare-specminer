@@ -8,7 +8,7 @@ import java.util.Arrays;
 public class ScenarioShould {
 
     @Test public void storeReferenceToTheWrappingFeatureSoThatOnaCanFindTheFeaturesFile() {
-        ExistingFeature feature = createWrappingFeature();
+        ExistingFeature feature = FeatureBuilder.use().build();
         Scenario scenario = createScenarioPassingWrappingFeature(feature);
         Assert.assertSame(feature, scenario.getFeature());
     }
@@ -88,9 +88,4 @@ public class ScenarioShould {
     private Scenario createScenarioPassingWrappingFeature(ExistingFeature wrappingFeature) {
         return ScenarioBuilder.use().withWrappingFeature(wrappingFeature).build();
     }
-
-    private ExistingFeature createWrappingFeature() {
-        return new ExistingFeature(new TextFragmentProvider(), "/path/to/Feature.feature", Arrays.asList("Feature: Foo"));
-    }
-
 }

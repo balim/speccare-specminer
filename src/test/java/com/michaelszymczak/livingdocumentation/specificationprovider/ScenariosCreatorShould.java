@@ -17,7 +17,7 @@ public class ScenariosCreatorShould {
     }
 
     @Test public void createScenariosBasedOnDataReceivedFromFeatureFiles() throws IOException {
-        givenSomeFeatureFilesAndTheLastContaining(Arrays.asList(
+        givenSomeFeatureFilesAndTheLastContaining(
                 "Feature: Feature3",
                 "",
                 "  Scenario: Feature 3, Scenario 1",
@@ -26,7 +26,7 @@ public class ScenariosCreatorShould {
                 "    Given foo",
                 "  Scenario: Feature 3, Scenario 3",
                 "    Given Feature 3, Scenario 3 precondition"
-        ));
+        );
 
         List<Scenario> scenarios = sc.create();
 
@@ -48,14 +48,14 @@ public class ScenariosCreatorShould {
         );
     }
 
-    @Test public void createScenariosUsingFeatureContent() {
-        ExistingFeature feature = createFeatureWithContent(Arrays.asList(
+    @Test public void createScenariosUsingSingleFeatureContent() {
+        ExistingFeature feature = createFeatureWithContent(
                 "Feature: Foo feature",
                 "",
                 "  Scenario: Bar scenario",
                 "    Given some precondition",
                 "    Then  some expected result"
-        ));
+        );
 
         List<Scenario> scenarios = sc.createFromOneFeature(feature);
 
@@ -67,13 +67,13 @@ public class ScenariosCreatorShould {
     }
 
     @Test public void usePassedFeatureAsScenariosWrappingFeature() {
-        ExistingFeature feature = createFeature();
+        ExistingFeature feature = FeatureBuilder.use().build();
         List<Scenario> scenarios = sc.createFromOneFeature(feature);
         Assert.assertSame(feature, scenarios.get(0).getFeature());
     }
 
     @Test public void createAllFoundScenarios() {
-        ExistingFeature feature = createFeatureWithContent(Arrays.asList(
+        ExistingFeature feature = createFeatureWithContent(
                 "Feature: Foo feature",
                 "",
                 "  Scenario: First scenario",
@@ -82,7 +82,7 @@ public class ScenariosCreatorShould {
                 "    Given second foo",
                 "  Scenario: Third scenario",
                 "    Given third foo"
-        ));
+        );
 
         List<Scenario> scenarios = sc.createFromOneFeature(feature);
 
@@ -93,14 +93,14 @@ public class ScenariosCreatorShould {
     }
 
     @Test public void treatScenarioOutlineAsAKindOfScenario() {
-        ExistingFeature feature = createFeatureWithContent(Arrays.asList(
+        ExistingFeature feature = createFeatureWithContent(
                 "Feature: Foo feature",
                 "",
                 "  Scenario: First scenario",
                 "    Given first foo",
                 "  Scenario Outline: Outline scenario",
                 "    Given second foo"
-        ));
+        );
 
         List<Scenario> scenarios = sc.createFromOneFeature(feature);
 
@@ -110,17 +110,27 @@ public class ScenariosCreatorShould {
         ), scenarios.get(1).getContent());
     }
 
+    private ScenariosCreator sc;
+    private FeatureFilesRetrieverStub retriever;
+
+    @Before
+    public void setUp() throws Exception {
+        retriever = new FeatureFilesRetrieverStub();
+        sc = new ScenariosCreator(new TextFragmentProvider(), new FeaturesCreator(new TextFragmentProvider(), retriever));
+    }
+
     private void assertLastScenarioCreatedWithFollowingContentAndFeatureContent(List<Scenario> scenarios, List<String> lastScenarioContent, List<String> lastScenarioFeatureContent) {
         Scenario lastScenario = scenarios.get(scenarios.size() - 1);
         Assert.assertEquals(lastScenarioContent, lastScenario.getContent());
         Assert.assertEquals(lastScenarioFeatureContent, lastScenario.getFeature().getContent());
     }
 
-    private void givenSomeFeatureFilesAndTheLastContaining(List<String> lastFeatureContent) {
+    private void givenSomeFeatureFilesAndTheLastContaining(String... lastFeatureContent) {
         givenFeatureFilesRetrieverHasTwoFeatureFilesContainingTwoScenariosEach();
 
-        retriever.files.put("/foo/bar/Feature3.feature", lastFeatureContent);
+        retriever.files.put("/foo/bar/Feature3.feature", Arrays.asList(lastFeatureContent));
     }
+
 
     private void givenFeatureFilesRetrieverHasTwoFeatureFilesContainingTwoScenariosEach() {
         retriever.files.put("Feature1.feature", Arrays.asList(
@@ -141,26 +151,7 @@ public class ScenariosCreatorShould {
         ));
     }
 
-    private ExistingFeature createFeatureWithContent(List<String> content) {
-        return new ExistingFeature(new TextFragmentProvider(), "path/to/Feature.feature", content);
-    }
-
-    private ExistingFeature createFeature() {
-        return createFeatureWithContent(Arrays.asList(
-                "Feature: Foo feature",
-                "",
-                "  Scenario: Bar scenario",
-                "    Given some precondition",
-                "    Then  some expected result"
-        ));
-    }
-
-    private ScenariosCreator sc;
-    private FeatureFilesRetrieverStub retriever;
-
-    @Before
-    public void setUp() throws Exception {
-        retriever = new FeatureFilesRetrieverStub();
-        sc = new ScenariosCreator(new TextFragmentProvider(), new FeaturesCreator(new TextFragmentProvider(), retriever));
+    private ExistingFeature createFeatureWithContent(String... content) {
+        return new ExistingFeature(new TextFragmentProvider(), "path/to/Feature.feature", Arrays.asList(content));
     }
 }
