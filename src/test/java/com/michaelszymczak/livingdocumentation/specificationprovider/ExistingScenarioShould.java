@@ -58,6 +58,14 @@ public class ExistingScenarioShould {
         Assert.assertEquals("", scenario.getName());
     }
 
+//    @Test public void beAbleToReturnItsDataInJsonFormat() {
+//        Scenario scenario = ScenarioBuilder.use().withWrappingFeature(
+//            FeatureBuilder.use().withPath("/path/to/Foo,feature").build()
+//        ).withContent("Scenario: Bar title", "    Given baz").build();
+//
+//
+//    }
+
     @Test(expected = InvalidScenarioContentException.class)
     public void throwExceptionIfNoScenarioLine() {
         createScenarioFromContent("Given foo");
