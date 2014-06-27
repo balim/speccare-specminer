@@ -49,7 +49,7 @@ public class ScenariosCreatorShould {
     }
 
     @Test public void createScenariosUsingFeatureContent() {
-        Feature feature = createFeatureWithContent(Arrays.asList(
+        ExistingFeature feature = createFeatureWithContent(Arrays.asList(
                 "Feature: Foo feature",
                 "",
                 "  Scenario: Bar scenario",
@@ -67,13 +67,13 @@ public class ScenariosCreatorShould {
     }
 
     @Test public void usePassedFeatureAsScenariosWrappingFeature() {
-        Feature feature = createFeature();
+        ExistingFeature feature = createFeature();
         List<Scenario> scenarios = sc.createFromOneFeature(feature);
         Assert.assertSame(feature, scenarios.get(0).getFeature());
     }
 
     @Test public void createAllFoundScenarios() {
-        Feature feature = createFeatureWithContent(Arrays.asList(
+        ExistingFeature feature = createFeatureWithContent(Arrays.asList(
                 "Feature: Foo feature",
                 "",
                 "  Scenario: First scenario",
@@ -93,7 +93,7 @@ public class ScenariosCreatorShould {
     }
 
     @Test public void treatScenarioOutlineAsAKindOfScenario() {
-        Feature feature = createFeatureWithContent(Arrays.asList(
+        ExistingFeature feature = createFeatureWithContent(Arrays.asList(
                 "Feature: Foo feature",
                 "",
                 "  Scenario: First scenario",
@@ -141,11 +141,11 @@ public class ScenariosCreatorShould {
         ));
     }
 
-    private Feature createFeatureWithContent(List<String> content) {
-        return new Feature(new TextFragmentProvider(), "path/to/Feature.feature", content);
+    private ExistingFeature createFeatureWithContent(List<String> content) {
+        return new ExistingFeature(new TextFragmentProvider(), "path/to/Feature.feature", content);
     }
 
-    private Feature createFeature() {
+    private ExistingFeature createFeature() {
         return createFeatureWithContent(Arrays.asList(
                 "Feature: Foo feature",
                 "",

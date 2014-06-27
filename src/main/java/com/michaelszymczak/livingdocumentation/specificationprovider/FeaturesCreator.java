@@ -2,7 +2,6 @@ package com.michaelszymczak.livingdocumentation.specificationprovider;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -18,7 +17,7 @@ class FeaturesCreator {
     public List<Feature> create() throws IOException {
         List<Feature> features = new ArrayList<>();
         for (Map.Entry<String, List<String>> entry : retriever.getFiles().entrySet()) {
-            features.add(new Feature(tfp, entry.getKey(), entry.getValue()));
+            features.add(new ExistingFeature(tfp, entry.getKey(), entry.getValue()));
         }
         return features;
     }

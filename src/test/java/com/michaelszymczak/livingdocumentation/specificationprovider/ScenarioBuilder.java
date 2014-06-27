@@ -7,7 +7,7 @@ import java.util.List;
 public class ScenarioBuilder {
     private TextFragmentProvider tfp = new TextFragmentProvider();
     private List<String> scenarioContent = Arrays.asList("Scenario: Default scenario");
-    private Feature wrappingFeature = new Feature(tfp, "/default/path/Feature.feature", Arrays.asList("Feature: Default feature"));
+    private ExistingFeature wrappingFeature = new ExistingFeature(tfp, "/default/path/Feature.feature", Arrays.asList("Feature: Default feature"));
 
     public static ScenarioBuilder use()
     {
@@ -24,7 +24,7 @@ public class ScenarioBuilder {
         return this;
     }
 
-    public ScenarioBuilder withWrappingFeature(Feature wrappingFeature) {
+    public ScenarioBuilder withWrappingFeature(ExistingFeature wrappingFeature) {
         this.wrappingFeature = wrappingFeature;
         return this;
     }

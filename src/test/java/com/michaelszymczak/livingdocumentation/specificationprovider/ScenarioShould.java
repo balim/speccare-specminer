@@ -1,17 +1,14 @@
 package com.michaelszymczak.livingdocumentation.specificationprovider;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
 
 public class ScenarioShould {
 
     @Test public void storeReferenceToTheWrappingFeatureSoThatOnaCanFindTheFeaturesFile() {
-        Feature feature = createWrappingFeature();
+        ExistingFeature feature = createWrappingFeature();
         Scenario scenario = createScenarioPassingWrappingFeature(feature);
         Assert.assertSame(feature, scenario.getFeature());
     }
@@ -88,12 +85,12 @@ public class ScenarioShould {
         return ScenarioBuilder.use().withContent(scenarioContent).build();
     }
 
-    private Scenario createScenarioPassingWrappingFeature(Feature wrappingFeature) {
+    private Scenario createScenarioPassingWrappingFeature(ExistingFeature wrappingFeature) {
         return ScenarioBuilder.use().withWrappingFeature(wrappingFeature).build();
     }
 
-    private Feature createWrappingFeature() {
-        return new Feature(new TextFragmentProvider(), "/path/to/Feature.feature", Arrays.asList("Feature: Foo"));
+    private ExistingFeature createWrappingFeature() {
+        return new ExistingFeature(new TextFragmentProvider(), "/path/to/Feature.feature", Arrays.asList("Feature: Foo"));
     }
 
 }
