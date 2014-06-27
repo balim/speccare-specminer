@@ -1,6 +1,8 @@
 package com.michaelszymczak.livingdocumentation.specificationprovider;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 class ExistingFeature extends Feature {
@@ -13,7 +15,7 @@ class ExistingFeature extends Feature {
     public ExistingFeature(TextFragmentProvider textFragmentProvider, String pathToFeatureFile, List<String> featureFileContent) {
         tfp = textFragmentProvider;
         path = pathToFeatureFile;
-        content = featureFileContent;
+        content = Collections.unmodifiableList(featureFileContent);
         name = extractName(featureFileContent);
     }
 

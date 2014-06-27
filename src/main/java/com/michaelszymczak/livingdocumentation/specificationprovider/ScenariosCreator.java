@@ -72,7 +72,7 @@ class ScenariosCreator implements ScenariosCreatable {
         }
 
         private Scenario create(List<String> scenarioContent) {
-            return new Scenario(tfp, scenarioContent, feature);
+            return new ExistingScenario(tfp, scenarioContent, feature);
         }
     }
 }

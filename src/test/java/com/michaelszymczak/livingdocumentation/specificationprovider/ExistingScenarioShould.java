@@ -3,9 +3,10 @@ package com.michaelszymczak.livingdocumentation.specificationprovider;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
-public class ScenarioShould {
+public class ExistingScenarioShould {
 
     @Test public void storeReferenceToTheWrappingFeatureSoThatOnaCanFindTheFeaturesFile() {
         ExistingFeature feature = FeatureBuilder.use().build();

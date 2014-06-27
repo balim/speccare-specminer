@@ -30,6 +30,6 @@ public class ScenarioBuilder {
     }
 
     public Scenario build() {
-        return new Scenario(tfp, scenarioContent, wrappingFeature);
+        return new ExistingScenario(tfp, scenarioContent, wrappingFeature);
     }
 }

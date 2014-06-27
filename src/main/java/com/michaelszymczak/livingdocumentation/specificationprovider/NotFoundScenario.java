@@ -3,15 +3,15 @@ package com.michaelszymczak.livingdocumentation.specificationprovider;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NotFoundFeature extends Feature {
+public class NotFoundScenario extends Scenario {
     @Override
     public String getName() {
-        return "Feature not found";
+        return "Scenario not found";
     }
 
     @Override
-    public String getPath() {
-        return "";
+    public Feature getFeature() {
+        return Feature.getNotFound();
     }
 
     @Override
