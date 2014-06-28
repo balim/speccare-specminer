@@ -8,14 +8,12 @@
     <context:component-scan base-package="com.michaelszymczak.livingdocumentation"/>
     <context:property-placeholder location="classpath:app.prod.properties" order="0"/>
 
-
-    <bean id="pathToFeatureDir" class="java.nio.file.Paths" factory-method="get">
-        <constructor-arg value="${pathToFeatureDir.absolutePath}" />
-        <constructor-arg><array /></constructor-arg>
+    <bean id="featuresDir" class="com.michaelszymczak.livingdocumentation.specificationprovider.FeaturesRealDirectory">
+        <constructor-arg value="${pathToFeatureDir.absolutePath}"/>
     </bean>
 
     <bean id="filesystemFeatureFilesRetriever" class="com.michaelszymczak.livingdocumentation.specificationprovider.FilesystemFeatureFilesRetriever">
-        <constructor-arg ref="pathToFeatureDir"/>
+        <constructor-arg ref="featuresDir"/>
     </bean>
 
     <bean id="textFragmentProvider" class="com.michaelszymczak.livingdocumentation.specificationprovider.TextFragmentProvider"/>

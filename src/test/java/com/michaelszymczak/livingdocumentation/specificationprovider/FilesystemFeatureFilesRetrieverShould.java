@@ -56,7 +56,7 @@ public class FilesystemFeatureFilesRetrieverShould {
     @Before public void setUp() throws IOException {
         featuresDir = Files.createTempDirectory("LivingDocumentationFeaturesTempDir");
         featuresDir.toFile().deleteOnExit();
-        retriever = new FilesystemFeatureFilesRetriever(featuresDir);
+        retriever = new FilesystemFeatureFilesRetriever(new FeaturesRealDirectory(featuresDir.toFile().getAbsolutePath()));
     }
 
     private void givenEmptyDirectory(Path featuresDirectory) {

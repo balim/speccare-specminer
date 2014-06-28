@@ -10,16 +10,16 @@ import static java.nio.file.FileVisitResult.CONTINUE;
 
 class FilesystemFeatureFilesRetriever implements FeatureFilesRetriever {
 
-    private final Path featuresDir;
+    private final FeaturesDirectory featuresDir;
 
-    public FilesystemFeatureFilesRetriever(Path featuresDir) {
+    public FilesystemFeatureFilesRetriever(FeaturesDirectory featuresDir) {
         this.featuresDir = featuresDir;
     }
 
     @Override
     public Map<String, List<String>> getFiles() throws IOException {
         Finder fileVisitor = new Finder(FileSystems.getDefault().getPathMatcher("glob:*.feature"));
-        Files.walkFileTree(featuresDir, EnumSet.of(FileVisitOption.FOLLOW_LINKS), Integer.MAX_VALUE, fileVisitor);
+        Files.walkFileTree(featuresDir.getPath(), EnumSet.of(FileVisitOption.FOLLOW_LINKS), Integer.MAX_VALUE, fileVisitor);
         return fileVisitor.getFoundPaths();
     }
 

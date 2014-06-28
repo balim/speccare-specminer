@@ -5,7 +5,13 @@
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <import resource="classpath:applicationContext.xml"/>
+
     <context:property-placeholder location="classpath:app.test.properties" order="-1"/>
+    <import resource="classpath:applicationContext.xml"/>
+
+    <bean id="featuresDir" class="com.michaelszymczak.livingdocumentation.specificationprovider.FeaturesConfigurableDirectory"/>
+
+
+
 
 </beans>
