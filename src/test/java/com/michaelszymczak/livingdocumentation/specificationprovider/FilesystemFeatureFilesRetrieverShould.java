@@ -97,7 +97,7 @@ public class FilesystemFeatureFilesRetrieverShould {
         return new BaseMatcher<Map<String, List<String>>>() {
             @Override
             public boolean matches(final Object item) {
-                Map<String, List<String>> actualResult = (Map<String, List<String>>) item;
+                @SuppressWarnings("unchecked") Map<String, List<String>> actualResult = (Map<String, List<String>>) item;
                 return actualResult.keySet().equals(expectedAbsolutePaths);
             }
 
@@ -107,7 +107,7 @@ public class FilesystemFeatureFilesRetrieverShould {
             }
             @Override
             public void describeMismatch(final Object item, Description description) {
-                Map<String, List<String>> actualResult = (Map<String, List<String>>) item;
+                @SuppressWarnings("unchecked") Map<String, List<String>> actualResult = (Map<String, List<String>>) item;
                 description.appendText("was ").appendValue(actualResult.keySet().toString());
             }
         };
@@ -127,7 +127,7 @@ public class FilesystemFeatureFilesRetrieverShould {
         return new BaseMatcher<Map<String, List<String>>>() {
             @Override
             public boolean matches(final Object item) {
-                Map<String, List<String>> actualResult = (Map<String, List<String>>) item;
+                @SuppressWarnings("unchecked") Map<String, List<String>> actualResult = (Map<String, List<String>>) item;
                 return expectedFilesWithContent.equals(actualResult);
             }
 
@@ -137,7 +137,7 @@ public class FilesystemFeatureFilesRetrieverShould {
             }
             @Override
             public void describeMismatch(final Object item, Description description) {
-                Map<String, List<String>> actualResult = (Map<String, List<String>>) item;
+                @SuppressWarnings("unchecked") Map<String, List<String>> actualResult = (Map<String, List<String>>) item;
                 description.appendText("was ").appendValue(actualResult.toString());
             }
         };
