@@ -5,8 +5,8 @@ Requirements:
 
 To build and test:
 
-    mvn clean verify
+    ./init.sh
+    
+To develop and test in IDE you probably want to start server first:
 
-To run mutation tests
-
-    mvn org.pitest:pitest-maven:mutationCoverage
+    mvn -Dspring.profiles.active="uat" jetty:start

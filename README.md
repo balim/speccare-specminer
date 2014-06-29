@@ -5,9 +5,17 @@ Living Documentation Maintainer - WIP (not ready yet)
 A tool for creating and maintaining living documentation.
 
 
-Future usage
+Requirements:
+-------------
+
+- oraclejdk7 or openjdk7
+- maven
+
+Usage
 ------------
+Run the application
 
-docker run -t -i -v `pwd`:/opt/livingdocumentation/features:ro -v `pwd`:/opt/livingdocumentation/results:ro tutum/tomcat:7.0 bin/bash
+    mvn jetty:run
 
-https://registry.hub.docker.com/u/tutum/tomcat/
+Go to http://localhost:9999
+

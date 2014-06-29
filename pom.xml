@@ -8,10 +8,12 @@
     <name>LivingDocumentation</name>
 
     <properties>
-        <spring.version>3.2.0.RELEASE</spring.version>
+        <spring.version>3.2.2.RELEASE</spring.version>
         <cobertura.version>2.6</cobertura.version>
         <cucumber.java.version>1.1.7</cucumber.java.version>
-        <jettyVersion>9.2.1.v20140609</jettyVersion>
+        <jetty.version>9.2.1.v20140609</jetty.version>
+        <jetty.port>9999</jetty.port>
+        <selenium.version>2.40.0</selenium.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
@@ -111,7 +113,7 @@
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-server</artifactId>
-            <version>${jettyVersion}</version>
+            <version>${jetty.version}</version>
         </dependency>
 
         <dependency>
@@ -131,9 +133,23 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-htmlunit-driver</artifactId>
-            <version>2.40.0</version>
+            <version>${selenium.version}</version>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-support</artifactId>
+            <version>${selenium.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-firefox-driver</artifactId>
+            <version>${selenium.version}</version>
+        </dependency>
+
 
         <dependency>
             <groupId>xml-apis</groupId>
@@ -240,11 +256,17 @@
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
-                <version>${jettyVersion}</version>
+                <version>${jetty.version}</version>
                 <configuration>
-                    <scanIntervalSeconds>10</scanIntervalSeconds>
+                    <scanIntervalSeconds>5</scanIntervalSeconds>
                     <stopKey>someStopKeyABC1234</stopKey>
-                    <stopPort>9999</stopPort>
+                    <stopPort>9998</stopPort>
+                    <systemProperties>
+                        <systemProperty>
+                            <name>jetty.port</name>
+                            <value>${jetty.port}</value>
+                        </systemProperty>
+                    </systemProperties>
                 </configuration>
                 <executions>
                     <execution>

@@ -8,9 +8,7 @@
     <context:component-scan base-package="com.michaelszymczak.livingdocumentation"/>
     <context:property-placeholder location="classpath:app.prod.properties" order="0"/>
 
-    <bean id="featuresDir" class="com.michaelszymczak.livingdocumentation.specificationprovider.FeaturesRealDirectory">
-        <constructor-arg value="${pathToFeatureDir.absolutePath}"/>
-    </bean>
+
 
     <bean id="filesystemFeatureFilesRetriever" class="com.michaelszymczak.livingdocumentation.specificationprovider.FilesystemFeatureFilesRetriever">
         <constructor-arg ref="featuresDir"/>
@@ -32,5 +30,15 @@
         <constructor-arg ref="scenariosCreator"/>
     </bean>
 
+    <beans profile="default">
+        <bean id="featuresDir" class="com.michaelszymczak.livingdocumentation.specificationprovider.FeaturesRealDirectory">
+            <constructor-arg value="${pathToFeatureDir.absolutePath}"/>
+        </bean>
+    </beans>
+
+
+    <beans profile="test,uat">
+        <bean id="featuresDir" class="com.michaelszymczak.livingdocumentation.specificationprovider.FeaturesConfigurableDirectory"/>
+    </beans>
 
 </beans>
