@@ -9,4 +9,8 @@ To build and test:
     
 To develop and test in IDE you probably want to start server first:
 
-    mvn -Dspring.profiles.active="uat" jetty:start
+    mvn -Dspring.profiles.active="uat" -Djetty.port=9999 jetty:start
+
+And run some tests. When you run some individual tests outside the maven in IDE,
+be sure that you provide the jetty port number, i.e. -Djetty.port=999 to the test run arguments list.
+If the port that you used to start the jetty server is different, change it there accordingly.

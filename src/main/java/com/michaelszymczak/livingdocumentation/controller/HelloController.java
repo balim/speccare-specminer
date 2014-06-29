@@ -1,4 +1,4 @@
-package com.michaelszymczak.livingdocumentation.sandbox;
+package com.michaelszymczak.livingdocumentation.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
