@@ -1,5 +1,12 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
+<head>
+    <title>${title}</title>
+</head>
 <body>
-	<h1>${message}</h1>
+<pre>
+Environment: ${environment}
+Details: ${details}
+</pre>
 </body>
 </html>

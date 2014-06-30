@@ -17,7 +17,7 @@ public class ScenariosController {
 
 
     @Autowired
-    private ScenarioRepository repository;
+    private ObjectScenarioRepository repository;
 
     @RequestMapping(value="/{scenarioNameFragment}", method=RequestMethod.GET,  produces = { "application/json"})
     @ResponseBody

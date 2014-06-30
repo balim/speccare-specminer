@@ -1,10 +1,9 @@
 package com.michaelszymczak.livingdocumentation.cucumberSteps;
 
-import cucumber.api.PendingException;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.springframework.test.context.ContextConfiguration;
@@ -14,10 +13,12 @@ import org.springframework.test.context.web.WebAppConfiguration;
 @WebAppConfiguration
 public class FeaturePresenceSteps {
 
+
     @Given("^documentation that reads:$")
-    public void documentation_that_reads(String documentation) throws Throwable {
-        driver.get(siteUrl + "/");
-        System.out.println(driver.getPageSource());
+    public void documentation_that_reads(final String documentation) throws Throwable {
+        driver.get(siteUrl + "/examples/test.html");
+        String html = driver.getPageSource();
+        Assert.assertTrue(html.contains(documentation));
     }
 
 //    @Given("^feature file \"(.*?)\" in the developed application:$")

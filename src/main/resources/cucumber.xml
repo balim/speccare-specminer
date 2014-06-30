@@ -8,6 +8,6 @@
     <context:component-scan base-package="cucumber.runtime.java.spring"/>
     <context:annotation-config/>
 
-    <import resource="classpath:applicationContext.xml"/>
+    <import resource="classpath:applicationTestContext.xml"/>
 
 </beans>

@@ -14,11 +14,11 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
 
+import javax.annotation.Resource;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,16 +34,13 @@ public class ScenariosControllerShouldIT {
     @SuppressWarnings("SpringJavaAutowiringInspection")
     @Autowired
     protected WebApplicationContext wac;
-    @Autowired
-    private FeaturesConfigurableDirectory featuresDir;
+    @Resource(name = "featuresDir") private FeaturesDirectory featuresDir;
     private MockMvc mockMvc;
     private Gson gson = new Gson();
 
     @Before
     public void setup() throws IOException {
         this.mockMvc = webAppContextSetup(this.wac).build();
-        featuresDir.path = Files.createTempDirectory("LivingDocumentationFeaturesTempDir");
-        featuresDir.path.toFile().deleteOnExit();
     }
 
     @Test
@@ -149,7 +146,7 @@ public class ScenariosControllerShouldIT {
 
 
     private void createFeatureFileInFeatureDirectory(String filePath, String... content) throws FileNotFoundException {
-        File featureFile = featuresDir.path.resolve(filePath).toFile();
+        File featureFile = featuresDir.getPath().resolve(filePath).toFile();
         featureFile.deleteOnExit();
         PrintWriter writer = new PrintWriter(featureFile);
         for (String line : content) {

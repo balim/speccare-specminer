@@ -6,12 +6,11 @@ Feature:
   Scenario: Scenario described in documentation exists in the actual feature files
     Given documentation that reads:
     """
-    Scenario: Adding two numbers
-      Given I have 2 and 3
-      When  I add these numbers
-      Then I should have 5
+      Scenario: Adding two numbers
+        Given I have 2 and 3
+        When  I add these numbers
+        Then the result should be 5
     """
-
 #    And feature file "Adding.feature" in the developed application:
 #    """
 #    Feature: Calculator

@@ -6,39 +6,13 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
     <context:component-scan base-package="com.michaelszymczak.livingdocumentation"/>
-    <context:property-placeholder location="classpath:app.prod.properties" order="0"/>
 
-
-
-    <bean id="filesystemFeatureFilesRetriever" class="com.michaelszymczak.livingdocumentation.specificationprovider.FilesystemFeatureFilesRetriever">
-        <constructor-arg ref="featuresDir"/>
-    </bean>
-
-    <bean id="textFragmentProvider" class="com.michaelszymczak.livingdocumentation.specificationprovider.TextFragmentProvider"/>
-
-    <bean id="featuresCreator" class="com.michaelszymczak.livingdocumentation.specificationprovider.FeaturesCreator">
-        <constructor-arg index="0" ref="textFragmentProvider"/>
-        <constructor-arg index="1" ref="filesystemFeatureFilesRetriever"/>
-    </bean>
-
-    <bean id="scenariosCreator" class="com.michaelszymczak.livingdocumentation.specificationprovider.ScenariosCreator">
-        <constructor-arg index="0" ref="textFragmentProvider"/>
-        <constructor-arg index="1" ref="featuresCreator"/>
-    </bean>
-
-    <bean class="com.michaelszymczak.livingdocumentation.specificationprovider.ObjectScenarioRepository">
-        <constructor-arg ref="scenariosCreator"/>
-    </bean>
-
-    <beans profile="default">
-        <bean id="featuresDir" class="com.michaelszymczak.livingdocumentation.specificationprovider.FeaturesRealDirectory">
-            <constructor-arg value="${pathToFeatureDir.absolutePath}"/>
-        </bean>
+    <beans profile="default,prod">
+        <import resource="classpath:applicationProdContext.xml"/>
     </beans>
 
-
     <beans profile="test,uat">
-        <bean id="featuresDir" class="com.michaelszymczak.livingdocumentation.specificationprovider.FeaturesConfigurableDirectory"/>
+        <import resource="classpath:applicationTestContext.xml"/>
     </beans>
 
 </beans>
