@@ -5,4 +5,4 @@ jdk:
   - oraclejdk7
   - openjdk7
 
-script: mvn clean verify
+script: mvn -Dspring.profiles.active="test" clean verify
