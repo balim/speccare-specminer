@@ -13,24 +13,6 @@
         <constructor-arg value="${pathToFeatureDir.absolutePath}"/>
     </bean>
 
-    <bean id="filesystemFeatureFilesRetriever" class="com.michaelszymczak.livingdocumentation.specificationprovider.FilesystemFeatureFilesRetriever">
-        <constructor-arg ref="featuresDir"/>
-    </bean>
-
-    <bean id="textFragmentProvider" class="com.michaelszymczak.livingdocumentation.specificationprovider.TextFragmentProvider"/>
-
-    <bean id="featuresCreator" class="com.michaelszymczak.livingdocumentation.specificationprovider.FeaturesCreator">
-        <constructor-arg index="0" ref="textFragmentProvider"/>
-        <constructor-arg index="1" ref="filesystemFeatureFilesRetriever"/>
-    </bean>
-
-    <bean id="scenariosCreator" class="com.michaelszymczak.livingdocumentation.specificationprovider.ScenariosCreator">
-        <constructor-arg index="0" ref="textFragmentProvider"/>
-        <constructor-arg index="1" ref="featuresCreator"/>
-    </bean>
-
-    <bean class="com.michaelszymczak.livingdocumentation.specificationprovider.ObjectScenarioRepository">
-        <constructor-arg ref="scenariosCreator"/>
-    </bean>
+    <import resource="classpath:applicationCommonContext.xml"/>
 
 </beans>
