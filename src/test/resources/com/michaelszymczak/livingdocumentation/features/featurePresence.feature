@@ -11,16 +11,23 @@ Feature:
         When  I add these numbers
         Then the result should be 5
     """
-#    And feature file "Adding.feature" in the developed application:
+    And feature file "Adding.feature" in the developed application:
+    """
+    Feature: Calculator
+
+      Scenario: Adding two numbers
+        Given I have 2 and 3
+        When  I add these numbers
+        Then the result should be 5
+    """
+#    Then scenario should be marked as present:
 #    """
-#    Feature: Calculator
-#
 #      Scenario: Adding two numbers
 #        Given I have 2 and 3
 #        When  I add these numbers
-#        Then I should have 5
+#        Then the result should be 5
 #    """
-#    Then "Adding two numbers" scenario should be marked as present
+
 #
 #
 #
@@ -39,6 +46,6 @@ Feature:
 #      Scenario: Adding two numbers
 #        Given I have 2 and 3
 #        When  I add these numbers
-#        Then I should have 5
+#        Then the result should be 5
 #    """
 #    Then "Subtracting two numbers" scenario should be marked as absent
