@@ -33,13 +33,6 @@ public class ExamplesControllerShouldIT {
     }
 
     @Test
-    public void presentScenarioExamplesThatCanBeUsedInTests() throws Exception {
-        mockMvc.perform(get("/examples/test.html"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("examples/test.html"));
-    }
-
-    @Test
     public void returnPathToFeaturesDirectoryThatCanBeUsedInTests() throws Exception {
         String response = mockMvc.perform(get("/examples/featuresPath"))
                 .andExpect(status().isOk()).andReturn().getResponse().getContentAsString();

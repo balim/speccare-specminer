@@ -1,6 +1,5 @@
 package com.michaelszymczak.livingdocumentation.controller;
 
-import com.michaelszymczak.livingdocumentation.specificationprovider.FeaturesConfigurableDirectory;
 import com.michaelszymczak.livingdocumentation.specificationprovider.FeaturesDirectory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,11 +15,6 @@ import java.io.IOException;
 class ExamplesController {
 
     @Resource(name = "featuresDir") private FeaturesDirectory featuresDir;
-
-    @RequestMapping(value="/test.html", method = RequestMethod.GET)
-    public String example() {
-        return "examples/test.html";
-    }
 
     @RequestMapping(value="/featuresPath", method = RequestMethod.GET)
     @ResponseBody

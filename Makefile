@@ -8,7 +8,7 @@ run:
 	mvn clean jetty:run
 
 test:
-	mvn clean verify
+	mvn -Dspring.profiles.active="test" clean verify
 
 test-coverage:
 	mvn -Dspring.profiles.active="test" clean verify && \
