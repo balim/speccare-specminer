@@ -16,17 +16,21 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 @ContextConfiguration("/cucumber.xml")
 @WebAppConfiguration
 public class FeaturePresenceSteps {
 
-    private WebResponse response;
+
 
     @Given("^feature file \"(.*?)\" in the developed application:$")
     public void feature_file_in_the_developed_application(String featureFileName, String content) throws Throwable {
-        temporaryFileCreator.createInDirWithContent(featuresDir, featureFileName, content);
+        tempFilesToRemove.add(temporaryFileCreator.createInDirWithContent(featuresDir, featureFileName, content));
     }
 
     @When("^I get \"(.*?)\"$")
@@ -39,6 +43,11 @@ public class FeaturePresenceSteps {
         Assert.assertEquals(HttpStatus.OK.value(), response.getStatusCode());
     }
 
+    @Then("^the response should be NOT FOUND$")
+    public void the_response_should_be_NOT_FOUND() throws Throwable {
+        Assert.assertEquals(HttpStatus.NOT_FOUND.value(), response.getStatusCode());
+    }
+
     @Then("^the response content should be JSON:$")
     public void the_response_content_should_be_json(String expectedJsonString) throws Throwable {
         ScenarioJson expectedJson = ScenarioJson.createFromStringCorrectingFeaturesDir(expectedJsonString, featuresDir);
@@ -49,11 +58,12 @@ public class FeaturePresenceSteps {
 
 
 
-    private WebDriver driver;
     private String siteUrl;
-    private WebClient client;
+    private final WebClient client = new WebClient();
 
     private String featuresDir;
+    private WebResponse response;
+    private List<Path> tempFilesToRemove = new ArrayList<>();
 
     @Autowired private TemporaryFileCreator temporaryFileCreator;
 
@@ -64,17 +74,26 @@ public class FeaturePresenceSteps {
             throw new RuntimeException("You must set the jetty.port property first");
         }
         siteUrl = "http://localhost:" + jettyPort;
-        driver = new HtmlUnitDriver();
-        client = new WebClient();
         featuresDir = client.getPage(siteUrl + "/examples/featuresPath").getWebResponse().getContentAsString();
-        Assert.assertTrue(Paths.get(featuresDir).toFile().listFiles().length == 0);
+        client.getOptions().setThrowExceptionOnFailingStatusCode(false);
+        assertNoFilesInFeaturesDir();
+    }
+
+    @After
+    public void tearDown() throws IOException {
+        removeAllTmpFiles();
+        assertNoFilesInFeaturesDir();
     }
 
 
-    @After
-    public void destroy() {
-        if(driver != null) {
-            driver.close();
+    private void assertNoFilesInFeaturesDir() {
+        Assert.assertTrue(Paths.get(featuresDir).toFile().listFiles().length == 0);
+    }
+
+    private void removeAllTmpFiles() throws IOException {
+        for (Path tmpFile : tempFilesToRemove) {
+            Files.delete(tmpFile);
         }
+        tempFilesToRemove.clear();
     }
 }

@@ -46,3 +46,16 @@ Feature:
       ]
     }
     """
+
+  Scenario: Scenario described in documentation not present in the actual feature files
+    When I get "/scenarios/Multiplying two numbers"
+    Then the response should be NOT FOUND
+    And the response content should be JSON:
+    """
+    {
+      "result":"notfound",
+      "name":"Scenario not found",
+      "path":"",
+      "content": []
+    }
+    """
