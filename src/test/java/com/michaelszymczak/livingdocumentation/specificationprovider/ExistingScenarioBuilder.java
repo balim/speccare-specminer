@@ -29,7 +29,7 @@ public class ExistingScenarioBuilder {
         return this;
     }
 
-    public Scenario build() {
+    public ExistingScenario build() {
         return new ExistingScenario(tfp, scenarioContent, wrappingFeature);
     }
 }

@@ -1,6 +1,6 @@
 package com.michaelszymczak.livingdocumentation.specificationprovider;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class NotFoundScenario extends Scenario {
@@ -16,7 +16,7 @@ public class NotFoundScenario extends Scenario {
 
     @Override
     public List<String> getContent() {
-        return new ArrayList<>();
+        return Collections.emptyList();
     }
 
     @Override

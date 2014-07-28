@@ -7,7 +7,7 @@ abstract class Scenario {
     public static final String SCENARIO_START = "Scenario:";
     public static final String SCENARIO_OUTLINE_START = "Scenario Outline:";
 
-    private static NotFoundScenario notFoundScenario = new NotFoundScenario();
+    private final static NotFoundScenario notFoundScenario = new NotFoundScenario();
     public static NotFoundScenario getNotFound() {
         return notFoundScenario;
     }

@@ -51,19 +51,9 @@ public class ObjectScenarioRepositoryShould {
         givenScenarioCreatorThatReturnsScenariosAndTheirFirstLinesAreRespectively(
                 "Scenario: Foo 1", "Scenario: Fooo 2", "Scenario: Bar", "Scenario: Foo scenario 3"
         );
-
-        assertTooManyScenariosFoundExceptionWillBeThrownWithTheMessageContaining("Foo 1", "Fooo 2", "Foo scenario 3");
-        repository.find("Foo");
+        Scenario scenario = repository.find("Foo");
+        Assert.assertTrue(scenario instanceof AmbiguousScenario);
     }
-
-
-    private void assertTooManyScenariosFoundExceptionWillBeThrownWithTheMessageContaining(String... expectedMessages) {
-        thrown.expect(TooManyScenariosFound.class);
-        for (String message : expectedMessages) {
-            thrown.expectMessage(containsString(message));
-        }
-    }
-
 
     private void givenScenarioCreatorThatReturnsScenariosAndTheirFirstLinesAreRespectively(String... firstLines) {
         for(String scenarioFirstLine : firstLines) {
