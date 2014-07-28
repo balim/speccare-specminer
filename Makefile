@@ -2,10 +2,11 @@ clean:
 	mvn clean
 
 install:
-	mvn clean install
+	mvn -Dspring.profiles.active="test" clean install
 
 run:
-	mvn clean jetty:run
+	mvn clean package && \
+	java -jar target/dependency/jetty-runner.jar target/LivingDocumentation-1.0-SNAPSHOT.war
 
 test:
 	mvn -Dspring.profiles.active="test" clean verify
