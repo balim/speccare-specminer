@@ -87,7 +87,7 @@ public class ScenariosControllerShouldIT {
         givenFeatureFilesInFeatureDirectoryContainingScenariosNamed("Foo scenario", "", "Bar scenario", "");
 
         String response = mockMvc.perform(get("/scenarios/scenario"))
-                .andExpect(status().isBadRequest()).andReturn().getResponse().getContentAsString();
+                .andExpect(status().isUnprocessableEntity()).andReturn().getResponse().getContentAsString();
 
         Map<String,String> expectedJsonParameters = new HashMap<>();
         expectedJsonParameters.put("result", "toomany");

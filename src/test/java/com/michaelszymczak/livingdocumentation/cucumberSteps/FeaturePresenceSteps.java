@@ -48,6 +48,11 @@ public class FeaturePresenceSteps {
         Assert.assertEquals(HttpStatus.NOT_FOUND.value(), response.getStatusCode());
     }
 
+    @Then("^the response should be UNPROCESSABLE ENTITY$")
+    public void the_response_should_be_UNPROCESSABLE_ENTITY() throws Throwable {
+        Assert.assertEquals(HttpStatus.UNPROCESSABLE_ENTITY.value(), response.getStatusCode());
+    }
+
     @Then("^the response content should be JSON:$")
     public void the_response_content_should_be_json(String expectedJsonString) throws Throwable {
         ScenarioJson expectedJson = ScenarioJson.createFromStringCorrectingFeaturesDir(expectedJsonString, featuresDir);

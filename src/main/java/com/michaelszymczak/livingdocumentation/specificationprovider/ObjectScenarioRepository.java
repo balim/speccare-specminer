@@ -28,13 +28,15 @@ class ObjectScenarioRepository implements ScenarioRepository {
     private void throwExceptionIfMoreThanOneScenarioFound(String partOfScenarioName, List<Scenario> foundScenarios) {
         if (foundScenarios.size() > 1) {
             StringBuilder message = new StringBuilder();
+            List<String> featurePaths = new ArrayList<>();
             message.append("More than one matching scenario found for the phrase '").append(partOfScenarioName)
                     .append("'. Change your searched phrase or correct the scenario files. Scenarios found:");
             for(Scenario scenario : foundScenarios) {
                 message.append("\n").append(scenario.getName()).append(" in ").append(scenario.getFeature().getPath());
+                featurePaths.add(scenario.getFeature().getPath());
             }
 
-            throw new TooManyScenariosFound(message.toString());
+            throw new TooManyScenariosFound(message.toString(), featurePaths);
         }
     }
 }

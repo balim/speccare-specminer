@@ -20,7 +20,6 @@ test-coverage:
 	mvn org.pitest:pitest-maven:mutationCoverage
 
 test-start-server:
-	mvn clean package && \
-	java -Dspring.profiles.active="uat" -Djetty.port=9999 -jar target/dependency/jetty-runner.jar --port 9999 target/LivingDocumentation-1.0-SNAPSHOT.war
+	mvn -Dspring.profiles.active="uat" -Djetty.port=9999 jetty:start
 
 .PHONY: clean install run test test-coverage test-start-server

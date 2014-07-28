@@ -31,7 +31,7 @@ public class ScenariosController {
             return new ResponseEntity<>(scenario.toJson(), HttpStatus.OK);
 
         } catch (TooManyScenariosFound e ) {
-            return new ResponseEntity<>("{\"result\":\"toomany\",\"details\":\"" + e.getMessage() + "\"}", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("{\"result\":\"toomany\",\"name\":\"Too many scenarios matching searched phrase\",\"path\":\"" + e.getFeaturePaths() + "\",\"content\":[]}", HttpStatus.UNPROCESSABLE_ENTITY);
         }
 
 
