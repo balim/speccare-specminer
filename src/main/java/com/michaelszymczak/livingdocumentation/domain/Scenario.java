@@ -1,8 +1,8 @@
-package com.michaelszymczak.livingdocumentation.specificationprovider;
+package com.michaelszymczak.livingdocumentation.domain;
 
 import java.util.List;
 
-abstract class Scenario {
+public abstract class Scenario {
 
     public static final String SCENARIO_START = "Scenario:";
     public static final String SCENARIO_OUTLINE_START = "Scenario Outline:";

@@ -8,13 +8,12 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.junit.Assert;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -68,7 +67,7 @@ public class FeaturePresenceSteps {
 
     private String featuresDir;
     private WebResponse response;
-    private List<Path> tempFilesToRemove = new ArrayList<>();
+    private final List<Path> tempFilesToRemove = new ArrayList<>();
 
     @Autowired private TemporaryFileCreator temporaryFileCreator;
 
@@ -92,7 +91,9 @@ public class FeaturePresenceSteps {
 
 
     private void assertNoFilesInFeaturesDir() {
-        Assert.assertTrue(Paths.get(featuresDir).toFile().listFiles().length == 0);
+        File[] files = Paths.get(featuresDir).toFile().listFiles();
+        Assert.assertNotNull(files);
+        Assert.assertTrue(files.length == 0);
     }
 
     private void removeAllTmpFiles() throws IOException {

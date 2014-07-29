@@ -1,5 +1,7 @@
 package com.michaelszymczak.livingdocumentation.specificationprovider;
 
+import com.michaelszymczak.livingdocumentation.domain.AmbiguousScenario;
+import com.michaelszymczak.livingdocumentation.domain.Scenario;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
@@ -7,8 +9,6 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import java.io.IOException;
-
-import static org.hamcrest.CoreMatchers.containsString;
 
 public class ObjectScenarioRepositoryShould {
 

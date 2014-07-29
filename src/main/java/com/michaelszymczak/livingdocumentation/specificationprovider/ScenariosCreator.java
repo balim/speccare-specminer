@@ -1,13 +1,17 @@
 package com.michaelszymczak.livingdocumentation.specificationprovider;
 
+import com.michaelszymczak.livingdocumentation.domain.ExistingScenario;
+import com.michaelszymczak.livingdocumentation.domain.Feature;
+import com.michaelszymczak.livingdocumentation.domain.Scenario;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 class ScenariosCreator implements ScenariosCreatable {
 
-    private TextFragmentProvider tfp;
-    private FeaturesCreator featuresCreator;
+    private final TextFragmentProvider tfp;
+    private final FeaturesCreator featuresCreator;
 
     public ScenariosCreator(TextFragmentProvider textFragmentProvider, FeaturesCreator featuresCreator) {
         this.tfp = textFragmentProvider;
@@ -58,8 +62,8 @@ class ScenariosCreator implements ScenariosCreatable {
     }
 
     private class SingleScenarioCreator {
-        private TextFragmentProvider tfp;
-        private Feature feature;
+        private final TextFragmentProvider tfp;
+        private final Feature feature;
         public SingleScenarioCreator(TextFragmentProvider tfp, Feature feature) {
             this.tfp = tfp;
             this.feature = feature;

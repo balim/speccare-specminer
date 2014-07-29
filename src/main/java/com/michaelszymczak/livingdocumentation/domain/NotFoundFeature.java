@@ -1,4 +1,4 @@
-package com.michaelszymczak.livingdocumentation.specificationprovider;
+package com.michaelszymczak.livingdocumentation.domain;
 
 import java.util.ArrayList;
 import java.util.List;

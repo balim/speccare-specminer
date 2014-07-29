@@ -1,10 +1,11 @@
 package com.michaelszymczak.livingdocumentation.specificationprovider;
 
 import static org.springframework.http.HttpStatus.*;
+
+import com.michaelszymczak.livingdocumentation.domain.*;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.Collections;
 import java.util.List;
 
 public class ScenarioTypeHttpStatusShould {

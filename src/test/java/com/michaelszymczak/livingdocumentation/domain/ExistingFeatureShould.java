@@ -1,5 +1,8 @@
-package com.michaelszymczak.livingdocumentation.specificationprovider;
+package com.michaelszymczak.livingdocumentation.domain;
 
+import com.michaelszymczak.livingdocumentation.domain.ExistingFeature;
+import com.michaelszymczak.livingdocumentation.domain.InvalidFeatureContentException;
+import com.michaelszymczak.livingdocumentation.specificationprovider.ExistingFeatureBuilder;
 import org.junit.Assert;
 import org.junit.Test;
 

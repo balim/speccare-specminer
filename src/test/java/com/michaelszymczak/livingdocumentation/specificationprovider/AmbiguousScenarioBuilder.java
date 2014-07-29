@@ -1,11 +1,14 @@
 package com.michaelszymczak.livingdocumentation.specificationprovider;
 
 
+import com.michaelszymczak.livingdocumentation.domain.AmbiguousScenario;
+import com.michaelszymczak.livingdocumentation.domain.Scenario;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class AmbiguousScenarioBuilder {
-    private List<String> featurePaths = new ArrayList<>();
+    private final List<String> featurePaths = new ArrayList<>();
 
     public static AmbiguousScenarioBuilder use()
     {

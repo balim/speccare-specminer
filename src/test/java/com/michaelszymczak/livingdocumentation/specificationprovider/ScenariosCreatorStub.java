@@ -1,12 +1,14 @@
 package com.michaelszymczak.livingdocumentation.specificationprovider;
 
+import com.michaelszymczak.livingdocumentation.domain.Scenario;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ScenariosCreatorStub implements ScenariosCreatable {
+class ScenariosCreatorStub implements ScenariosCreatable {
 
-    public List<Scenario> scenarios = new ArrayList<>();
+    public final List<Scenario> scenarios = new ArrayList<>();
 
     @Override
     public List<Scenario> create() throws IOException {

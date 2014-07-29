@@ -27,18 +27,18 @@ public class FilesystemFeatureFilesRetrieverShould {
 
     @Test public void returnNoFileIfNoFeatureFiles() throws IOException {
         givenEmptyDirectory(featuresPath);
-        assertThatNoFilenamesReturnedInGivenDirectory(retriever.getFiles(), featuresPath);
+        assertThatNoFilenameReturnedInGivenDirectory(retriever.getFiles(), featuresPath);
 
     }
 
     @Test public void findFeatureFilesBasedOnTheirExtensionAndIgnoreTheRest() throws IOException {
         givenFilesInDirectory(featuresPath, new String[]{"foo.feature", "bar.feature", "baz.txt"});
-        assertThat(retriever.getFiles(), containsOnlyFilenamesInDirectory(featuresPath, new String[]{"foo.feature", "bar.feature"}));
+        assertThat(retriever.getFiles(), containsOnlyFileNamesInDirectory(featuresPath, new String[]{"foo.feature", "bar.feature"}));
     }
 
     @Test public void findFeatureFilesAlsoInSubdirectoriesRelativeToTheBaseDirectory() throws IOException {
         givenFilesInDirectory(featuresPath, new String[]{"bar/foo.feature", "foo/bar/baz/bar.feature", "foo/bar/baz/baz.feature"});
-        assertThat(retriever.getFiles(), containsOnlyFilenamesInDirectory(featuresPath, new String[]{"bar/foo.feature", "foo/bar/baz/bar.feature", "foo/bar/baz/baz.feature"}));
+        assertThat(retriever.getFiles(), containsOnlyFileNamesInDirectory(featuresPath, new String[]{"bar/foo.feature", "foo/bar/baz/bar.feature", "foo/bar/baz/baz.feature"}));
     }
 
     @Test public void retrieveTheContentOfTheFile() throws IOException {
@@ -85,8 +85,8 @@ public class FilesystemFeatureFilesRetrieverShould {
         assertEquals(0, featuresDirectory.toFile().list().length);
     }
 
-    private void assertThatNoFilenamesReturnedInGivenDirectory(Map<String, List<String>> files, Path featuresDirectory) {
-        assertThat(files, containsOnlyFilenamesInDirectory(featuresDirectory, new String[]{}));
+    private void assertThatNoFilenameReturnedInGivenDirectory(Map<String, List<String>> files, Path featuresDirectory) {
+        assertThat(files, containsOnlyFileNamesInDirectory(featuresDirectory, new String[]{}));
     }
 
     private void givenFilesInDirectory(Path featuresDirectory, String[] filePaths) throws IOException {
@@ -109,7 +109,7 @@ public class FilesystemFeatureFilesRetrieverShould {
         }
     }
 
-    private static Matcher<Map<String, List<String>>> containsOnlyFilenamesInDirectory(final Path featuresDirectory, final String[] expectedRelativeFilePaths) {
+    private static Matcher<Map<String, List<String>>> containsOnlyFileNamesInDirectory(final Path featuresDirectory, final String[] expectedRelativeFilePaths) {
         final Set<String> expectedAbsolutePaths = new HashSet<>();
         for (String relativePath : expectedRelativeFilePaths) {
             expectedAbsolutePaths.add(featuresDirectory.resolve(relativePath).toFile().getAbsolutePath());
@@ -138,9 +138,9 @@ public class FilesystemFeatureFilesRetrieverShould {
         final Map<String, List<String>> expectedFilesWithContent = new HashMap<>();
         String absolutePath;
         List<String> content;
-        for (int i = 0; i < expectedRelativeFilePaths.length; i++) {
-            absolutePath = featuresDirectory.resolve(expectedRelativeFilePaths[i]).toFile().getAbsolutePath();
-            Path pathToFile = featuresDirectory.resolve(expectedRelativeFilePaths[i]);
+        for (String expectedRelativeFilePath : expectedRelativeFilePaths) {
+            absolutePath = featuresDirectory.resolve(expectedRelativeFilePath).toFile().getAbsolutePath();
+            Path pathToFile = featuresDirectory.resolve(expectedRelativeFilePath);
             content = Files.readAllLines(pathToFile, Charset.defaultCharset());
             expectedFilesWithContent.put(absolutePath, content);
         }

@@ -1,5 +1,7 @@
 package com.michaelszymczak.livingdocumentation.specificationprovider;
 
+import com.michaelszymczak.livingdocumentation.domain.ExistingFeature;
+import com.michaelszymczak.livingdocumentation.domain.Scenario;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

@@ -1,8 +1,6 @@
 package com.michaelszymczak.livingdocumentation.controller;
 
-import com.michaelszymczak.livingdocumentation.specificationprovider.FeaturesConfigurableDirectory;
 import com.michaelszymczak.livingdocumentation.specificationprovider.FeaturesDirectory;
-import com.michaelszymczak.livingdocumentation.specificationprovider.FeaturesTemporaryDirectory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -14,7 +12,7 @@ import javax.annotation.Resource;
 
 @Controller
 @RequestMapping("/")
-public class HelloController {
+class HelloController {
 
 
     @Autowired private WebApplicationContext wac;

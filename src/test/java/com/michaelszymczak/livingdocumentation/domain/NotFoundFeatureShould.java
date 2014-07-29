@@ -1,4 +1,4 @@
-package com.michaelszymczak.livingdocumentation.specificationprovider;
+package com.michaelszymczak.livingdocumentation.domain;
 
 
 import org.junit.Assert;
@@ -10,15 +10,11 @@ public class NotFoundFeatureShould {
         Assert.assertSame(NotFoundFeature.class, Feature.getNotFound().getClass());
     }
 
-    @Test public void beOfTypeOfFeature() {
-        Feature f = Feature.getNotFound();
-    }
-
     @Test public void beAlwaysTheSameInstanceAsItIsImmutableObject() {
         Assert.assertSame(Feature.getNotFound(), Feature.getNotFound());
     }
 
-    @Test public void presetThemselfAsNotFoundFeature() {
+    @Test public void presetItselfAsNotFoundFeature() {
         NotFoundFeature feature = Feature.getNotFound();
 
         Assert.assertEquals("Feature not found", feature.getName());

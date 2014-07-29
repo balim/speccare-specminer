@@ -1,13 +1,16 @@
 package com.michaelszymczak.livingdocumentation.specificationprovider;
 
+import com.michaelszymczak.livingdocumentation.domain.ExistingFeature;
+import com.michaelszymczak.livingdocumentation.domain.Feature;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 class FeaturesCreator {
-    private TextFragmentProvider tfp;
-    private FeatureFilesRetriever retriever;
+    private final TextFragmentProvider tfp;
+    private final FeatureFilesRetriever retriever;
 
     public FeaturesCreator(TextFragmentProvider tfp, FeatureFilesRetriever retriever) {
         this.tfp = tfp;

@@ -1,11 +1,12 @@
-package com.michaelszymczak.livingdocumentation.specificationprovider;
+package com.michaelszymczak.livingdocumentation.domain;
+
+import com.michaelszymczak.livingdocumentation.specificationprovider.TextFragmentProvider;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-class ExistingFeature extends Feature {
+public class ExistingFeature extends Feature {
 
     private final String name;
     private final TextFragmentProvider tfp;

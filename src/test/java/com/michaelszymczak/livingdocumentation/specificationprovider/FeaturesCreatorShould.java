@@ -1,5 +1,6 @@
 package com.michaelszymczak.livingdocumentation.specificationprovider;
 
+import com.michaelszymczak.livingdocumentation.domain.Feature;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

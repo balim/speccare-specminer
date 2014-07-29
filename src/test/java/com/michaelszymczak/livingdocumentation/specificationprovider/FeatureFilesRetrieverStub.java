@@ -5,9 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class FeatureFilesRetrieverStub implements FeatureFilesRetriever {
+class FeatureFilesRetrieverStub implements FeatureFilesRetriever {
 
-    Map<String, List<String>> files = new HashMap<>();
+    final Map<String, List<String>> files = new HashMap<>();
 
     @Override
     public Map<String, List<String>> getFiles() throws IOException {

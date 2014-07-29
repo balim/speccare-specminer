@@ -8,7 +8,6 @@ import org.junit.Test;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.LinkedHashSet;
 
 public class FeaturesTemporaryDirectoryShould {

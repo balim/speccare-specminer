@@ -1,4 +1,4 @@
-package com.michaelszymczak.livingdocumentation.sandbox;
+package com.michaelszymczak.livingdocumentation.controller;
 
 import org.junit.Before;
 import org.junit.Test;

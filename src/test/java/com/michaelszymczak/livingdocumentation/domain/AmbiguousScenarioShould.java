@@ -1,12 +1,14 @@
-package com.michaelszymczak.livingdocumentation.specificationprovider;
+package com.michaelszymczak.livingdocumentation.domain;
 
 
+import com.michaelszymczak.livingdocumentation.specificationprovider.AmbiguousScenarioBuilder;
+import com.michaelszymczak.livingdocumentation.specificationprovider.ExistingFeatureBuilder;
+import com.michaelszymczak.livingdocumentation.specificationprovider.ExistingScenarioBuilder;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -16,10 +18,6 @@ public class AmbiguousScenarioShould {
         List<Scenario> foundScenarios = Arrays.asList(scenarioWithFeaturePath("foo.feature"), scenarioWithFeaturePath("bar.feature"));
         AmbiguousScenario ambiguousScenario = new AmbiguousScenario(foundScenarios);
         Assert.assertEquals("{\"result\":\"toomany\",\"name\":\"Too many scenarios matching searched phrase\",\"path\":\"foo.feature,bar.feature\",\"content\":[]}", ambiguousScenario.toJson());
-    }
-
-    @Test public void beOfTypeOfScenario() {
-        Scenario s = getAmbiguousScenarioPointingToTwoFeatures();
     }
 
     @Test public void presetItselfAsAmbiguousFoundScenario() {

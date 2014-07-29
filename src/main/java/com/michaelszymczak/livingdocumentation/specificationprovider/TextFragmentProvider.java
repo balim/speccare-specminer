@@ -3,8 +3,8 @@ package com.michaelszymczak.livingdocumentation.specificationprovider;
 import java.util.ArrayList;
 import java.util.List;
 
-class TextFragmentProvider {
-    ArrayList<String> getAllFragmentsThatFollows(List<String> scenarioContent, String[] availableStarts) {
+public class TextFragmentProvider {
+    public ArrayList<String> getAllFragmentsThatFollows(List<String> scenarioContent, String[] availableStarts) {
         ArrayList<String> scenarioNames = new ArrayList<>();
         for(String line : scenarioContent) {
             String foundFragment = returnStringFollowingAnyOf(line, availableStarts);

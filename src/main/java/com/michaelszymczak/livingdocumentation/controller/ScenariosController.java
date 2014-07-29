@@ -1,5 +1,8 @@
-package com.michaelszymczak.livingdocumentation.specificationprovider;
+package com.michaelszymczak.livingdocumentation.controller;
 
+import com.michaelszymczak.livingdocumentation.specificationprovider.ObjectScenarioRepository;
+import com.michaelszymczak.livingdocumentation.domain.Scenario;
+import com.michaelszymczak.livingdocumentation.specificationprovider.ScenarioTypeHttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -12,7 +15,7 @@ import java.io.IOException;
 
 @Controller
 @RequestMapping("/scenarios")
-public class ScenariosController {
+class ScenariosController {
 
 
     @Autowired private ObjectScenarioRepository repository;

@@ -1,19 +1,13 @@
-package com.michaelszymczak.livingdocumentation.specificationprovider;
+package com.michaelszymczak.livingdocumentation.domain;
 
 
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.Objects;
-
 public class NotFoundScenarioShould {
 
     @Test public void beCreatedUsingFactoryMethod() {
         Assert.assertSame(NotFoundScenario.class, Scenario.getNotFound().getClass());
-    }
-
-    @Test public void beOfTypeOfScenario() {
-        Scenario s = Scenario.getNotFound();
     }
 
     @Test public void beAlwaysTheSameInstanceAsItIsImmutableObject() {

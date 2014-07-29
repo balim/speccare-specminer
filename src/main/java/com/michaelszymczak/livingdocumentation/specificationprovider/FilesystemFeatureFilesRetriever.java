@@ -29,7 +29,7 @@ class FilesystemFeatureFilesRetriever implements FeatureFilesRetriever {
 
         private final PathMatcher matcher;
 
-        private Map<String, List<String>> foundPaths = new HashMap<>();
+        private final Map<String, List<String>> foundPaths = new HashMap<>();
 
         Finder(PathMatcher matcher) {
             this.matcher = matcher;

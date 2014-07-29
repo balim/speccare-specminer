@@ -1,5 +1,9 @@
 package com.michaelszymczak.livingdocumentation.specificationprovider;
 
+import com.michaelszymczak.livingdocumentation.domain.AmbiguousScenario;
+import com.michaelszymczak.livingdocumentation.domain.ExistingScenario;
+import com.michaelszymczak.livingdocumentation.domain.NotFoundScenario;
+import com.michaelszymczak.livingdocumentation.domain.Scenario;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 

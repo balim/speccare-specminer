@@ -1,8 +1,8 @@
-package com.michaelszymczak.livingdocumentation.specificationprovider;
+package com.michaelszymczak.livingdocumentation.controller;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.michaelszymczak.livingdocumentation.specificationprovider.FeaturesDirectory;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,7 +36,6 @@ public class ScenariosControllerShouldIT {
     protected WebApplicationContext wac;
     @Resource(name = "featuresDir") private FeaturesDirectory featuresDir;
     private MockMvc mockMvc;
-    private Gson gson = new Gson();
 
     @Before
     public void setup() throws IOException {

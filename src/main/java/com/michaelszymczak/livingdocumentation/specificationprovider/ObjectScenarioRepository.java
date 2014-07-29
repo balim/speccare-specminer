@@ -1,10 +1,14 @@
 package com.michaelszymczak.livingdocumentation.specificationprovider;
 
+import com.michaelszymczak.livingdocumentation.domain.AmbiguousScenario;
+import com.michaelszymczak.livingdocumentation.domain.Scenario;
+import com.michaelszymczak.livingdocumentation.domain.ScenarioRepository;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-class ObjectScenarioRepository implements ScenarioRepository {
+public class ObjectScenarioRepository implements ScenarioRepository {
     private final ScenariosCreatable sc;
     public ObjectScenarioRepository(ScenariosCreatable sc) {
         this.sc = sc;

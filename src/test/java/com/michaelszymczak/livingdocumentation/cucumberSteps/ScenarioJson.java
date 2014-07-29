@@ -4,7 +4,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 class ScenarioJson {
-    public static final String ABSOLUTE_PATH_TO_FEATURES_DIR_PLACEHOLDER = "ABSOLUTE_PATH_TO_FEATURES_DIR";
+    private static final String ABSOLUTE_PATH_TO_FEATURES_DIR_PLACEHOLDER = "ABSOLUTE_PATH_TO_FEATURES_DIR";
     private final JsonObject jsonObject;
 
     private ScenarioJson(JsonObject jsonObject) {
@@ -30,9 +30,7 @@ class ScenarioJson {
     @Override
     public boolean equals(Object other) {
         if (other == null) return false;
-        if (other == this) return true;
-        if (!(other instanceof ScenarioJson)) return false;
-        return jsonObject.equals(((ScenarioJson) other).jsonObject);
+        return other == this || (other instanceof ScenarioJson && jsonObject.equals(((ScenarioJson) other).jsonObject));
     }
 
     private static JsonObject createJsonObject(String jsonString) {

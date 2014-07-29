@@ -1,5 +1,10 @@
-package com.michaelszymczak.livingdocumentation.specificationprovider;
+package com.michaelszymczak.livingdocumentation.domain;
 
+import com.michaelszymczak.livingdocumentation.domain.ExistingFeature;
+import com.michaelszymczak.livingdocumentation.domain.InvalidScenarioContentException;
+import com.michaelszymczak.livingdocumentation.domain.Scenario;
+import com.michaelszymczak.livingdocumentation.specificationprovider.ExistingFeatureBuilder;
+import com.michaelszymczak.livingdocumentation.specificationprovider.ExistingScenarioBuilder;
 import org.junit.Assert;
 import org.junit.Test;
 import java.util.Arrays;
