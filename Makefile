@@ -6,11 +6,7 @@ install:
 
 run:
 	mvn clean package && \
-	java -jar target/dependency/jetty-runner.jar --port 48001 target/LivingDocumentation-1.0-SNAPSHOT.war
-
-run-uat:
-	mvn clean package && \
-	java -jar target/dependency/jetty-runner.jar --port 9999 target/LivingDocumentation-1.0-SNAPSHOT.war
+	java -jar -DlivingDocumentation.featuresDir=`pwd`/src target/dependency/jetty-runner.jar --port 48001 target/LivingDocumentation-1.0-SNAPSHOT.war
 
 test:
 	mvn -Dspring.profiles.active="test" clean verify
