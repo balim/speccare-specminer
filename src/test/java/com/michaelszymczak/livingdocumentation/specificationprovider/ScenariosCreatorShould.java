@@ -112,6 +112,42 @@ public class ScenariosCreatorShould {
         ), scenarios.get(1).getContent());
     }
 
+    @Test public void ignoreScenariosInsideInlineQuotation() {
+        ExistingFeature feature = createFeatureWithContent(
+                "Feature: Foo feature",
+                "",
+                "  Scenario: First scenario",
+                "    Given first foo",
+                "  \"Scenario: Second scenario\"",
+                "    Given second foo",
+                "  Scenario: Third scenario",
+                "    Given third foo"
+        );
+
+        List<Scenario> scenarios = sc.createFromOneFeature(feature);
+
+        Assert.assertEquals(2, scenarios.size());
+    }
+
+    @Test public void ignoreScenariosInsideMultilineQuotation() {
+        ExistingFeature feature = createFeatureWithContent(
+                "Feature: Foo feature",
+                "",
+                "  Scenario: First scenario",
+                "    Given first foo:",
+                "    \"\"\"",
+                "      Scenario: this is not a real scenario, only quotation",
+                "        Given second foo",
+                "    \"\"\"",
+                "  Scenario: Third scenario",
+                "    Given third foo"
+        );
+
+        List<Scenario> scenarios = sc.createFromOneFeature(feature);
+
+        Assert.assertEquals(2, scenarios.size());
+    }
+
     private ScenariosCreator sc;
     private FeatureFilesRetrieverStub retriever;
 

@@ -35,9 +35,13 @@ class ScenariosCreator implements ScenariosCreatable {
         List<List<String>> scenariosContent = new ArrayList<>();
         List<String> currentScenarioLines = null;
         List<Scenario> scenarios = new ArrayList<>();
+        boolean isInMultilineQuotation = false;
 
         for (String line : feature.getContent()) {
-            if (isScenarioStartingLine(line)) {
+            if (tfp.returnStringFollowingAnyOf(line, new String[]{"\"\"\""}) != null) {
+                isInMultilineQuotation = !isInMultilineQuotation;
+            }
+            if (isScenarioStartingLine(line) && !isInMultilineQuotation) {
                 ssc.addNewScenario(scenarios, currentScenarioLines);
                 currentScenarioLines = createPlaceholderForNewScenarioLines(scenariosContent);
             }

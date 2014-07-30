@@ -17,18 +17,6 @@ public class ExistingScenarioShould {
         Assert.assertSame(feature, scenario.getFeature());
     }
 
-    @Test public void provideOriginalContentOfTheScenarioSoThatItCanBeDisplayedInDocumentation() {
-        Scenario scenario = createScenarioFromContent(
-                "Scenario: Foo title",
-                "    Given bar"
-        );
-
-        Assert.assertEquals(Arrays.asList(
-                "Scenario: Foo title",
-                "    Given bar"
-        ), scenario.getContent());
-    }
-
     @Test public void provideScenarioNameBasedOnTheContentPassedDuringCreation() {
         Scenario scenario = createScenarioFromContent(
                 "Scenario: Foo title",
@@ -73,6 +61,13 @@ public class ExistingScenarioShould {
             scenario.toJson());
     }
 
+    @Test public void provideOriginalContentOfTheScenarioSoThatItCanBeDisplayedInDocumentation() {
+        assertContentOfTheScenarioPreserved(
+                "Scenario: Foo title",
+                "    Given bar"
+        );
+    }
+
     @Test(expected = InvalidScenarioContentException.class)
     public void throwExceptionIfNoScenarioLine() {
         createScenarioFromContent("Given foo");
@@ -92,12 +87,44 @@ public class ExistingScenarioShould {
             "Scenario: Foo",
             "Scenario Outline: Bar"
         );
+    }
 
+    @Test public void
+    ignoreScenarioKeywordInsideMultilineQuotation() {
+        assertContentOfTheScenarioPreserved(
+                "Scenario: Foo",
+                "  Given I have quotation as follows:",
+                "  \"\"\"",
+                "    Scenario: only a quote, not yet another scenario",
+                "    Scenario Outline: only a quote, not yet another scenario",
+                "\"\"\"",
+                "  Then everything should be fine"
+        );
+    }
+
+    @Test(expected = InvalidScenarioContentException.class) public void
+    spotAProblemWhenFeatureKeywordOutsideQuotation() {
+        assertContentOfTheScenarioPreserved(
+                "Scenario: too many scenario keywords",
+                "  Given I have quotation as follows:",
+                "  \"\"\"",
+                "    Scenario: only a quote, not yet another scenario",
+                "  \"\"\"",
+                "    Then everything should be fine",
+                "Scenario: but this one should not be here, outside quotation",
+                "  Given foo"
+        );
+    }
+
+    private void assertContentOfTheScenarioPreserved(String... lines) {
+        Scenario scenario = createScenarioFromContent(lines);
+        Assert.assertEquals(Arrays.asList(lines), scenario.getContent());
     }
 
     private Scenario createScenarioFromContent(String... scenarioContent) {
         return ExistingScenarioBuilder.use().withContent(scenarioContent).build();
     }
+
 
     private Scenario createScenarioPassingWrappingFeature(ExistingFeature wrappingFeature) {
         return ExistingScenarioBuilder.use().withWrappingFeature(wrappingFeature).build();

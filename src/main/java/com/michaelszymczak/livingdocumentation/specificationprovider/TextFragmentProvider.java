@@ -5,13 +5,23 @@ import java.util.List;
 
 public class TextFragmentProvider {
     public ArrayList<String> getAllFragmentsThatFollows(List<String> scenarioContent, String[] availableStarts) {
+        String foundFragment;
+        boolean isInMultilineQuotation = false;
+
         ArrayList<String> scenarioNames = new ArrayList<>();
         for(String line : scenarioContent) {
-            String foundFragment = returnStringFollowingAnyOf(line, availableStarts);
+            foundFragment = null;
+            if (returnStringFollowingAnyOf(line, new String[]{"\"\"\""}) != null) {
+                isInMultilineQuotation = !isInMultilineQuotation;
+            }
+            if (!isInMultilineQuotation) {
+                foundFragment = returnStringFollowingAnyOf(line, availableStarts);
+            }
             if (null != foundFragment) {
                 scenarioNames.add(foundFragment);
             }
         }
+
         return scenarioNames;
     }
 
