@@ -8,14 +8,15 @@ A tool for creating and maintaining living documentation.
 Requirements:
 -------------
 
-- oraclejdk7 or openjdk7
-- maven
+- make
+- docker
+
 
 Usage
 ------------
 Run the application
 
-    mvn jetty:run
+    make container-run
 
-Go to http://localhost:9999
+
 
