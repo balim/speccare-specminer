@@ -5,7 +5,7 @@
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <context:component-scan base-package="com.michaelszymczak.livingdocumentation"/>
+    <context:component-scan base-package="com.michaelszymczak.speccare.specminer"/>
 
     <beans profile="default,prod">
         <import resource="classpath:applicationProdContext.xml"/>

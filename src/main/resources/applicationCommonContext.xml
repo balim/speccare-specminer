@@ -5,25 +5,25 @@
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <context:component-scan base-package="com.michaelszymczak.livingdocumentation"/>
+    <context:component-scan base-package="com.michaelszymczak.speccare.specminer"/>
 
-    <bean id="filesystemFeatureFilesRetriever" class="com.michaelszymczak.livingdocumentation.specificationprovider.FilesystemFeatureFilesRetriever">
+    <bean id="filesystemFeatureFilesRetriever" class="com.michaelszymczak.speccare.specminer.specificationprovider.FilesystemFeatureFilesRetriever">
         <constructor-arg ref="featuresDir"/>
     </bean>
 
-    <bean id="textFragmentProvider" class="com.michaelszymczak.livingdocumentation.specificationprovider.TextFragmentProvider"/>
+    <bean id="textFragmentProvider" class="com.michaelszymczak.speccare.specminer.specificationprovider.TextFragmentProvider"/>
 
-    <bean id="featuresCreator" class="com.michaelszymczak.livingdocumentation.specificationprovider.FeaturesCreator">
+    <bean id="featuresCreator" class="com.michaelszymczak.speccare.specminer.specificationprovider.FeaturesCreator">
         <constructor-arg index="0" ref="textFragmentProvider"/>
         <constructor-arg index="1" ref="filesystemFeatureFilesRetriever"/>
     </bean>
 
-    <bean id="scenariosCreator" class="com.michaelszymczak.livingdocumentation.specificationprovider.ScenariosCreator">
+    <bean id="scenariosCreator" class="com.michaelszymczak.speccare.specminer.specificationprovider.ScenariosCreator">
         <constructor-arg index="0" ref="textFragmentProvider"/>
         <constructor-arg index="1" ref="featuresCreator"/>
     </bean>
 
-    <bean class="com.michaelszymczak.livingdocumentation.specificationprovider.ObjectScenarioRepository">
+    <bean class="com.michaelszymczak.speccare.specminer.specificationprovider.ObjectScenarioRepository">
         <constructor-arg ref="scenariosCreator"/>
     </bean>
 
