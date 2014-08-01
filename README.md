@@ -1,9 +1,13 @@
-Living Documentation Maintainer - WIP (not ready yet)
+SpecMiner (part of SpecCare) - WIP
 ===================
-[![Build Status](https://travis-ci.org/michaelszymczak/livingDocumentation.svg?branch=master)](https://travis-ci.org/michaelszymczak/livingDocumentation)
 
-A tool for creating and maintaining living documentation.
+A tool that provides a RESTful API to retrieve projects' actual specification.
 
+Supported spec types:
+
+- Gherkin *.feature files [DONE]
+- Cucumber-jvm reports [WIP]
+- Behat reports [WIP]
 
 Requirements:
 -------------
@@ -14,9 +18,9 @@ Requirements:
 
 Usage
 ------------
-Run the application
+Run the application by typing
 
     make container-run
 
-
+Or, if you do not want to use make, open Makefile to see what the full command is.
 
