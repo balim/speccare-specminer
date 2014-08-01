@@ -33,6 +33,10 @@ class ScenarioJson {
         return other == this || (other instanceof ScenarioJson && jsonObject.equals(((ScenarioJson) other).jsonObject));
     }
 
+    @Override public int hashCode() {
+        return jsonObject.hashCode();
+    }
+
     private static JsonObject createJsonObject(String jsonString) {
         return new JsonParser().parse(jsonString).getAsJsonObject();
     }

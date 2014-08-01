@@ -96,15 +96,18 @@ public class FilesystemFeatureFilesRetrieverShould {
     private void givenFilesWithContentInDirectory(Path featuresDirectory, String[] filePaths, String[] contentOfEachFile) throws IOException {
         String filePath;
         File createdFile;
-        FileWriter fw;
+        FileWriter fw = null;
         for (int i = 0; i < filePaths.length; i++) {
             filePath = filePaths[i];
             Files.createDirectories(featuresDirectory.resolve(filePath).getParent()).toFile();
             createdFile = Files.createFile(featuresDirectory.resolve(filePath)).toFile();
             if (contentOfEachFile.length > i && contentOfEachFile[i] != null) {
-                fw = new FileWriter(createdFile);
-                fw.write(contentOfEachFile[i]);
-                fw.close();
+                try {
+                    fw = new FileWriter(createdFile);
+                    fw.write(contentOfEachFile[i]);
+                } finally {
+                    fw.close();
+                }
             }
         }
     }
