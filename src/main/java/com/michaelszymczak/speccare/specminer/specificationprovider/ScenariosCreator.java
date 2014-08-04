@@ -38,7 +38,7 @@ class ScenariosCreator implements ScenariosCreatable {
         boolean isInMultilineQuotation = false;
 
         for (String line : feature.getContent()) {
-            if (tfp.returnStringFollowingAnyOf(line, new String[]{"\"\"\""}) != null) {
+            if (tfp.isMultilineQuotation(line)) {
                 isInMultilineQuotation = !isInMultilineQuotation;
             }
             if (isScenarioStartingLine(line) && !isInMultilineQuotation) {

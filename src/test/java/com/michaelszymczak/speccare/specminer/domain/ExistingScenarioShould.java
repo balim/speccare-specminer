@@ -17,6 +17,18 @@ public class ExistingScenarioShould {
         Assert.assertSame(feature, scenario.getFeature());
     }
 
+    @Test public void useFoundAsItsResult() {
+        ExistingFeature feature = ExistingFeatureBuilder.use().build();
+        Scenario scenario = createScenarioPassingWrappingFeature(feature);
+        Assert.assertSame("found", scenario.getResult());
+    }
+
+    @Test public void provideWrappingFeaturePath() {
+        ExistingFeature feature = ExistingFeatureBuilder.use().withPath("/some/path/foo.feature").build();
+        Scenario scenario = createScenarioPassingWrappingFeature(feature);
+        Assert.assertSame("/some/path/foo.feature", scenario.getFeaturePath());
+    }
+
     @Test public void provideScenarioNameBasedOnTheContentPassedDuringCreation() {
         Scenario scenario = createScenarioFromContent(
                 "Scenario: Foo title",

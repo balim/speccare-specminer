@@ -11,7 +11,7 @@ public class TextFragmentProvider {
         ArrayList<String> scenarioNames = new ArrayList<>();
         for(String line : scenarioContent) {
             foundFragment = null;
-            if (returnStringFollowingAnyOf(line, new String[]{"\"\"\""}) != null) {
+            if (isMultilineQuotation(line)) {
                 isInMultilineQuotation = !isInMultilineQuotation;
             }
             if (!isInMultilineQuotation) {
@@ -23,6 +23,10 @@ public class TextFragmentProvider {
         }
 
         return scenarioNames;
+    }
+
+    public boolean isMultilineQuotation(String line) {
+        return returnStringFollowingAnyOf(line, new String[]{"\"\"\""}) != null;
     }
 
     public String returnStringFollowingAnyOf(String line, String[] startingStrings) {

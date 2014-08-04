@@ -1,5 +1,7 @@
 package com.michaelszymczak.speccare.specminer.domain;
 
+import com.michaelszymczak.speccare.specminer.view.ScenarioJson;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -20,7 +22,11 @@ public class NotFoundScenario extends Scenario {
     }
 
     @Override
+    public String getResult() { return "notfound"; }
+
+    @Override
     public String toJson() {
-        return "{\"name\":\"Scenario not found\",\"path\":\"\",\"content\":[],\"result\":\"notfound\"}";
+        ScenarioJson scenarioJson = new ScenarioJson(this);
+        return scenarioJson.toString();
     }
 }

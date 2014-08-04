@@ -17,15 +17,21 @@ public class AmbiguousScenarioShould {
     @Test public void returnJsonWithAllFeaturePathsWhereScenarioWasFound() {
         List<Scenario> foundScenarios = Arrays.asList(scenarioWithFeaturePath("foo.feature"), scenarioWithFeaturePath("bar.feature"));
         AmbiguousScenario ambiguousScenario = new AmbiguousScenario(foundScenarios);
-        Assert.assertEquals("{\"result\":\"toomany\",\"name\":\"Too many scenarios matching searched phrase\",\"path\":\"foo.feature,bar.feature\",\"content\":[]}", ambiguousScenario.toJson());
+        Assert.assertEquals("{\"name\":\"Too many scenarios matching searched phrase\",\"path\":\"foo.feature,bar.feature\",\"content\":[],\"result\":\"toomany\"}", ambiguousScenario.toJson());
     }
 
     @Test public void presetItselfAsAmbiguousFoundScenario() {
         Assert.assertEquals("Too many scenarios matching searched phrase", getAmbiguousScenarioPointingToTwoFeatures().getName());
+        Assert.assertEquals("toomany", getAmbiguousScenarioPointingToTwoFeatures().getResult());
     }
 
     @Test public void notConveyAnyContent() {
         Assert.assertEquals(0, getAmbiguousScenarioPointingToTwoFeatures().getContent().size());
+    }
+
+    @Test public void presentAllFoundFeaturePathsSeparatedByComma() {
+        AmbiguousScenario scenario = AmbiguousScenarioBuilder.use().addFeaturePath("/foopath/foo.feature").addFeaturePath("/barpath/bar.feature").build();
+        Assert.assertEquals("/foopath/foo.feature,/barpath/bar.feature", scenario.getFeaturePath());
     }
 
     @Test public void haveNotFoundFeatureAsItsFeatureObject() {
