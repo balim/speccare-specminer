@@ -2,7 +2,6 @@ package com.michaelszymczak.speccare.specminer.domain;
 
 
 import com.michaelszymczak.speccare.specminer.specificationprovider.TextFragmentProvider;
-import com.michaelszymczak.speccare.specminer.view.ScenarioJson;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,14 +12,12 @@ public class ExistingScenario extends Scenario {
     private final TextFragmentProvider tfp;
     private final Feature feature;
     private final List<String> content;
-    private final ScenarioJson scenarioJson;
 
     public ExistingScenario(TextFragmentProvider textFragmentProvider, List<String> scenarioContent, Feature wrappingFeature) {
         tfp = textFragmentProvider;
         feature = wrappingFeature;
         content = Collections.unmodifiableList(scenarioContent);
         name = extractName(content);
-        scenarioJson = new ScenarioJson(this);
     }
 
     @Override
@@ -41,11 +38,6 @@ public class ExistingScenario extends Scenario {
     @Override
     public String getResult() {
         return "found";
-    }
-
-    @Override
-    public String toJson() {
-        return scenarioJson.toString();
     }
 
     private String extractName(List<String> scenarioContent) {

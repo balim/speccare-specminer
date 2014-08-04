@@ -63,16 +63,6 @@ public class ExistingScenarioShould {
         Assert.assertEquals("", scenario.getName());
     }
 
-    @Test public void returnItsDataInJsonFormat() {
-        Scenario scenario = ExistingScenarioBuilder.use().withWrappingFeature(
-            ExistingFeatureBuilder.use().withPath("/path/to/Foo.feature").build()
-        ).withContent("Scenario: Bar title", "    Given baz").build();
-
-        Assert.assertEquals(
-            "{\"name\":\"Bar title\",\"path\":\"/path/to/Foo.feature\",\"content\":[\"Scenario: Bar title\",\"    Given baz\"],\"result\":\"found\"}",
-            scenario.toJson());
-    }
-
     @Test public void provideOriginalContentOfTheScenarioSoThatItCanBeDisplayedInDocumentation() {
         assertContentOfTheScenarioPreserved(
                 "Scenario: Foo title",

@@ -3,6 +3,7 @@ package com.michaelszymczak.speccare.specminer.controller;
 import com.michaelszymczak.speccare.specminer.specificationprovider.ObjectScenarioRepository;
 import com.michaelszymczak.speccare.specminer.domain.Scenario;
 import com.michaelszymczak.speccare.specminer.specificationprovider.ScenarioTypeHttpStatus;
+import com.michaelszymczak.speccare.specminer.view.ScenarioJson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -26,6 +27,6 @@ class ScenariosController {
 	public ResponseEntity<String> find(@PathVariable String scenarioNameFragment) throws IOException {
         Scenario scenario = repository.find(scenarioNameFragment);
 
-        return new ResponseEntity<>(scenario.toJson(), scenarioHttpStatus.getStatus(scenario));
+        return new ResponseEntity<>(new ScenarioJson(scenario).toString(), scenarioHttpStatus.getStatus(scenario));
 	}
 }

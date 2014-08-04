@@ -1,7 +1,5 @@
 package com.michaelszymczak.speccare.specminer.domain;
 
-import com.michaelszymczak.speccare.specminer.view.ScenarioJson;
-
 import java.util.Collections;
 import java.util.List;
 
@@ -33,12 +31,6 @@ public class AmbiguousScenario extends Scenario {
     public String getResult() { return "toomany"; }
 
     @Override
-    public String toJson() {
-        ScenarioJson scenarioJson = new ScenarioJson(this);
-        return scenarioJson.toString();
-    }
-
-    @Override
     public String getFeaturePath() {
         return getWithoutEndingComma(getFeaturePathsSeparatedByComma());
     }
@@ -46,7 +38,7 @@ public class AmbiguousScenario extends Scenario {
     private String getFeaturePathsSeparatedByComma() {
         StringBuilder message = new StringBuilder();
         for(Scenario scenario : foundScenarios) {
-            message.append(scenario.getFeature().getPath());
+            message.append(scenario.getFeaturePath());
             message.append(",");
         }
         return message.toString();

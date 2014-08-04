@@ -14,12 +14,6 @@ import java.util.List;
 
 public class AmbiguousScenarioShould {
 
-    @Test public void returnJsonWithAllFeaturePathsWhereScenarioWasFound() {
-        List<Scenario> foundScenarios = Arrays.asList(scenarioWithFeaturePath("foo.feature"), scenarioWithFeaturePath("bar.feature"));
-        AmbiguousScenario ambiguousScenario = new AmbiguousScenario(foundScenarios);
-        Assert.assertEquals("{\"name\":\"Too many scenarios matching searched phrase\",\"path\":\"foo.feature,bar.feature\",\"content\":[],\"result\":\"toomany\"}", ambiguousScenario.toJson());
-    }
-
     @Test public void presetItselfAsAmbiguousFoundScenario() {
         Assert.assertEquals("Too many scenarios matching searched phrase", getAmbiguousScenarioPointingToTwoFeatures().getName());
         Assert.assertEquals("toomany", getAmbiguousScenarioPointingToTwoFeatures().getResult());

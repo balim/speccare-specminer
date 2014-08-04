@@ -1,7 +1,5 @@
 package com.michaelszymczak.speccare.specminer.domain;
 
-import com.google.gson.Gson;
-
 import java.util.List;
 
 public abstract class Scenario {
@@ -18,7 +16,6 @@ public abstract class Scenario {
     public abstract Feature getFeature();
     public abstract List<String> getContent();
     public abstract String getResult();
-    public abstract String toJson();
 
     public String getFeaturePath() {
         return getFeature().getPath();

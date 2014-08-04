@@ -1,12 +1,9 @@
 package com.michaelszymczak.speccare.specminer.view;
 
-import com.michaelszymczak.speccare.specminer.domain.ExistingFeature;
-import com.michaelszymczak.speccare.specminer.domain.Feature;
 import com.michaelszymczak.speccare.specminer.domain.NotFoundScenario;
 import com.michaelszymczak.speccare.specminer.domain.Scenario;
 import com.michaelszymczak.speccare.specminer.specificationprovider.ExistingFeatureBuilder;
 import com.michaelszymczak.speccare.specminer.specificationprovider.ExistingScenarioBuilder;
-import cucumber.runtime.FeatureBuilder;
 import org.junit.Assert;
 import org.junit.Test;
 

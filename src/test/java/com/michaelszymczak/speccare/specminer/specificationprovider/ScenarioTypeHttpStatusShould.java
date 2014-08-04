@@ -48,11 +48,6 @@ public class ScenarioTypeHttpStatusShould {
 
         @Override
         public String getResult() { return null; }
-
-        @Override
-        public String toJson() {
-            return null;
-        }
     };
 
 }
