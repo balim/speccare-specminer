@@ -8,13 +8,13 @@ ADD ./pom.xml /tmp/maven/pom.xml
 WORKDIR /tmp/maven
 RUN ["mvn", "dependency:go-offline"]
 
-EXPOSE 48001
-
 ADD . /app
 WORKDIR /app
 
 RUN ["make", "test"]
 RUN ["make", "install"]
+
+EXPOSE 48001
 
 
 
