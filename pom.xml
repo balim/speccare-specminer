@@ -297,10 +297,10 @@
                 <version>1.0.0</version>
                 <configuration>
                     <targetClasses>
-                        <param>com.michaelszymczak.livingdocumentation*</param>
+                        <param>com.michaelszymczak.speccare.specminer*</param>
                     </targetClasses>
                     <targetTests>
-                        <param>com.michaelszymczak.livingdocumentation*</param>
+                        <param>com.michaelszymczak.speccare.specminer*</param>
                     </targetTests>
                 </configuration>
             </plugin>
