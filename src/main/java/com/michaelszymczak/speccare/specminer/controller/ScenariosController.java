@@ -24,9 +24,9 @@ class ScenariosController {
 
     @RequestMapping(value="/{scenarioNameFragment}", method=RequestMethod.GET,  produces = { "application/json"})
     @ResponseBody
-	public ResponseEntity<String> find(@PathVariable String scenarioNameFragment) throws IOException {
+    public ResponseEntity<String> find(@PathVariable String scenarioNameFragment) throws IOException {
         Scenario scenario = repository.find(scenarioNameFragment);
 
         return new ResponseEntity<>(new ScenarioJson(scenario).toString(), scenarioHttpStatus.getStatus(scenario));
-	}
+    }
 }

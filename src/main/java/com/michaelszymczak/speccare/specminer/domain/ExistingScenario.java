@@ -3,7 +3,6 @@ package com.michaelszymczak.speccare.specminer.domain;
 
 import com.michaelszymczak.speccare.specminer.specificationprovider.TextFragmentProvider;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -41,8 +40,8 @@ public class ExistingScenario extends Scenario {
     }
 
     private String extractName(List<String> scenarioContent) {
-        ArrayList<String> scenarioNames = tfp.getAllFragmentsThatFollows(scenarioContent, new String[]{SCENARIO_START, SCENARIO_OUTLINE_START});
-        if (scenarioNames.size() == 0) {
+        List<String> scenarioNames = tfp.getAllFragmentsThatFollows(scenarioContent, new String[]{SCENARIO_START, SCENARIO_OUTLINE_START});
+        if (scenarioNames.isEmpty()) {
             throw new InvalidScenarioContentException("No 'Scenario:' nor 'Scenario Outline:' line in scenario content: " + scenarioContent.toString());
         }
         if (scenarioNames.size() > 1) {

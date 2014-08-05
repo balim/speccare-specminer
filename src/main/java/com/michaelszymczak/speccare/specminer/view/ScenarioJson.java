@@ -6,10 +6,11 @@ import com.michaelszymczak.speccare.specminer.domain.Scenario;
 import java.util.List;
 
 public class ScenarioJson {
-    private final String name;
-    private final String path;
-    private final List<String> content;
-    private final String result;
+    // used to create Json
+    @SuppressWarnings("unused") private final String name;
+    @SuppressWarnings("unused") private final String path;
+    @SuppressWarnings("unused") private final List<String> content;
+    @SuppressWarnings("unused") private final String result;
 
     // according to https://sites.google.com/site/gson :
     // The Gson instance does not maintain any state while invoking Json operations.

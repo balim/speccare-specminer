@@ -6,5 +6,5 @@ import java.io.IOException;
 import java.util.List;
 
 interface ScenariosCreatable {
-    public List<Scenario> create() throws IOException;
+    List<Scenario> create() throws IOException;
 }

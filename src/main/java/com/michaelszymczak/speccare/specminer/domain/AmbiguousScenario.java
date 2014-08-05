@@ -28,7 +28,9 @@ public class AmbiguousScenario extends Scenario {
     }
 
     @Override
-    public String getResult() { return "toomany"; }
+    public String getResult() {
+        return "toomany";
+    }
 
     @Override
     public String getFeaturePath() {

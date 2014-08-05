@@ -33,8 +33,8 @@ public class ExistingFeature extends Feature {
     }
 
     private String extractName(List<String> featureFileContent) {
-        ArrayList<String> names = tfp.getAllFragmentsThatFollows(featureFileContent, new String[]{FEATURE_START});
-        if (names.size() == 0) {
+        List<String> names = tfp.getAllFragmentsThatFollows(featureFileContent, new String[]{FEATURE_START});
+        if (names.isEmpty()) {
             throw new InvalidFeatureContentException("No 'Feature:' line in feature content: " + featureFileContent.toString());
         }
         if (names.size() > 1) {

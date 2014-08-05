@@ -35,8 +35,7 @@ class FilesystemFeatureFilesRetriever implements FeatureFilesRetriever {
             this.matcher = matcher;
         }
 
-        public Map<String, List<String>> getFoundPaths()
-        {
+        public Map<String, List<String>> getFoundPaths() {
             return foundPaths;
         }
 

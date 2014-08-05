@@ -33,7 +33,7 @@ public class ObjectScenarioRepository implements ScenarioRepository {
         if (foundScenarios.size() > 1) {
             return new AmbiguousScenario(foundScenarios);
         }
-        if (foundScenarios.size() == 0) {
+        if (foundScenarios.isEmpty()) {
             return Scenario.getNotFound();
         }
         return foundScenarios.remove(0);

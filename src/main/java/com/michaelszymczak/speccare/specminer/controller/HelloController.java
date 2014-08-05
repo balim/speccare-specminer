@@ -18,11 +18,11 @@ class HelloController {
     @Autowired private WebApplicationContext wac;
     @Resource(name = "featuresDir") private FeaturesDirectory featuresDir;
 
-	@RequestMapping(method = RequestMethod.GET)
-	public String printWelcome(ModelMap model) {
-		model.addAttribute("title", "LivingDocumentation " + wac.getEnvironment());
-		model.addAttribute("environment", wac.getEnvironment());
-		model.addAttribute("details", "@" + featuresDir.getPath());
-		return "hello";
-	}
+    @RequestMapping(method = RequestMethod.GET)
+    public String printWelcome(ModelMap model) {
+        model.addAttribute("title", "LivingDocumentation " + wac.getEnvironment());
+        model.addAttribute("environment", wac.getEnvironment());
+        model.addAttribute("details", "@" + featuresDir.getPath());
+        return "hello";
+    }
 }

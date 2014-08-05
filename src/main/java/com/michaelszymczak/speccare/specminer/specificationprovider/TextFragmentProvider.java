@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TextFragmentProvider {
-    public ArrayList<String> getAllFragmentsThatFollows(List<String> scenarioContent, String[] availableStarts) {
+    public List<String> getAllFragmentsThatFollows(List<String> scenarioContent, String[] availableStarts) {
         String foundFragment;
         boolean isInMultilineQuotation = false;
 
-        ArrayList<String> scenarioNames = new ArrayList<>();
+        List<String> scenarioNames = new ArrayList<>();
         for(String line : scenarioContent) {
             foundFragment = null;
             if (isMultilineQuotation(line)) {
