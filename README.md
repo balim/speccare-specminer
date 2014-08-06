@@ -20,7 +20,7 @@ Usage
 ------------
 Run the application by typing
 
-    make container-run
+    make container-run SPECMINER_FEATURESDIR=/path/to/your/project
 
 Or, if you do not want to use make, open Makefile to see what the full command is.
 
