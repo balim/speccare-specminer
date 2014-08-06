@@ -2,11 +2,14 @@ package com.michaelszymczak.speccare.specminer.cucumberSteps;
 
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
+import com.michaelszymczak.speccare.specminer.specificationprovider.EncodingDetector;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +18,8 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -58,6 +63,12 @@ public class FeaturePresenceSteps {
         ScenarioJson actualJson = ScenarioJson.createFromString(response.getContentAsString());
 
         Assert.assertEquals(expectedJson, actualJson);
+    }
+
+    @And("^file \"([^\"]*)\" with content from \"([^\"]*)\"$")
+    public void file_with_content_from(String filename, String sourcePath) throws Throwable {
+        InputStream stream = Thread.currentThread().getContextClassLoader().getResourceAsStream(sourcePath);
+        tempFilesToRemove.add(temporaryFileCreator.createInDirWithContent(featuresDir, filename, IOUtils.toString(stream, "UTF-8")));
     }
 
     @Given("^OK$")
