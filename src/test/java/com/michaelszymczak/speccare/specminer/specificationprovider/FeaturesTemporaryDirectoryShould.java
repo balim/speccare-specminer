@@ -11,22 +11,31 @@ import java.nio.file.Path;
 import java.util.LinkedHashSet;
 
 public class FeaturesTemporaryDirectoryShould {
-    @Test public void createTemporaryDirectoryToStoreTemporaryFeaturesForUAT() throws IOException {
-        assertThatPathExistsInTemporaryDirectory(ftd.getPath());
+    @Test public void
+    createTemporaryDirectoryToStoreTemporaryFeaturesForUAT() throws IOException {
+        assertThatPathExistsInTemporaryDirectory(ftd.getFeaturesDirPath());
     }
 
-    @Test public void createDirectoryDuringCreationAndDoNotChangeIt() throws IOException {
-        Assert.assertSame(ftd.getPath(), ftd.getPath());
+    @Test public void
+    createDirectoryDuringCreationAndDoNotChangeIt() throws IOException {
+        Assert.assertSame(ftd.getFeaturesDirPath(), ftd.getFeaturesDirPath());
     }
 
-    @Test public void tryToRemoveDirectoryOnExit() throws IOException, ClassNotFoundException, NoSuchFieldException, IllegalAccessException {
-        assertThatPathWillBeDeletedOnExit(ftd.getPath());
+    @Test public void
+    tryToRemoveDirectoryOnExit() throws IOException, ClassNotFoundException, NoSuchFieldException, IllegalAccessException {
+        assertThatPathWillBeDeletedOnExit(ftd.getFeaturesDirPath());
+    }
+
+    @Test public void
+    placePassedResultFileInFeaturesTemporaryDirectory() throws IOException {
+        ftd = new FeaturesTemporaryDirectory("myResult.json");
+        Assert.assertEquals(ftd.getFeaturesDirPath().resolve("myResult.json"), ftd.getResultFilePath());
     }
 
     private FeaturesTemporaryDirectory ftd;
 
     @Before public void setUp() throws IOException {
-        ftd = new FeaturesTemporaryDirectory();
+        ftd = new FeaturesTemporaryDirectory("result.json");
     }
 
     private void assertThatPathExistsInTemporaryDirectory(Path featuresTmpDirPath) {

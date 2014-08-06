@@ -21,7 +21,7 @@ class FilesystemFeatureFilesRetriever implements FeatureFilesRetriever {
     @Override
     public Map<String, List<String>> getFiles() throws IOException {
         Finder fileVisitor = new Finder(FileSystems.getDefault().getPathMatcher("glob:*.feature"));
-        Files.walkFileTree(featuresDir.getPath(), EnumSet.of(FileVisitOption.FOLLOW_LINKS), Integer.MAX_VALUE, fileVisitor);
+        Files.walkFileTree(featuresDir.getFeaturesDirPath(), EnumSet.of(FileVisitOption.FOLLOW_LINKS), Integer.MAX_VALUE, fileVisitor);
         return fileVisitor.getFoundPaths();
     }
 

@@ -145,7 +145,7 @@ public class ScenariosControllerShouldIT {
 
 
     private void createFeatureFileInFeatureDirectory(String filePath, String... content) throws FileNotFoundException {
-        File featureFile = featuresDir.getPath().resolve(filePath).toFile();
+        File featureFile = featuresDir.getFeaturesDirPath().resolve(filePath).toFile();
         featureFile.deleteOnExit();
         PrintWriter writer = new PrintWriter(featureFile);
         for (String line : content) {

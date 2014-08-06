@@ -7,14 +7,21 @@ import java.nio.file.Path;
 public class FeaturesTemporaryDirectory implements FeaturesDirectory {
 
     private Path path;
+    private Path resultFilePath;
 
-    public FeaturesTemporaryDirectory() throws IOException {
+    public FeaturesTemporaryDirectory(String resultFile) throws IOException {
         path = Files.createTempDirectory("LivingDocumentationFeaturesTemporaryDirectory");
         path.toFile().deleteOnExit();
+        this.resultFilePath = getFeaturesDirPath().resolve(resultFile);
     }
 
     @Override
-    public Path getPath() {
+    public Path getFeaturesDirPath() {
         return path;
+    }
+
+    @Override
+    public Path getResultFilePath() {
+        return resultFilePath;
     }
 }

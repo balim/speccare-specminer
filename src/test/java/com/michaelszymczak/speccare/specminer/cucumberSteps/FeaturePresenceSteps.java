@@ -2,7 +2,6 @@ package com.michaelszymczak.speccare.specminer.cucumberSteps;
 
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
-import com.michaelszymczak.speccare.specminer.specificationprovider.EncodingDetector;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.And;
@@ -19,7 +18,6 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;

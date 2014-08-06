@@ -59,9 +59,9 @@ public class FilesystemFeatureFilesRetrieverShould {
     private Path featuresPath;
     private FilesystemFeatureFilesRetriever retriever;
     @Before public void setUp() throws IOException {
-        FeaturesTemporaryDirectory ftd = new FeaturesTemporaryDirectory();
+        FeaturesTemporaryDirectory ftd = new FeaturesTemporaryDirectory("result.json");
         retriever = new FilesystemFeatureFilesRetriever(ftd);
-        featuresPath = ftd.getPath();
+        featuresPath = ftd.getFeaturesDirPath();
     }
 
     @After public void tearDown() throws IOException {

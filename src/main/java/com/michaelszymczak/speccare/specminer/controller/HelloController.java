@@ -20,9 +20,9 @@ class HelloController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String printWelcome(ModelMap model) {
-        model.addAttribute("title", "LivingDocumentation " + wac.getEnvironment());
         model.addAttribute("environment", wac.getEnvironment());
-        model.addAttribute("details", "@" + featuresDir.getPath());
+        model.addAttribute("featuresDir", featuresDir.getFeaturesDirPath());
+        model.addAttribute("resultFile", featuresDir.getResultFilePath());
         return "hello";
     }
 }

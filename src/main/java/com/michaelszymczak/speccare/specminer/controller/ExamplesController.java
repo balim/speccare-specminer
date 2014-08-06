@@ -18,6 +18,12 @@ class ExamplesController {
     @RequestMapping(value="/featuresPath", method = RequestMethod.GET)
     @ResponseBody
     public String featuresPath() throws IOException {
-        return featuresDir.getPath().toFile().getAbsolutePath();
+        return featuresDir.getFeaturesDirPath().toFile().getAbsolutePath();
+    }
+
+    @RequestMapping(value="/resultFilePath", method = RequestMethod.GET)
+    @ResponseBody
+    public String resultFilePath() throws IOException {
+        return featuresDir.getResultFilePath().toFile().getAbsolutePath();
     }
 }

@@ -39,6 +39,14 @@ public class ExamplesControllerShouldIT {
         assertThatResponseContainsTemporaryPathToFeaturesDirectory(response);
     }
 
+    @Test
+    public void returnPathToResultFileThatCanBeUsedInTests() throws Exception {
+        String response = mockMvc.perform(get("/examples/resultFilePath"))
+                .andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+
+        assertThatResponseContainsTemporaryPathToFeaturesDirectory(response);
+    }
+
     private void assertThatResponseContainsTemporaryPathToFeaturesDirectory(String response) {
         Assert.assertTrue(response.startsWith(System.getProperty("java.io.tmpdir")));
     }

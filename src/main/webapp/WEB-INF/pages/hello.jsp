@@ -6,7 +6,8 @@
 <body>
 <pre>
 Environment: ${environment}
-Details: ${details}
+Features directory: ${featuresDir}
+Result file: ${resultFile}
 </pre>
 </body>
 </html>

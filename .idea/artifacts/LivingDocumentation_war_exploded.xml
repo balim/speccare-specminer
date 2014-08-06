@@ -21,6 +21,7 @@
           <element id="library" level="project" name="Maven: com.google.code.gson:gson:2.2.4" />
           <element id="library" level="project" name="Maven: com.googlecode.juniversalchardet:juniversalchardet:1.0.3" />
           <element id="library" level="project" name="Maven: commons-io:commons-io:2.4" />
+          <element id="library" level="project" name="Maven: com.eclipsesource.minimal-json:minimal-json:0.9.1" />
           <element id="library" level="project" name="Maven: org.codehaus.mojo:build-helper-maven-plugin:1.7" />
           <element id="library" level="project" name="Maven: org.apache.maven:maven-model:2.0.6" />
           <element id="library" level="project" name="Maven: org.codehaus.plexus:plexus-utils:1.5.8" />

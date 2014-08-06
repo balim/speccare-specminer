@@ -10,7 +10,8 @@
     <context:property-placeholder location="classpath:app.prod.properties"/>
 
     <bean id="featuresDir" class="com.michaelszymczak.speccare.specminer.specificationprovider.FeaturesRealDirectory">
-        <constructor-arg value="${pathToFeatureDir.absolutePath}"/>
+        <constructor-arg value="${pathToFeatureDir.featuresAbsolutePath}"/>
+        <constructor-arg value="${pathToFeatureDir.cucumberResultAbsoluteFilePath}"/>
     </bean>
 
     <import resource="classpath:applicationCommonContext.xml"/>
