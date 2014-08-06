@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+// TODO: use http://mvnrepository.com/artifact/info.cukes/gherkin/2.7.3 instead
 class ScenariosCreator implements ScenariosCreatable {
 
     private final TextFragmentProvider tfp;
