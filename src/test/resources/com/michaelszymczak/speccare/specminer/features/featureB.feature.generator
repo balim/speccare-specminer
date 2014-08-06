@@ -1,0 +1,18 @@
+Feature:
+  As foo
+  I want feature B
+  So that bar
+
+  Scenario: feature B Scenario passed
+    When OK
+    Then OK
+
+  Scenario: feature B Scenario failed
+    When OK
+    Then FAIL
+
+
+  Scenario: feature B Scenario ignored
+    Given OK
+    When NOTFOUND
+    Then OK

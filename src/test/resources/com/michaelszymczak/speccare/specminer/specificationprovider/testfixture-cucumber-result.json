@@ -1,0 +1,887 @@
+[
+  {
+    "id": "",
+    "description": "As foo\nI want feature A\nSo that bar",
+    "name": "",
+    "keyword": "Feature",
+    "line": 1,
+    "elements": [
+      {
+        "description": "",
+        "name": "",
+        "keyword": "Background",
+        "line": 6,
+        "steps": [
+          {
+            "result": {
+              "duration": 60729885,
+              "status": "passed"
+            },
+            "name": "OK",
+            "keyword": "Given ",
+            "line": 7,
+            "match": {
+              "location": "FeaturePresenceSteps.gok()"
+            }
+          },
+          {
+            "result": {
+              "duration": 16369,
+              "status": "passed"
+            },
+            "name": "OK",
+            "keyword": "And ",
+            "line": 8,
+            "match": {
+              "location": "FeaturePresenceSteps.gok()"
+            }
+          }
+        ],
+        "type": "background"
+      },
+      {
+        "after": [
+          {
+            "result": {
+              "duration": 111574,
+              "status": "passed"
+            },
+            "match": {
+              "location": "FeaturePresenceSteps.tearDown()"
+            }
+          }
+        ],
+        "id": ";feature-a-scenario-passed",
+        "before": [
+          {
+            "result": {
+              "duration": 1128996834,
+              "status": "passed"
+            },
+            "match": {
+              "location": "FeaturePresenceSteps.setUp()"
+            }
+          }
+        ],
+        "description": "",
+        "name": "Feature A Scenario passed",
+        "keyword": "Scenario",
+        "line": 10,
+        "steps": [
+          {
+            "result": {
+              "duration": 18448,
+              "status": "passed"
+            },
+            "name": "OK",
+            "keyword": "When ",
+            "line": 11,
+            "match": {
+              "location": "FeaturePresenceSteps.gok()"
+            }
+          },
+          {
+            "result": {
+              "duration": 14961,
+              "status": "passed"
+            },
+            "name": "OK",
+            "keyword": "Then ",
+            "line": 12,
+            "match": {
+              "location": "FeaturePresenceSteps.gok()"
+            }
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "name": "",
+        "keyword": "Background",
+        "line": 6,
+        "steps": [
+          {
+            "result": {
+              "duration": 37129,
+              "status": "passed"
+            },
+            "name": "OK",
+            "keyword": "Given ",
+            "line": 7,
+            "match": {
+              "location": "FeaturePresenceSteps.gok()"
+            }
+          },
+          {
+            "result": {
+              "duration": 16244,
+              "status": "passed"
+            },
+            "name": "OK",
+            "keyword": "And ",
+            "line": 8,
+            "match": {
+              "location": "FeaturePresenceSteps.gok()"
+            }
+          }
+        ],
+        "type": "background"
+      },
+      {
+        "after": [
+          {
+            "result": {
+              "duration": 90551,
+              "status": "passed"
+            },
+            "match": {
+              "location": "FeaturePresenceSteps.tearDown()"
+            }
+          }
+        ],
+        "id": ";feature-a-scenario-failed",
+        "before": [
+          {
+            "result": {
+              "duration": 23068335,
+              "status": "passed"
+            },
+            "match": {
+              "location": "FeaturePresenceSteps.setUp()"
+            }
+          }
+        ],
+        "description": "",
+        "name": "Feature A Scenario failed",
+        "keyword": "Scenario",
+        "line": 14,
+        "steps": [
+          {
+            "result": {
+              "duration": 15552,
+              "status": "passed"
+            },
+            "name": "OK",
+            "keyword": "When ",
+            "line": 15,
+            "match": {
+              "location": "FeaturePresenceSteps.gok()"
+            }
+          },
+          {
+            "result": {
+              "duration": 353101,
+              "status": "failed",
+              "error_message": "java.lang.AssertionError\n\tat org.junit.Assert.fail(Assert.java:86)\n\tat org.junit.Assert.assertTrue(Assert.java:41)\n\tat org.junit.Assert.assertTrue(Assert.java:52)\n\tat com.michaelszymczak.speccare.specminer.cucumberSteps.FeaturePresenceSteps.tfail(FeaturePresenceSteps.java:70)\n\tat ✽.Then FAIL(com/michaelszymczak/speccare/specminer/features/featureA.feature:16)\n"
+            },
+            "name": "FAIL",
+            "keyword": "Then ",
+            "line": 16,
+            "match": {
+              "location": "FeaturePresenceSteps.tfail()"
+            }
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "name": "",
+        "keyword": "Background",
+        "line": 6,
+        "steps": [
+          {
+            "result": {
+              "duration": 32408,
+              "status": "passed"
+            },
+            "name": "OK",
+            "keyword": "Given ",
+            "line": 7,
+            "match": {
+              "location": "FeaturePresenceSteps.gok()"
+            }
+          },
+          {
+            "result": {
+              "duration": 27623,
+              "status": "passed"
+            },
+            "name": "OK",
+            "keyword": "And ",
+            "line": 8,
+            "match": {
+              "location": "FeaturePresenceSteps.gok()"
+            }
+          }
+        ],
+        "type": "background"
+      },
+      {
+        "after": [
+          {
+            "result": {
+              "duration": 110005,
+              "status": "passed"
+            },
+            "match": {
+              "location": "FeaturePresenceSteps.tearDown()"
+            }
+          }
+        ],
+        "id": ";feature-a-scenario-ignored",
+        "before": [
+          {
+            "result": {
+              "duration": 19620103,
+              "status": "passed"
+            },
+            "match": {
+              "location": "FeaturePresenceSteps.setUp()"
+            }
+          }
+        ],
+        "description": "",
+        "name": "Feature A Scenario ignored",
+        "keyword": "Scenario",
+        "line": 19,
+        "steps": [
+          {
+            "result": {
+              "duration": 25508,
+              "status": "passed"
+            },
+            "name": "OK",
+            "keyword": "Given ",
+            "line": 20,
+            "match": {
+              "location": "FeaturePresenceSteps.gok()"
+            }
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "name": "NOTFOUND",
+            "keyword": "When ",
+            "line": 21,
+            "match": {}
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "name": "OK",
+            "keyword": "Then ",
+            "line": 22,
+            "match": {
+              "location": "FeaturePresenceSteps.gok()"
+            }
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "uri": "com/michaelszymczak/speccare/specminer/features/featureA.feature"
+  },
+  {
+    "id": "",
+    "description": "As foo\nI want feature B\nSo that bar",
+    "name": "",
+    "keyword": "Feature",
+    "line": 1,
+    "elements": [
+      {
+        "after": [
+          {
+            "result": {
+              "duration": 142523,
+              "status": "passed"
+            },
+            "match": {
+              "location": "FeaturePresenceSteps.tearDown()"
+            }
+          }
+        ],
+        "id": ";feature-b-scenario-passed",
+        "before": [
+          {
+            "result": {
+              "duration": 18549791,
+              "status": "passed"
+            },
+            "match": {
+              "location": "FeaturePresenceSteps.setUp()"
+            }
+          }
+        ],
+        "description": "",
+        "name": "feature B Scenario passed",
+        "keyword": "Scenario",
+        "line": 6,
+        "steps": [
+          {
+            "result": {
+              "duration": 40523,
+              "status": "passed"
+            },
+            "name": "OK",
+            "keyword": "When ",
+            "line": 7,
+            "match": {
+              "location": "FeaturePresenceSteps.gok()"
+            }
+          },
+          {
+            "result": {
+              "duration": 32300,
+              "status": "passed"
+            },
+            "name": "OK",
+            "keyword": "Then ",
+            "line": 8,
+            "match": {
+              "location": "FeaturePresenceSteps.gok()"
+            }
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "after": [
+          {
+            "result": {
+              "duration": 115375,
+              "status": "passed"
+            },
+            "match": {
+              "location": "FeaturePresenceSteps.tearDown()"
+            }
+          }
+        ],
+        "id": ";feature-b-scenario-failed",
+        "before": [
+          {
+            "result": {
+              "duration": 19121801,
+              "status": "passed"
+            },
+            "match": {
+              "location": "FeaturePresenceSteps.setUp()"
+            }
+          }
+        ],
+        "description": "",
+        "name": "feature B Scenario failed",
+        "keyword": "Scenario",
+        "line": 10,
+        "steps": [
+          {
+            "result": {
+              "duration": 27073,
+              "status": "passed"
+            },
+            "name": "OK",
+            "keyword": "When ",
+            "line": 11,
+            "match": {
+              "location": "FeaturePresenceSteps.gok()"
+            }
+          },
+          {
+            "result": {
+              "duration": 119438,
+              "status": "failed",
+              "error_message": "java.lang.AssertionError\n\tat org.junit.Assert.fail(Assert.java:86)\n\tat org.junit.Assert.assertTrue(Assert.java:41)\n\tat org.junit.Assert.assertTrue(Assert.java:52)\n\tat com.michaelszymczak.speccare.specminer.cucumberSteps.FeaturePresenceSteps.tfail(FeaturePresenceSteps.java:70)\n\tat ✽.Then FAIL(com/michaelszymczak/speccare/specminer/features/featureB.feature:12)\n"
+            },
+            "name": "FAIL",
+            "keyword": "Then ",
+            "line": 12,
+            "match": {
+              "location": "FeaturePresenceSteps.tfail()"
+            }
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "after": [
+          {
+            "result": {
+              "duration": 92024,
+              "status": "passed"
+            },
+            "match": {
+              "location": "FeaturePresenceSteps.tearDown()"
+            }
+          }
+        ],
+        "id": ";feature-b-scenario-ignored",
+        "before": [
+          {
+            "result": {
+              "duration": 19157433,
+              "status": "passed"
+            },
+            "match": {
+              "location": "FeaturePresenceSteps.setUp()"
+            }
+          }
+        ],
+        "description": "",
+        "name": "feature B Scenario ignored",
+        "keyword": "Scenario",
+        "line": 15,
+        "steps": [
+          {
+            "result": {
+              "duration": 31962,
+              "status": "passed"
+            },
+            "name": "OK",
+            "keyword": "Given ",
+            "line": 16,
+            "match": {
+              "location": "FeaturePresenceSteps.gok()"
+            }
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "name": "NOTFOUND",
+            "keyword": "When ",
+            "line": 17,
+            "match": {}
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "name": "OK",
+            "keyword": "Then ",
+            "line": 18,
+            "match": {
+              "location": "FeaturePresenceSteps.gok()"
+            }
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "uri": "com/michaelszymczak/speccare/specminer/features/featureB.feature"
+  },
+  {
+    "id": "",
+    "description": "As a stakeholder\nI want to have my features in the documentation checked against their presence in the developed application\nSo that I know if the documentation does not lie by describing something that does not exist",
+    "name": "",
+    "keyword": "Feature",
+    "line": 1,
+    "elements": [
+      {
+        "description": "",
+        "name": "",
+        "keyword": "Background",
+        "line": 6,
+        "steps": [
+          {
+            "result": {
+              "duration": 2461382,
+              "status": "passed"
+            },
+            "name": "feature file \"Adding.feature\" in the developed application:",
+            "keyword": "Given ",
+            "line": 7,
+            "doc_string": {
+              "value": "Feature: Adding calculator\n\n  Scenario: Adding two numbers\n    Given I have 2 and 3\n    When  I add these numbers\n    Then the result should be 5\n\n  Scenario: Adding three numbers\n    Given I have 2, 3 and 4\n    When  I add these numbers\n    Then the result should be 9",
+              "line": 8,
+              "content_type": ""
+            },
+            "match": {
+              "arguments": [
+                {
+                  "val": "Adding.feature",
+                  "offset": 14
+                }
+              ],
+              "location": "FeaturePresenceSteps.feature_file_in_the_developed_application(String,String)"
+            }
+          },
+          {
+            "result": {
+              "duration": 249910,
+              "status": "passed"
+            },
+            "name": "feature file \"Subtracting.feature\" in the developed application:",
+            "keyword": "And ",
+            "line": 21,
+            "doc_string": {
+              "value": "Feature: Subtracting Calculator\n\n  Scenario: Subtracting two numbers\n    Given I have 2 and 3\n    When  I subtract these numbers\n    Then the result should be -1",
+              "line": 22,
+              "content_type": ""
+            },
+            "match": {
+              "arguments": [
+                {
+                  "val": "Subtracting.feature",
+                  "offset": 14
+                }
+              ],
+              "location": "FeaturePresenceSteps.feature_file_in_the_developed_application(String,String)"
+            }
+          }
+        ],
+        "type": "background"
+      },
+      {
+        "after": [
+          {
+            "result": {
+              "duration": 254898,
+              "status": "passed"
+            },
+            "match": {
+              "location": "FeaturePresenceSteps.tearDown()"
+            }
+          }
+        ],
+        "id": ";scenario-described-in-documentation-exists-in-the-actual-feature-files",
+        "before": [
+          {
+            "result": {
+              "duration": 21072801,
+              "status": "passed"
+            },
+            "match": {
+              "location": "FeaturePresenceSteps.setUp()"
+            }
+          }
+        ],
+        "description": "",
+        "name": "Scenario described in documentation exists in the actual feature files",
+        "keyword": "Scenario",
+        "line": 31,
+        "steps": [
+          {
+            "result": {
+              "duration": 70185256,
+              "status": "passed"
+            },
+            "name": "I get \"/scenarios/Adding two numbers\"",
+            "keyword": "When ",
+            "line": 32,
+            "match": {
+              "arguments": [
+                {
+                  "val": "/scenarios/Adding two numbers",
+                  "offset": 7
+                }
+              ],
+              "location": "FeaturePresenceSteps.i_get(String)"
+            }
+          },
+          {
+            "result": {
+              "duration": 58514,
+              "status": "passed"
+            },
+            "name": "the response should be OK",
+            "keyword": "Then ",
+            "line": 33,
+            "match": {
+              "location": "FeaturePresenceSteps.the_response_should_be_OK()"
+            }
+          },
+          {
+            "result": {
+              "duration": 1545413,
+              "status": "passed"
+            },
+            "name": "the response content should be JSON:",
+            "keyword": "And ",
+            "line": 34,
+            "doc_string": {
+              "value": "{\n  \"result\":\"found\",\n  \"name\":\"Adding two numbers\",\n  \"path\":\"ABSOLUTE_PATH_TO_FEATURES_DIR/Adding.feature\",\n  \"content\": [\n    \"  Scenario: Adding two numbers\",\n    \"    Given I have 2 and 3\",\n    \"    When  I add these numbers\",\n    \"    Then the result should be 5\",\n    \"\"\n  ]\n}",
+              "line": 35,
+              "content_type": ""
+            },
+            "match": {
+              "location": "FeaturePresenceSteps.the_response_content_should_be_json(String)"
+            }
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "name": "",
+        "keyword": "Background",
+        "line": 6,
+        "steps": [
+          {
+            "result": {
+              "duration": 361836,
+              "status": "passed"
+            },
+            "name": "feature file \"Adding.feature\" in the developed application:",
+            "keyword": "Given ",
+            "line": 7,
+            "doc_string": {
+              "value": "Feature: Adding calculator\n\n  Scenario: Adding two numbers\n    Given I have 2 and 3\n    When  I add these numbers\n    Then the result should be 5\n\n  Scenario: Adding three numbers\n    Given I have 2, 3 and 4\n    When  I add these numbers\n    Then the result should be 9",
+              "line": 8,
+              "content_type": ""
+            },
+            "match": {
+              "arguments": [
+                {
+                  "val": "Adding.feature",
+                  "offset": 14
+                }
+              ],
+              "location": "FeaturePresenceSteps.feature_file_in_the_developed_application(String,String)"
+            }
+          },
+          {
+            "result": {
+              "duration": 258846,
+              "status": "passed"
+            },
+            "name": "feature file \"Subtracting.feature\" in the developed application:",
+            "keyword": "And ",
+            "line": 21,
+            "doc_string": {
+              "value": "Feature: Subtracting Calculator\n\n  Scenario: Subtracting two numbers\n    Given I have 2 and 3\n    When  I subtract these numbers\n    Then the result should be -1",
+              "line": 22,
+              "content_type": ""
+            },
+            "match": {
+              "arguments": [
+                {
+                  "val": "Subtracting.feature",
+                  "offset": 14
+                }
+              ],
+              "location": "FeaturePresenceSteps.feature_file_in_the_developed_application(String,String)"
+            }
+          }
+        ],
+        "type": "background"
+      },
+      {
+        "after": [
+          {
+            "result": {
+              "duration": 406201,
+              "status": "passed"
+            },
+            "match": {
+              "location": "FeaturePresenceSteps.tearDown()"
+            }
+          }
+        ],
+        "id": ";scenario-described-in-documentation-not-present-in-the-actual-feature-files",
+        "before": [
+          {
+            "result": {
+              "duration": 18041691,
+              "status": "passed"
+            },
+            "match": {
+              "location": "FeaturePresenceSteps.setUp()"
+            }
+          }
+        ],
+        "description": "",
+        "name": "Scenario described in documentation not present in the actual feature files",
+        "keyword": "Scenario",
+        "line": 50,
+        "steps": [
+          {
+            "result": {
+              "duration": 18531863,
+              "status": "passed"
+            },
+            "name": "I get \"/scenarios/Multiplying two numbers\"",
+            "keyword": "When ",
+            "line": 51,
+            "match": {
+              "arguments": [
+                {
+                  "val": "/scenarios/Multiplying two numbers",
+                  "offset": 7
+                }
+              ],
+              "location": "FeaturePresenceSteps.i_get(String)"
+            }
+          },
+          {
+            "result": {
+              "duration": 92393,
+              "status": "passed"
+            },
+            "name": "the response should be NOT FOUND",
+            "keyword": "Then ",
+            "line": 52,
+            "match": {
+              "location": "FeaturePresenceSteps.the_response_should_be_NOT_FOUND()"
+            }
+          },
+          {
+            "result": {
+              "duration": 577497,
+              "status": "passed"
+            },
+            "name": "the response content should be JSON:",
+            "keyword": "And ",
+            "line": 53,
+            "doc_string": {
+              "value": "{\n  \"result\":\"notfound\",\n  \"name\":\"Scenario not found\",\n  \"path\":\"\",\n  \"content\": []\n}",
+              "line": 54,
+              "content_type": ""
+            },
+            "match": {
+              "location": "FeaturePresenceSteps.the_response_content_should_be_json(String)"
+            }
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "name": "",
+        "keyword": "Background",
+        "line": 6,
+        "steps": [
+          {
+            "result": {
+              "duration": 267165,
+              "status": "passed"
+            },
+            "name": "feature file \"Adding.feature\" in the developed application:",
+            "keyword": "Given ",
+            "line": 7,
+            "doc_string": {
+              "value": "Feature: Adding calculator\n\n  Scenario: Adding two numbers\n    Given I have 2 and 3\n    When  I add these numbers\n    Then the result should be 5\n\n  Scenario: Adding three numbers\n    Given I have 2, 3 and 4\n    When  I add these numbers\n    Then the result should be 9",
+              "line": 8,
+              "content_type": ""
+            },
+            "match": {
+              "arguments": [
+                {
+                  "val": "Adding.feature",
+                  "offset": 14
+                }
+              ],
+              "location": "FeaturePresenceSteps.feature_file_in_the_developed_application(String,String)"
+            }
+          },
+          {
+            "result": {
+              "duration": 181316,
+              "status": "passed"
+            },
+            "name": "feature file \"Subtracting.feature\" in the developed application:",
+            "keyword": "And ",
+            "line": 21,
+            "doc_string": {
+              "value": "Feature: Subtracting Calculator\n\n  Scenario: Subtracting two numbers\n    Given I have 2 and 3\n    When  I subtract these numbers\n    Then the result should be -1",
+              "line": 22,
+              "content_type": ""
+            },
+            "match": {
+              "arguments": [
+                {
+                  "val": "Subtracting.feature",
+                  "offset": 14
+                }
+              ],
+              "location": "FeaturePresenceSteps.feature_file_in_the_developed_application(String,String)"
+            }
+          }
+        ],
+        "type": "background"
+      },
+      {
+        "after": [
+          {
+            "result": {
+              "duration": 182951,
+              "status": "passed"
+            },
+            "match": {
+              "location": "FeaturePresenceSteps.tearDown()"
+            }
+          }
+        ],
+        "id": ";scenario-described-in-documentation-has-ambiguous-name",
+        "before": [
+          {
+            "result": {
+              "duration": 14959329,
+              "status": "passed"
+            },
+            "match": {
+              "location": "FeaturePresenceSteps.setUp()"
+            }
+          }
+        ],
+        "description": "",
+        "name": "Scenario described in documentation has ambiguous name",
+        "keyword": "Scenario",
+        "line": 63,
+        "steps": [
+          {
+            "result": {
+              "duration": 15007601,
+              "status": "passed"
+            },
+            "name": "I get \"/scenarios/Adding\"",
+            "keyword": "When ",
+            "line": 64,
+            "match": {
+              "arguments": [
+                {
+                  "val": "/scenarios/Adding",
+                  "offset": 7
+                }
+              ],
+              "location": "FeaturePresenceSteps.i_get(String)"
+            }
+          },
+          {
+            "result": {
+              "duration": 69597,
+              "status": "passed"
+            },
+            "name": "the response should be UNPROCESSABLE ENTITY",
+            "keyword": "Then ",
+            "line": 65,
+            "match": {
+              "location": "FeaturePresenceSteps.the_response_should_be_UNPROCESSABLE_ENTITY()"
+            }
+          },
+          {
+            "result": {
+              "duration": 343131,
+              "status": "passed"
+            },
+            "name": "the response content should be JSON:",
+            "keyword": "And ",
+            "line": 66,
+            "doc_string": {
+              "value": "{\n  \"result\":\"toomany\",\n  \"name\":\"Too many scenarios matching searched phrase\",\n  \"path\":\"ABSOLUTE_PATH_TO_FEATURES_DIR/Adding.feature,ABSOLUTE_PATH_TO_FEATURES_DIR/Adding.feature\",\n  \"content\": []\n}",
+              "line": 67,
+              "content_type": ""
+            },
+            "match": {
+              "location": "FeaturePresenceSteps.the_response_content_should_be_json(String)"
+            }
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "uri": "com/michaelszymczak/speccare/specminer/features/featurePresence.feature"
+  }
+]

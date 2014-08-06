@@ -60,6 +60,17 @@ public class FeaturePresenceSteps {
         Assert.assertEquals(expectedJson, actualJson);
     }
 
+    @Given("^OK$")
+    public void gok() throws Throwable {
+        Assert.assertTrue(true);
+    }
+
+    @Then("^FAIL$")
+    public void tfail() throws Throwable {
+        Assert.assertTrue(false);
+    }
+
+
 
 
     private String siteUrl;
