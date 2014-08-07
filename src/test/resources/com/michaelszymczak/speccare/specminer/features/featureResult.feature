@@ -50,8 +50,24 @@ Feature:
         When NOTFOUND
         Then OK
     """
-    And file "testfixture-cucumberjvm-result.json" with content from "com/michaelszymczak/speccare/specminer/specificationprovider/testfixture-cucumber-result.json"
+    And result file with content from "com/michaelszymczak/speccare/specminer/specificationprovider/testfixture-cucumber-result.json"
 
-  Scenario: Scenario exists and passes
-    Given OK
+  Scenario: Existing and passing scenario searched by the scenario name fragment
+    Given result file with one "Feature A Scenario passed" scenario with all passing steps
+    When I get "/scenarios/A Scenario passed"
+    Then the response should be OK
+#    And the response content should be JSON:
+#    """
+#    {
+#      "result":"passed",
+#      "name":"Feature A Scenario passed",
+#      "path":"ABSOLUTE_PATH_TO_FEATURES_DIR/featureA.feature",
+#      "content": [
+#        "  Scenario: Feature A Scenario passed",
+#        "    When OK",
+#        "    Then OK",
+#        ""
+#      ]
+#    }
+#    """
 

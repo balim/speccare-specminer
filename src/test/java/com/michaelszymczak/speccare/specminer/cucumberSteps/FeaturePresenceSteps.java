@@ -1,7 +1,11 @@
 package com.michaelszymczak.speccare.specminer.cucumberSteps;
 
+import com.eclipsesource.json.JsonArray;
+import com.eclipsesource.json.JsonObject;
+import com.eclipsesource.json.JsonValue;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
+import com.michaelszymczak.speccare.specminer.specificationprovider.EncodingDetector;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.And;
@@ -16,13 +20,13 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @ContextConfiguration("/cucumber.xml")
 @WebAppConfiguration
@@ -63,10 +67,38 @@ public class FeaturePresenceSteps {
         Assert.assertEquals(expectedJson, actualJson);
     }
 
-    @And("^file \"([^\"]*)\" with content from \"([^\"]*)\"$")
-    public void file_with_content_from(String filename, String sourcePath) throws Throwable {
+    @And("^result file with content from \"([^\"]*)\"$")
+    public void result_file_with_content_from(String sourcePath) throws Throwable {
         InputStream stream = Thread.currentThread().getContextClassLoader().getResourceAsStream(sourcePath);
-        tempFilesToRemove.add(temporaryFileCreator.createInDirWithContent(featuresDir, filename, IOUtils.toString(stream, "UTF-8")));
+        tempFilesToRemove.add(temporaryFileCreator.createWithContent(resultFilePath, IOUtils.toString(stream, "UTF-8")));
+    }
+
+    @Given("^result file with one \"(.*?)\" scenario with all passing steps$")
+    public void result_file_with_one_scenario_with_all_passing_steps(String scenarioName) throws Throwable {
+        JsonObject scenario;
+        List<JsonObject> foundScenarios = new ArrayList<>();
+        JsonArray jsonArray = JsonArray.readFrom( new FileReader(resultFilePath) );
+        for( JsonValue feature : jsonArray ) {
+            for (JsonValue value: feature.asObject().get("elements").asArray()) {
+                scenario = value.asObject();
+                if (scenario.get("keyword").asString().equals("Scenario") && scenario.get("name").asString().equals(scenarioName)) {
+                    foundScenarios.add(scenario);
+                }
+            }
+        }
+
+        Assert.assertEquals(1, foundScenarios.size());
+
+        Set<String> results = new HashSet<>();
+        for (JsonValue value : foundScenarios.get(0).get("steps").asArray()) {
+            String stepResult = value.asObject().get("result").asObject().get("status").asString();
+            results.add(stepResult);
+        }
+
+        Assert.assertTrue(results.contains("passed"));
+        Assert.assertFalse(results.contains("failed"));
+        Assert.assertFalse(results.contains("ignored"));
+        Assert.assertFalse(results.contains("skipped"));
     }
 
     @Given("^OK$")
@@ -86,10 +118,12 @@ public class FeaturePresenceSteps {
     private final WebClient client = new WebClient();
 
     private String featuresDir;
+    private String resultFilePath;
     private WebResponse response;
     private final List<Path> tempFilesToRemove = new ArrayList<>();
 
     @Autowired private TemporaryFileCreator temporaryFileCreator;
+    private final EncodingDetector encodingDetector = new EncodingDetector();
 
     @Before
     public void setUp() throws IOException {
@@ -99,6 +133,7 @@ public class FeaturePresenceSteps {
         }
         siteUrl = "http://localhost:" + jettyPort;
         featuresDir = client.getPage(siteUrl + "/examples/featuresPath").getWebResponse().getContentAsString();
+        resultFilePath = client.getPage(siteUrl + "/examples/resultFilePath").getWebResponse().getContentAsString();
         client.getOptions().setThrowExceptionOnFailingStatusCode(false);
         assertNoFilesInFeaturesDir();
     }

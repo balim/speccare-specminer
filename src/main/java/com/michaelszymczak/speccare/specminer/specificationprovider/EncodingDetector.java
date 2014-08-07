@@ -3,10 +3,7 @@ package com.michaelszymczak.speccare.specminer.specificationprovider;
 import org.codehaus.plexus.util.IOUtil;
 import org.mozilla.universalchardet.UniversalDetector;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -19,7 +16,7 @@ public class EncodingDetector {
         return Files.readAllLines(path, Charset.forName(detect(path.toFile())));
     }
 
-    private String detect(File file) {
+    private String detect(File file) throws IOException {
         InputStream is = null;
         String encoding = null;
         try {
@@ -32,8 +29,6 @@ public class EncodingDetector {
             }
             detector.dataEnd();
             encoding = detector.getDetectedCharset();
-        } catch (IOException e) {
-            // nothing to do
         } finally {
             IOUtil.close(is);
             if (encoding == null) {

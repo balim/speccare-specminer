@@ -18,4 +18,14 @@ class TemporaryFileCreator {
         pw.close();
         return featureFile.toPath();
     }
+
+    public java.nio.file.Path createWithContent(String filePath, String content) throws IOException {
+        File file = Paths.get(filePath).toFile();
+        file.createNewFile();
+        file.deleteOnExit();
+        PrintWriter pw = new PrintWriter(file);
+        pw.println(content);
+        pw.close();
+        return file.toPath();
+    }
 }
