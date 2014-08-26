@@ -81,7 +81,7 @@ public class FeaturePresenceSteps {
         for( JsonValue feature : jsonArray ) {
             for (JsonValue value: feature.asObject().get("elements").asArray()) {
                 scenario = value.asObject();
-                if (scenario.get("keyword").asString().equals("Scenario") && scenario.get("name").asString().equals(scenarioName)) {
+                if (scenario.get("type").asString().equals("scenario") && scenario.get("name").asString().equals(scenarioName)) {
                     foundScenarios.add(scenario);
                 }
             }
