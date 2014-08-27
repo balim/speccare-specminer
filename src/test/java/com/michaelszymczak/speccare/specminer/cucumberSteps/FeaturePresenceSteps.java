@@ -1,11 +1,9 @@
 package com.michaelszymczak.speccare.specminer.cucumberSteps;
 
-import com.eclipsesource.json.JsonArray;
-import com.eclipsesource.json.JsonObject;
-import com.eclipsesource.json.JsonValue;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
-import com.michaelszymczak.speccare.specminer.result.JsonResult;
+import com.michaelszymczak.speccare.specminer.domain.JsonResult;
+import com.michaelszymczak.speccare.specminer.domain.ResultStatus;
 import com.michaelszymczak.speccare.specminer.specificationprovider.EncodingDetector;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
@@ -27,7 +25,8 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @ContextConfiguration("/cucumber.xml")
 @WebAppConfiguration
@@ -74,10 +73,10 @@ public class FeaturePresenceSteps {
         tempFilesToRemove.add(temporaryFileCreator.createWithContent(resultFilePath, IOUtils.toString(stream, "UTF-8")));
     }
 
-    @Given("^result file with one \"(.*?)\" scenario with all passing steps$")
+    @Given("^result file with one \"(.*?)\" passing scenario$")
     public void result_file_with_one_scenario_with_all_passing_steps(String scenarioName) throws Throwable {
-        JsonResult.Result result = new JsonResult(new FileReader(resultFilePath)).getResult(scenarioName);
-        Assert.assertEquals(JsonResult.Result.PASSED, result);
+        ResultStatus result = new JsonResult(new FileReader(resultFilePath)).getResult(scenarioName);
+        Assert.assertEquals(ResultStatus.PASSED, result);
     }
 
     @Given("^OK$")

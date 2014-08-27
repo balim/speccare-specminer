@@ -1,4 +1,4 @@
-package com.michaelszymczak.speccare.specminer.result;
+package com.michaelszymczak.speccare.specminer.domain;
 
 import com.eclipsesource.json.JsonArray;
 import com.eclipsesource.json.JsonObject;
@@ -11,11 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class JsonResult {
-
-    public static enum Result {
-        FAILED, NOT_FOUND, IGNORED, SKIPPED, AMBIGUOUS, UNKNOWN, PASSED
-    }
+public class JsonResult extends Result {
 
     private final JsonArray jsonArray;
 
@@ -27,13 +23,14 @@ public class JsonResult {
         jsonArray = JsonArray.readFrom(json);
     }
 
-    public Result getResult(String scenarioName) {
+    @Override
+    public ResultStatus getResult(String scenarioName) {
         List<JsonObject> found = findScenarios(scenarioName);
         if (found.isEmpty()) {
-            return Result.NOT_FOUND;
+            return ResultStatus.NOT_FOUND;
         }
         if (found.size() > 1) {
-            return Result.AMBIGUOUS;
+            return ResultStatus.AMBIGUOUS;
         }
         return getScenarioResult(found.get(0));
     }
@@ -49,31 +46,31 @@ public class JsonResult {
         return found;
     }
 
-    private Result getScenarioResult(JsonObject foundScenario) {
+    private ResultStatus getScenarioResult(JsonObject foundScenario) {
         for(JsonValue value : foundScenario.get("steps").asArray()) {
             JsonObject step = value.asObject();
             String status = step.get("result").asObject().get("status").asString();
-            Result result = resultFromStatus(status);
-            if (result != Result.PASSED) {
+            ResultStatus result = resultFromStatus(status);
+            if (result != ResultStatus.PASSED) {
                 return result;
             }
         }
-        return Result.PASSED;
+        return ResultStatus.PASSED;
     }
 
-    private Result resultFromStatus(String status) {
+    private ResultStatus resultFromStatus(String status) {
         if ("failed".equals(status)) {
-            return Result.FAILED;
+            return ResultStatus.FAILED;
         }
         if ("ignored".equals(status)) {
-            return Result.IGNORED;
+            return ResultStatus.IGNORED;
         }
         if ("skipped".equals(status)) {
-            return Result.SKIPPED;
+            return ResultStatus.SKIPPED;
         }
         if ("passed".equals(status)) {
-            return Result.PASSED;
+            return ResultStatus.PASSED;
         }
-        return Result.UNKNOWN;
+        return ResultStatus.UNKNOWN;
     }
 }
