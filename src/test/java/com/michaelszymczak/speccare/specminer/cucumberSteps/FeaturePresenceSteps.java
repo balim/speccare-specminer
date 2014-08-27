@@ -5,6 +5,7 @@ import com.eclipsesource.json.JsonObject;
 import com.eclipsesource.json.JsonValue;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
+import com.michaelszymczak.speccare.specminer.result.JsonResult;
 import com.michaelszymczak.speccare.specminer.specificationprovider.EncodingDetector;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
@@ -75,30 +76,8 @@ public class FeaturePresenceSteps {
 
     @Given("^result file with one \"(.*?)\" scenario with all passing steps$")
     public void result_file_with_one_scenario_with_all_passing_steps(String scenarioName) throws Throwable {
-        JsonObject scenario;
-        List<JsonObject> foundScenarios = new ArrayList<>();
-        JsonArray jsonArray = JsonArray.readFrom( new FileReader(resultFilePath) );
-        for( JsonValue feature : jsonArray ) {
-            for (JsonValue value: feature.asObject().get("elements").asArray()) {
-                scenario = value.asObject();
-                if (scenario.get("type").asString().equals("scenario") && scenario.get("name").asString().equals(scenarioName)) {
-                    foundScenarios.add(scenario);
-                }
-            }
-        }
-
-        Assert.assertEquals(1, foundScenarios.size());
-
-        Set<String> results = new HashSet<>();
-        for (JsonValue value : foundScenarios.get(0).get("steps").asArray()) {
-            String stepResult = value.asObject().get("result").asObject().get("status").asString();
-            results.add(stepResult);
-        }
-
-        Assert.assertTrue(results.contains("passed"));
-        Assert.assertFalse(results.contains("failed"));
-        Assert.assertFalse(results.contains("ignored"));
-        Assert.assertFalse(results.contains("skipped"));
+        JsonResult.Result result = new JsonResult(new FileReader(resultFilePath)).getResult(scenarioName);
+        Assert.assertEquals(JsonResult.Result.PASSED, result);
     }
 
     @Given("^OK$")

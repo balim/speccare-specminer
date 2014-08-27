@@ -7,55 +7,73 @@ import com.eclipsesource.json.JsonValue;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class JsonResult {
-    public static enum result {FAILED, NOT_FOUND, IGNORED, SKIPPED, PASSED}
+
+    public static enum Result {
+        FAILED, NOT_FOUND, IGNORED, SKIPPED, AMBIGUOUS, UNKNOWN, PASSED
+    }
 
     private final JsonArray jsonArray;
 
-    public JsonResult(String jsonString) throws IOException {
-        this(new StringReader(jsonString));
+    public JsonResult(String json) throws IOException {
+        this(new StringReader(json));
     }
 
-    private JsonResult(Reader jsonReader) throws IOException {
-        jsonArray = JsonArray.readFrom(jsonReader);
+    public JsonResult(Reader json) throws IOException {
+        jsonArray = JsonArray.readFrom(json);
     }
 
-    public result getResult(String scenarioName) {
-        JsonObject foundScenario = findScenario(scenarioName);
-        if (null == foundScenario) {
-            return result.NOT_FOUND;
+    public Result getResult(String scenarioName) {
+        List<JsonObject> found = findScenarios(scenarioName);
+        if (found.isEmpty()) {
+            return Result.NOT_FOUND;
         }
-        return getScenarioResult(foundScenario);
+        if (found.size() > 1) {
+            return Result.AMBIGUOUS;
+        }
+        return getScenarioResult(found.get(0));
     }
 
-    private JsonObject findScenario(String scenarioName) {
-        JsonObject foundScenario = null;
+    private List<JsonObject> findScenarios(String scenarioName) {
+        List<JsonObject> found = new ArrayList<>();
         for (JsonValue value : jsonArray.get(0).asObject().get("elements").asArray()) {
             JsonObject scenario = value.asObject();
-            if (scenario.get("name").asString().equals(scenarioName)) {
-                foundScenario = scenario;
-                break;
+            if (scenario.get("name").asString().equals(scenarioName) && "scenario".equals(scenario.get("type").asString())) {
+                found.add(scenario);
             }
         }
-        return foundScenario;
+        return found;
     }
 
-    private result getScenarioResult(JsonObject foundScenario) {
+    private Result getScenarioResult(JsonObject foundScenario) {
         for(JsonValue value : foundScenario.get("steps").asArray()) {
             JsonObject step = value.asObject();
             String status = step.get("result").asObject().get("status").asString();
-            if (status.equals("failed")) {
-                return result.FAILED;
-            }
-            if (status.equals("ignored")) {
-                return result.IGNORED;
-            }
-            if (status.equals("skipped")) {
-                return result.SKIPPED;
+            Result result = resultFromStatus(status);
+            if (result != Result.PASSED) {
+                return result;
             }
         }
-        return result.PASSED;
+        return Result.PASSED;
+    }
+
+    private Result resultFromStatus(String status) {
+        if ("failed".equals(status)) {
+            return Result.FAILED;
+        }
+        if ("ignored".equals(status)) {
+            return Result.IGNORED;
+        }
+        if ("skipped".equals(status)) {
+            return Result.SKIPPED;
+        }
+        if ("passed".equals(status)) {
+            return Result.PASSED;
+        }
+        return Result.UNKNOWN;
     }
 }
