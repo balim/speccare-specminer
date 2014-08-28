@@ -21,7 +21,7 @@ public class ScenarioJson {
         name = scenario.getName();
         path = scenario.getFeaturePath();
         content = scenario.getContent();
-        result = scenario.getResult();
+        result = scenario.getResult().toString();
     }
 
     public String toString() {

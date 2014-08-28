@@ -89,7 +89,7 @@ public class ScenariosControllerShouldIT {
                 .andExpect(status().isUnprocessableEntity()).andReturn().getResponse().getContentAsString();
 
         Map<String,String> expectedJsonParameters = new HashMap<>();
-        expectedJsonParameters.put("result", "toomany");
+        expectedJsonParameters.put("result", "ambiguous");
         assertThatResponseIsValidJsonObjectWithParameters(response, expectedJsonParameters);
     }
 

@@ -20,7 +20,7 @@ public class NotFoundScenario extends Scenario {
     }
 
     @Override
-    public String getResult() {
-        return "notfound";
+    public ResultStatus getResult() {
+        return ResultStatus.NOT_FOUND;
     }
 }

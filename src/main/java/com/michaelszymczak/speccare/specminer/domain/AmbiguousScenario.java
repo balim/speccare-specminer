@@ -28,8 +28,8 @@ public class AmbiguousScenario extends Scenario {
     }
 
     @Override
-    public String getResult() {
-        return "toomany";
+    public ResultStatus getResult() {
+        return ResultStatus.AMBIGUOUS;
     }
 
     @Override

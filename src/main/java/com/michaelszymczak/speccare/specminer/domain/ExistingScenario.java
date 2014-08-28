@@ -35,8 +35,8 @@ public class ExistingScenario extends Scenario {
     }
 
     @Override
-    public String getResult() {
-        return "found";
+    public ResultStatus getResult() {
+        return ResultStatus.FOUND;
     }
 
     private String extractName(List<String> scenarioContent) {

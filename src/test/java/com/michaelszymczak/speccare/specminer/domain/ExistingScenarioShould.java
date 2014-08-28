@@ -20,7 +20,7 @@ public class ExistingScenarioShould {
     @Test public void useFoundAsItsResult() {
         ExistingFeature feature = ExistingFeatureBuilder.use().build();
         Scenario scenario = createScenarioPassingWrappingFeature(feature);
-        Assert.assertSame("found", scenario.getResult());
+        Assert.assertSame(ResultStatus.FOUND, scenario.getResult());
     }
 
     @Test public void provideWrappingFeaturePath() {

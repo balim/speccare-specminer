@@ -18,7 +18,7 @@ public class NotFoundScenarioShould {
         NotFoundScenario scenario = Scenario.getNotFound();
 
         Assert.assertEquals("Scenario not found", scenario.getName());
-        Assert.assertEquals("notfound", scenario.getResult());
+        Assert.assertEquals(ResultStatus.NOT_FOUND, scenario.getResult());
         Assert.assertEquals(0, scenario.getContent().size());
     }
 

@@ -16,7 +16,7 @@ public class AmbiguousScenarioShould {
 
     @Test public void presetItselfAsAmbiguousFoundScenario() {
         Assert.assertEquals("Too many scenarios matching searched phrase", getAmbiguousScenarioPointingToTwoFeatures().getName());
-        Assert.assertEquals("toomany", getAmbiguousScenarioPointingToTwoFeatures().getResult());
+        Assert.assertEquals(ResultStatus.AMBIGUOUS, getAmbiguousScenarioPointingToTwoFeatures().getResult());
     }
 
     @Test public void notConveyAnyContent() {

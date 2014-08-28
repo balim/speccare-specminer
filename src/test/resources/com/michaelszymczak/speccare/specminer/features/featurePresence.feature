@@ -66,7 +66,7 @@ Feature:
     And the response content should be JSON:
     """
     {
-      "result":"toomany",
+      "result":"ambiguous",
       "name":"Too many scenarios matching searched phrase",
       "path":"ABSOLUTE_PATH_TO_FEATURES_DIR/Adding.feature,ABSOLUTE_PATH_TO_FEATURES_DIR/Adding.feature",
       "content": []

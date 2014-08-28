@@ -15,7 +15,7 @@ public abstract class Scenario {
     public abstract String getName();
     public abstract Feature getFeature();
     public abstract List<String> getContent();
-    public abstract String getResult();
+    public abstract ResultStatus getResult();
 
     public String getFeaturePath() {
         return getFeature().getPath();
