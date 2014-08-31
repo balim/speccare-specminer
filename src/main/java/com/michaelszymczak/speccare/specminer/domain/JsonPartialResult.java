@@ -11,15 +11,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class JsonResult extends Result {
+public class JsonPartialResult implements Result {
 
     private final JsonArray jsonArray;
 
-    public JsonResult(String json) throws IOException {
+    public JsonPartialResult(String json) throws IOException {
         this(new StringReader(json));
     }
 
-    public JsonResult(Reader json) throws IOException {
+    public JsonPartialResult(Reader json) throws IOException {
         jsonArray = JsonArray.readFrom(json);
     }
 

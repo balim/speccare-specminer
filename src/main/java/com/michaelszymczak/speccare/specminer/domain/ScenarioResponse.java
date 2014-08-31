@@ -39,6 +39,10 @@ public class ScenarioResponse {
         return HttpStatus.OK;
     }
 
+    public ResultStatus getStatus() {
+        return status;
+    }
+
     private static class Content {
         @SuppressWarnings("unused") private final String name;
         @SuppressWarnings("unused") private final String path;

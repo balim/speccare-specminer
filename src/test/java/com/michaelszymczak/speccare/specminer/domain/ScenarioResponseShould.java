@@ -39,10 +39,6 @@ public class ScenarioResponseShould {
         assertResult(ResultStatus.AMBIGUOUS, response);
     }
 
-    private Scenario scenario() {
-        return getScenarioWithResult(ResultStatus.PASSED);
-    }
-
     @Test public void
     returnOKHttpStatusForPositiveResults() {
         assertHttpStatusForScenarioStatus(HttpStatus.OK, ResultStatus.PASSED);
@@ -65,6 +61,15 @@ public class ScenarioResponseShould {
     returnUnprocessableEntityHttpStatusWhenProblemWithScenarioOccurred() {
         assertHttpStatusForScenarioStatus(HttpStatus.UNPROCESSABLE_ENTITY, ResultStatus.AMBIGUOUS);
         assertHttpStatusForScenarioStatus(HttpStatus.UNPROCESSABLE_ENTITY, ResultStatus.UNKNOWN);
+    }
+
+    @Test public void
+    provideEasyAccessToTheNonHttpResultStatus() {
+        Assert.assertEquals(ResultStatus.SKIPPED, responseWithScenarioStatus(ResultStatus.SKIPPED).getStatus());
+    }
+
+    private Scenario scenario() {
+        return getScenarioWithResult(ResultStatus.PASSED);
     }
 
     private void assertHttpStatusForScenarioStatus(HttpStatus expectedHttpStatus, ResultStatus originalResponseStatus) {

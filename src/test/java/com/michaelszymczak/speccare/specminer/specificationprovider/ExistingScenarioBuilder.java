@@ -3,6 +3,7 @@ package com.michaelszymczak.speccare.specminer.specificationprovider;
 
 import com.michaelszymczak.speccare.specminer.domain.ExistingFeature;
 import com.michaelszymczak.speccare.specminer.domain.ExistingScenario;
+import com.michaelszymczak.speccare.specminer.domain.ResultStatus;
 
 import java.util.Arrays;
 import java.util.List;
@@ -11,6 +12,7 @@ public class ExistingScenarioBuilder {
     private final TextFragmentProvider tfp = new TextFragmentProvider();
     private List<String> scenarioContent = Arrays.asList("Scenario: Default scenario");
     private ExistingFeature wrappingFeature = ExistingFeatureBuilder.use().build();
+    private ResultStatus result;
 
     public static ExistingScenarioBuilder use()
     {
@@ -24,6 +26,11 @@ public class ExistingScenarioBuilder {
 
     public ExistingScenarioBuilder withWrappingFeature(ExistingFeature wrappingFeature) {
         this.wrappingFeature = wrappingFeature;
+        return this;
+    }
+
+    public ExistingScenarioBuilder withResult(ResultStatus result) {
+        this.result = result;
         return this;
     }
 
