@@ -26,7 +26,14 @@ public class ScenarioResponseShould {
     }
 
     @Test public void
-    overwriteScenarioResultWithTheNewOne() {
+    useScenarioResultAsIsIfNoOtherResultPassed() {
+        Scenario scenario = getScenarioWithResult(ResultStatus.NOT_FOUND);
+        ScenarioResponse response = new ScenarioResponse(scenario);
+        assertResult(ResultStatus.NOT_FOUND, response);
+    }
+
+    @Test public void
+    overwriteScenarioResultWithTheNewOneIfPassed() {
         Scenario scenario = getScenarioWithResult(ResultStatus.PASSED);
         ScenarioResponse response = new ScenarioResponse(scenario, ResultStatus.AMBIGUOUS);
         assertResult(ResultStatus.AMBIGUOUS, response);

@@ -3,10 +3,10 @@ package com.michaelszymczak.speccare.specminer.domain;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class ScenarioReportShould {
+public class ScenarioFinalResultShould {
 
     @Test public void createScenarioResponse() {
-        ScenarioReport report = new ScenarioReport();
+        ScenarioFinalResult report = new ScenarioFinalResult();
         Assert.assertNotNull(report.createResponse(scenario()));
     }
 

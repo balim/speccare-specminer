@@ -20,6 +20,10 @@ public class ScenarioResponse {
         this.status = status;
     }
 
+    public ScenarioResponse(Scenario scenario) {
+        this(scenario, scenario.getResult());
+    }
+
     public String getContent() {
         return GSON.toJson(content);
     }
