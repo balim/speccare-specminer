@@ -51,11 +51,6 @@ public class FilesystemFeatureFilesRetrieverShould {
         assertThat(retriever.getFiles().get(featuresPath + "/foo/bar.feature").get(0), is("Content of bar"));
     }
 
-
-
-
-
-
     private Path featuresPath;
     private FilesystemFeatureFilesRetriever retriever;
     @Before public void setUp() throws IOException {

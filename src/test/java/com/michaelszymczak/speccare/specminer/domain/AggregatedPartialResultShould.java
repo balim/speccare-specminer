@@ -4,10 +4,10 @@ package com.michaelszymczak.speccare.specminer.domain;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class AggregatedPartialResultShould {

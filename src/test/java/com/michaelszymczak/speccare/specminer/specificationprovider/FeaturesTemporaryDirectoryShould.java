@@ -28,7 +28,7 @@ public class FeaturesTemporaryDirectoryShould {
 
     @Test public void
     placePassedResultFileInFeaturesTemporaryDirectory() throws IOException {
-        ftd = new ResultTemporaryLocator("myResult.json");
+        ResultTemporaryLocator ftd = new ResultTemporaryLocator("myResult.json");
         Assert.assertEquals(ftd.getFeaturesDirPath().resolve("myResult.json"), ftd.getResultFilePath());
     }
 
