@@ -28,7 +28,7 @@ public class PartialResultStub implements PartialResult {
 
     @Override
     public ResultStatus getResult(String scenarioName) {
-        if (returnedStatusForScenarioName.containsKey(scenarioName)) {
+        if (null != returnedStatusForScenarioName) {
             return returnedStatusForScenarioName.get(scenarioName);
         }
         return returnedStatus;

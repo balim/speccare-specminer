@@ -11,6 +11,19 @@
         <constructor-arg ref="resultLocator"/>
     </bean>
 
+    <bean id="resultSource" class="com.michaelszymczak.speccare.specminer.specificationprovider.LocatorBasedResultSource">
+        <constructor-arg ref="resultLocator"/>
+    </bean>
+
+    <bean id="partialResult" class="com.michaelszymczak.speccare.specminer.domain.AggregatedPartialResult">
+        <constructor-arg ref="resultSource"/>
+    </bean>
+
+    <bean id="finalResult" class="com.michaelszymczak.speccare.specminer.domain.ScenarioFinalResult">
+        <constructor-arg ref="scenariosRepository"/>
+        <constructor-arg ref="partialResult"/>
+    </bean>
+
     <bean id="textFragmentProvider" class="com.michaelszymczak.speccare.specminer.specificationprovider.TextFragmentProvider"/>
 
     <bean id="featuresCreator" class="com.michaelszymczak.speccare.specminer.specificationprovider.FeaturesCreator">
@@ -23,7 +36,7 @@
         <constructor-arg index="1" ref="featuresCreator"/>
     </bean>
 
-    <bean class="com.michaelszymczak.speccare.specminer.specificationprovider.ObjectScenarioRepository">
+    <bean id="scenariosRepository" class="com.michaelszymczak.speccare.specminer.specificationprovider.ObjectScenarioRepository">
         <constructor-arg ref="scenariosCreator"/>
     </bean>
 

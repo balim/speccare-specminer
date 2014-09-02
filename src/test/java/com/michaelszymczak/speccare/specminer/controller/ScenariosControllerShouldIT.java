@@ -1,4 +1,5 @@
 package com.michaelszymczak.speccare.specminer.controller;
+// TODO: http://stackoverflow.com/questions/16170572/unable-to-mock-service-class-in-spring-mvc-controller-tests
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -153,5 +154,4 @@ public class ScenariosControllerShouldIT {
         }
         writer.close();
     }
-
 }

@@ -7,7 +7,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class JsonResultString {
-//    "[{\"elements\": [{\"name\": \"Scenario A\",\"steps\": [{\"result\": {\"status\": \"passed\"}},{\"result\": {\"status\": \"ignored\"}}],\"type\": \"scenario\"}]}]"
 
     private final String name;
     private final ResultStatus result;

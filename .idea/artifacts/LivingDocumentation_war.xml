@@ -3,11 +3,6 @@
     <output-path>$PROJECT_DIR$/target</output-path>
     <root id="archive" name="speccare-specminer-1.0-SNAPSHOT.war">
       <element id="artifact" artifact-name="LivingDocumentation:war exploded" />
-      <element id="directory" name="WEB-INF">
-        <element id="directory" name="classes">
-          <element id="library" level="application" name="sass-stdlib" />
-        </element>
-      </element>
     </root>
   </artifact>
 </component>

@@ -4,7 +4,9 @@ package com.michaelszymczak.speccare.specminer.specificationprovider;
 import com.michaelszymczak.speccare.specminer.domain.ResultLocator;
 import com.michaelszymczak.speccare.specminer.domain.ResultSource;
 import com.michaelszymczak.speccare.specminer.domain.SourceNotFound;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.annotation.Resource;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;

@@ -2,52 +2,89 @@ package com.michaelszymczak.speccare.specminer.domain;
 
 import com.michaelszymczak.speccare.specminer.specificationprovider.PartialResultStub;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
-
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ScenarioFinalResultShould {
 
-    @Test public void createScenarioResponse() throws IOException {
-        Assert.assertNotNull(result.createResponse(scenario()));
+    @Test public void
+    produceResponseBasedOnScenarioFoundUsingProvidedText() throws IOException {
+        ScenarioFinalResult result = new ScenarioFinalResult(
+                repositoryFindingScenarioByGivenKey("Foo", ScenarioStub.use().withContent("Scenario: Foo scenario").build()),
+                PartialResultStub.buildReturningStatus(ResultStatus.UNKNOWN)
+        );
+
+        ScenarioResponse response = result.createResponse("Foo");
+
+        Assert.assertTrue(response.getContent().contains("\"content\":[\"Scenario: Foo scenario\"]"));
     }
 
-    @Test public void useTheScenarioToGenerateTheResponse() throws IOException {
-        Scenario scenario = ScenarioStub.use().withContent("Scenario: Bar").build();
-        Assert.assertTrue(result.createResponse(scenario).getContent().contains("\"content\":[\"Scenario: Bar\"]"));
+    @Test public void
+    useResultDirectlyFromScenarioFoundInScenarioRepositoryIfTheResultIsOtherThanFound() throws IOException {
+        assertResponseWithSameStatusAsScenarioFromRepository(ResultStatus.FAILED);
+        assertResponseWithSameStatusAsScenarioFromRepository(ResultStatus.NOT_FOUND);
+        assertResponseWithSameStatusAsScenarioFromRepository(ResultStatus.IGNORED);
+        assertResponseWithSameStatusAsScenarioFromRepository(ResultStatus.SKIPPED);
+        assertResponseWithSameStatusAsScenarioFromRepository(ResultStatus.AMBIGUOUS);
+        assertResponseWithSameStatusAsScenarioFromRepository(ResultStatus.UNKNOWN);
+        assertResponseWithSameStatusAsScenarioFromRepository(ResultStatus.PASSED);
     }
 
-    @Test public void doNotAlterTheFinalResultUnlessOriginalScenarioResultIsFound() throws IOException {
-        assertResponseStatusForScenario(ResultStatus.FAILED, scenarioWithResult(ResultStatus.FAILED));
-        assertResponseStatusForScenario(ResultStatus.NOT_FOUND, Scenario.getNotFound());
-        assertResponseStatusForScenario(ResultStatus.IGNORED, scenarioWithResult(ResultStatus.IGNORED));
-        assertResponseStatusForScenario(ResultStatus.SKIPPED, scenarioWithResult(ResultStatus.SKIPPED));
-        assertResponseStatusForScenario(ResultStatus.AMBIGUOUS, scenarioWithResult(ResultStatus.AMBIGUOUS));
-        assertResponseStatusForScenario(ResultStatus.UNKNOWN, scenarioWithResult(ResultStatus.UNKNOWN));
-        assertResponseStatusForScenario(ResultStatus.PASSED, scenarioWithResult(ResultStatus.PASSED));
+    @Test public void
+    askExaminedScenarioResultsForFinalResultIfScenarioHasFoundResult() throws IOException {
+        ScenarioFinalResult finalResult = new ScenarioFinalResult(
+                repositoryReturningScenarioWIthStatus(ResultStatus.FOUND),
+                PartialResultStub.buildReturningStatus(ResultStatus.PASSED)
+        );
+
+        Assert.assertEquals(ResultStatus.PASSED, finalResult.createResponse("some scenario").getStatus());
     }
 
+    @Test public void
+    useScenarioFullNameToFindItInExaminedScenarioResults() throws IOException {
+        Map<String, ResultStatus> examinedScenarioStatuses = new HashMap<>();
+        examinedScenarioStatuses.put("Bar", ResultStatus.UNKNOWN);
+        examinedScenarioStatuses.put("Foo Bar scenario", ResultStatus.FAILED);
 
-    private ScenarioFinalResult result;
 
-    @Before public void setUp() {
-        result = new ScenarioFinalResult(PartialResultStub.buildReturningStatus(ResultStatus.UNKNOWN));
+        ScenarioFinalResult result = new ScenarioFinalResult(
+                repositoryFindingScenarioByGivenKey("Bar", ScenarioStub.use().withResult(ResultStatus.FOUND).withName("Foo Bar scenario").build()),
+                PartialResultStub.buildReturningStatusForScenarioName(examinedScenarioStatuses)
+        );
+
+        Assert.assertEquals(ResultStatus.FAILED, result.createResponse("Bar").getStatus());
     }
 
-    private void assertResponseStatusForScenario(ResultStatus expectedStatus, Scenario scenario) throws IOException {
-        Assert.assertEquals(expectedStatus, result.createResponse(scenario).getStatus());
+    private void assertResponseWithSameStatusAsScenarioFromRepository(ResultStatus expectedResultStatus) throws IOException {
+        ScenarioFinalResult finalResult = new ScenarioFinalResult(
+                repositoryReturningScenarioWIthStatus(expectedResultStatus),
+                PartialResultStub.buildReturningStatus(ResultStatus.UNKNOWN)
+        );
+
+        Assert.assertEquals(expectedResultStatus, finalResult.createResponse("whatever").getStatus());
     }
 
-    private Scenario scenario() {
-        return ScenarioStub.use().build();
+    private ScenarioRepository repositoryReturningScenarioWIthStatus(final ResultStatus scenarioResult) {
+        return new ScenarioRepository() {
+                @Override
+                public Scenario find(String partOfScenarioName) throws IOException {
+                    return ScenarioStub.use().withResult(scenarioResult).build();
+                }
+            };
     }
 
-    private Scenario scenarioWithResult(final ResultStatus status) {
-        return ScenarioStub.use().withResult(status).build();
+    private ScenarioRepository repositoryFindingScenarioByGivenKey(final String key, final Scenario returnedScenario) {
+        return new ScenarioRepository() {
+            @Override
+            public Scenario find(String partOfScenarioName) throws IOException {
+                if (key.equals(partOfScenarioName)) {
+                    return returnedScenario;
+                }
+                throw new IOException(partOfScenarioName + " not found");
+            }
+        };
     }
-
-
-
 
 }
