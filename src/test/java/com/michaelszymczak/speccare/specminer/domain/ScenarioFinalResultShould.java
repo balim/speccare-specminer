@@ -1,22 +1,24 @@
 package com.michaelszymczak.speccare.specminer.domain;
 
-import com.michaelszymczak.speccare.specminer.specificationprovider.ResultStub;
+import com.michaelszymczak.speccare.specminer.specificationprovider.PartialResultStub;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.IOException;
+
 public class ScenarioFinalResultShould {
 
-    @Test public void createScenarioResponse() {
+    @Test public void createScenarioResponse() throws IOException {
         Assert.assertNotNull(result.createResponse(scenario()));
     }
 
-    @Test public void useTheScenarioToGenerateTheResponse() {
+    @Test public void useTheScenarioToGenerateTheResponse() throws IOException {
         Scenario scenario = ScenarioStub.use().withContent("Scenario: Bar").build();
         Assert.assertTrue(result.createResponse(scenario).getContent().contains("\"content\":[\"Scenario: Bar\"]"));
     }
 
-    @Test public void doNotAlterTheFinalResultUnlessOriginalScenarioResultIsFound() {
+    @Test public void doNotAlterTheFinalResultUnlessOriginalScenarioResultIsFound() throws IOException {
         assertResponseStatusForScenario(ResultStatus.FAILED, scenarioWithResult(ResultStatus.FAILED));
         assertResponseStatusForScenario(ResultStatus.NOT_FOUND, Scenario.getNotFound());
         assertResponseStatusForScenario(ResultStatus.IGNORED, scenarioWithResult(ResultStatus.IGNORED));
@@ -30,10 +32,10 @@ public class ScenarioFinalResultShould {
     private ScenarioFinalResult result;
 
     @Before public void setUp() {
-        result = new ScenarioFinalResult(ResultStub.buildReturningStatus(ResultStatus.UNKNOWN));
+        result = new ScenarioFinalResult(PartialResultStub.buildReturningStatus(ResultStatus.UNKNOWN));
     }
 
-    private void assertResponseStatusForScenario(ResultStatus expectedStatus, Scenario scenario) {
+    private void assertResponseStatusForScenario(ResultStatus expectedStatus, Scenario scenario) throws IOException {
         Assert.assertEquals(expectedStatus, result.createResponse(scenario).getStatus());
     }
 

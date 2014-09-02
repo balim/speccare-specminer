@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class JsonPartialResult implements Result {
+public class JsonPartialResult implements PartialResult {
 
     private final JsonArray jsonArray;
 

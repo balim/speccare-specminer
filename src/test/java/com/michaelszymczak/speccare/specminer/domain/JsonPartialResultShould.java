@@ -5,7 +5,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.io.StringReader;
+import java.io.Reader;
 
 public class JsonPartialResultShould {
 
@@ -21,81 +21,90 @@ public class JsonPartialResultShould {
 
     @Test public void
     informAboutPassedScenario() throws IOException {
-        Result result = new JsonPartialResult("[{\"elements\": [{\"name\": \"Scenario A\",\"steps\": [{\"result\": {\"status\": \"passed\"}}],\"type\": \"scenario\"}]}]");
+        PartialResult result = create(json().name("Scenario A").result(ResultStatus.PASSED));
         Assert.assertEquals(ResultStatus.PASSED, result.getResult("Scenario A"));
     }
 
     @Test public void
     informAboutFailedScenario() throws IOException {
-        Result result = new JsonPartialResult("[{\"elements\": [{\"name\": \"Scenario A\",\"steps\": [{\"result\": {\"status\": \"failed\"}}],\"type\": \"scenario\"}]}]");
+        PartialResult result = create(json().name("Scenario A").result(ResultStatus.FAILED));
         Assert.assertEquals(ResultStatus.FAILED, result.getResult("Scenario A"));
     }
 
     @Test public void
     informAboutNotFoundScenario() throws IOException {
-        Result result = new JsonPartialResult("[{\"elements\": [{\"name\": \"Scenario A\",\"steps\": [{\"result\": {\"status\": \"passed\"}}],\"type\": \"scenario\"}]}]");
+        PartialResult result = create(json().name("Scenario A").result(ResultStatus.PASSED));
         Assert.assertEquals(ResultStatus.NOT_FOUND, result.getResult("Scenario B"));
     }
 
     @Test public void
     informAboutIgnoredScenario() throws IOException {
-        Result result = new JsonPartialResult("[{\"elements\": [{\"name\": \"Scenario A\",\"steps\": [{\"result\": {\"status\": \"ignored\"}}],\"type\": \"scenario\"}]}]");
+        PartialResult result = create(json().name("Scenario A").result(ResultStatus.IGNORED));
         Assert.assertEquals(ResultStatus.IGNORED, result.getResult("Scenario A"));
     }
 
     @Test public void
     informAboutUnknownScenarioIfResultStatusNotRecognized() throws IOException {
-        Result result = new JsonPartialResult("[{\"elements\": [{\"name\": \"Scenario A\",\"steps\": [{\"result\": {\"status\": \"foo\"}}],\"type\": \"scenario\"}]}]");
+        PartialResult result = new JsonPartialResult("[{\"elements\": [{\"name\": \"Scenario A\",\"steps\": [{\"result\": {\"status\": \"foo\"}}],\"type\": \"scenario\"}]}]");
         Assert.assertEquals(ResultStatus.UNKNOWN, result.getResult("Scenario A"));
     }
 
     @Test public void
     ignoreTypesOtherThanScenario() throws IOException {
-        Result result = new JsonPartialResult("[{\"elements\": [{\"name\": \"Scenario A\",\"steps\": [{\"result\": {\"status\": \"failed\"}}],\"type\": \"background\"}]}]");
+        PartialResult result = create(json().name("Scenario A").result(ResultStatus.PASSED).type("background"));
         Assert.assertEquals(ResultStatus.NOT_FOUND, result.getResult("Scenario A"));
     }
 
     @Test public void
     informAboutSkippedScenario() throws IOException {
-        Result result = new JsonPartialResult("[{\"elements\": [{\"name\": \"Scenario A\",\"steps\": [{\"result\": {\"status\": \"skipped\"}}],\"type\": \"scenario\"}]}]");
+        PartialResult result = create(json().name("Scenario A").result(ResultStatus.SKIPPED));
         Assert.assertEquals(ResultStatus.SKIPPED, result.getResult("Scenario A"));
     }
 
     @Test public void
     informOnlyAboutScenarioThatMatchesTheName() throws IOException {
-        Result result = new JsonPartialResult("[{\"elements\": [{\"name\": \"Scenario A\",\"steps\": [{\"result\": {\"status\": \"failed\"}}],\"type\": \"scenario\"},{\"name\": \"Scenario B\",\"steps\": [{\"result\": {\"status\": \"passed\"}}],\"type\": \"scenario\"}]}]");
+        PartialResult result = new JsonPartialResult("[{\"elements\": [{\"name\": \"Scenario A\",\"steps\": [{\"result\": {\"status\": \"failed\"}}],\"type\": \"scenario\"},{\"name\": \"Scenario B\",\"steps\": [{\"result\": {\"status\": \"passed\"}}],\"type\": \"scenario\"}]}]");
         Assert.assertEquals(ResultStatus.PASSED, result.getResult("Scenario B"));
     }
 
     @Test public void
     informAboutFailingScenarioWhenAtLeastOneFailingStep() throws IOException {
-        Result result = new JsonPartialResult("[{\"elements\": [{\"name\": \"Scenario A\",\"steps\": [{\"result\": {\"status\": \"passed\"}},{\"result\": {\"status\": \"failed\"}}],\"type\": \"scenario\"}]}]");
+        PartialResult result = create(json().name("Scenario A").result(ResultStatus.PASSED).nextResult(ResultStatus.FAILED));
         Assert.assertEquals(ResultStatus.FAILED, result.getResult("Scenario A"));
+
     }
 
     @Test public void
     informAboutIgnoredScenarioWhenAtLeastOneIgnoredStep() throws IOException {
-        Result result = new JsonPartialResult("[{\"elements\": [{\"name\": \"Scenario A\",\"steps\": [{\"result\": {\"status\": \"passed\"}},{\"result\": {\"status\": \"ignored\"}}],\"type\": \"scenario\"}]}]");
+        PartialResult result = create(json().name("Scenario A").result(ResultStatus.PASSED).nextResult(ResultStatus.IGNORED));
         Assert.assertEquals(ResultStatus.IGNORED, result.getResult("Scenario A"));
     }
 
     @Test public void
     informAboutFailingScenarioInCaseOfSkippedStepsAfterFailedStep() throws IOException {
-        Result result = new JsonPartialResult("[{\"elements\": [{\"name\": \"Scenario A\",\"steps\": [{\"result\": {\"status\": \"failed\"}},{\"result\": {\"status\": \"skipped\"}}],\"type\": \"scenario\"}]}]");
+        PartialResult result = create(json().name("Scenario A").result(ResultStatus.FAILED).nextResult(ResultStatus.SKIPPED));
         Assert.assertEquals(ResultStatus.FAILED, result.getResult("Scenario A"));
     }
 
     @Test public void
     informAboutAmbiguousResultIfTooManyScenariosOfGivenNameFound() throws IOException {
-        Result result = new JsonPartialResult("[{\"elements\": [{\"name\": \"Scenario A\",\"steps\": [{\"result\": {\"status\": \"passed\"}}],\"type\": \"scenario\"},{\"name\": \"Scenario A\",\"steps\": [{\"result\": {\"status\": \"passed\"}}],\"type\": \"scenario\"}]}]");
+        PartialResult result = new JsonPartialResult("[{\"elements\": [{\"name\": \"Scenario A\",\"steps\": [{\"result\": {\"status\": \"passed\"}}],\"type\": \"scenario\"},{\"name\": \"Scenario A\",\"steps\": [{\"result\": {\"status\": \"passed\"}}],\"type\": \"scenario\"}]}]");
         Assert.assertEquals(ResultStatus.AMBIGUOUS, result.getResult("Scenario A"));
     }
 
-    private StringReader readerWithValidJsonString() {
-        return new StringReader(validJsonString());
+    private Reader readerWithValidJsonString() {
+        return json().asReader();
     }
 
     private String validJsonString() {
-        return "[{\"elements\": [{\"name\": \"Scenario A\",\"steps\": [{\"result\": {\"status\": \"passed\"}}],\"type\": \"scenario\"}]}]";
+        return json().asString();
+    }
+
+    private JsonPartialResult create(JsonResultString.Builder jsonBuilder) throws IOException {
+        return new JsonPartialResult(jsonBuilder.asReader());
+    }
+
+    private JsonResultString.Builder json() {
+        return new JsonResultString.Builder();
     }
 }
