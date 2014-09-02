@@ -1,13 +1,15 @@
 package com.michaelszymczak.speccare.specminer.specificationprovider;
 
+import com.michaelszymczak.speccare.specminer.domain.ResultLocator;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class FeaturesRealDirectory implements FeaturesDirectory {
+public class ResultRealLocator implements ResultLocator {
     private final Path featuresDirPath;
     private final Path resultFilePath;
 
-    public FeaturesRealDirectory(String featuresDirPath, String resultFilePath) {
+    public ResultRealLocator(String featuresDirPath, String resultFilePath) {
         this.featuresDirPath = Paths.get(featuresDirPath);
         this.resultFilePath = Paths.get(resultFilePath);
     }

@@ -1,6 +1,6 @@
 package com.michaelszymczak.speccare.specminer.controller;
 
-import com.michaelszymczak.speccare.specminer.specificationprovider.FeaturesDirectory;
+import com.michaelszymczak.speccare.specminer.domain.ResultLocator;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,7 +13,7 @@ import java.io.IOException;
 @RequestMapping("/examples")
 class ExamplesController {
 
-    @Resource(name = "featuresDir") private FeaturesDirectory featuresDir;
+    @Resource(name = "resultLocator") private ResultLocator featuresDir;
 
     @RequestMapping(value="/featuresPath", method = RequestMethod.GET)
     @ResponseBody

@@ -1,5 +1,7 @@
 package com.michaelszymczak.speccare.specminer.specificationprovider;
 
+import com.michaelszymczak.speccare.specminer.domain.ResultLocator;
+
 import java.io.IOException;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
@@ -12,9 +14,9 @@ import static java.nio.file.FileVisitResult.CONTINUE;
 
 class FilesystemFeatureFilesRetriever implements FeatureFilesRetriever {
 
-    private final FeaturesDirectory featuresDir;
+    private final ResultLocator featuresDir;
 
-    public FilesystemFeatureFilesRetriever(FeaturesDirectory featuresDir) {
+    public FilesystemFeatureFilesRetriever(ResultLocator featuresDir) {
         this.featuresDir = featuresDir;
     }
 

@@ -1,6 +1,6 @@
 package com.michaelszymczak.speccare.specminer.controller;
 
-import com.michaelszymczak.speccare.specminer.specificationprovider.FeaturesDirectory;
+import com.michaelszymczak.speccare.specminer.domain.ResultLocator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -16,7 +16,7 @@ class HelloController {
 
 
     @Autowired private WebApplicationContext wac;
-    @Resource(name = "featuresDir") private FeaturesDirectory featuresDir;
+    @Resource(name = "resultLocator") private ResultLocator featuresDir;
 
     @RequestMapping(method = RequestMethod.GET)
     public String printWelcome(ModelMap model) {

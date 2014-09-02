@@ -28,14 +28,14 @@ public class FeaturesTemporaryDirectoryShould {
 
     @Test public void
     placePassedResultFileInFeaturesTemporaryDirectory() throws IOException {
-        ftd = new FeaturesTemporaryDirectory("myResult.json");
+        ftd = new ResultTemporaryLocator("myResult.json");
         Assert.assertEquals(ftd.getFeaturesDirPath().resolve("myResult.json"), ftd.getResultFilePath());
     }
 
-    private FeaturesTemporaryDirectory ftd;
+    private ResultTemporaryLocator ftd;
 
     @Before public void setUp() throws IOException {
-        ftd = new FeaturesTemporaryDirectory("result.json");
+        ftd = new ResultTemporaryLocator("result.json");
     }
 
     private void assertThatPathExistsInTemporaryDirectory(Path featuresTmpDirPath) {

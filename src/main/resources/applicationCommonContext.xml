@@ -8,7 +8,7 @@
     <context:component-scan base-package="com.michaelszymczak.speccare.specminer"/>
 
     <bean id="filesystemFeatureFilesRetriever" class="com.michaelszymczak.speccare.specminer.specificationprovider.FilesystemFeatureFilesRetriever">
-        <constructor-arg ref="featuresDir"/>
+        <constructor-arg ref="resultLocator"/>
     </bean>
 
     <bean id="textFragmentProvider" class="com.michaelszymczak.speccare.specminer.specificationprovider.TextFragmentProvider"/>

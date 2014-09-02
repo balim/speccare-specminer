@@ -2,7 +2,7 @@ package com.michaelszymczak.speccare.specminer.controller;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.michaelszymczak.speccare.specminer.specificationprovider.FeaturesDirectory;
+import com.michaelszymczak.speccare.specminer.domain.ResultLocator;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,7 +34,7 @@ public class ScenariosControllerShouldIT {
     @SuppressWarnings("SpringJavaAutowiringInspection")
     @Autowired
     protected WebApplicationContext wac;
-    @Resource(name = "featuresDir") private FeaturesDirectory featuresDir;
+    @Resource(name = "resultLocator") private ResultLocator featuresDir;
     private MockMvc mockMvc;
 
     @Before
