@@ -28,25 +28,6 @@ Feature:
         Then the result should be -1
     """
 
-  Scenario: Scenario described in documentation exists in the actual feature files
-    When I get "/scenarios/Adding two numbers"
-    Then the response should be OK
-    And the response content should be JSON:
-    """
-    {
-      "result":"found",
-      "name":"Adding two numbers",
-      "path":"ABSOLUTE_PATH_TO_FEATURES_DIR/Adding.feature",
-      "content": [
-        "  Scenario: Adding two numbers",
-        "    Given I have 2 and 3",
-        "    When  I add these numbers",
-        "    Then the result should be 5",
-        ""
-      ]
-    }
-    """
-
   Scenario: Scenario described in documentation not present in the actual feature files
     When I get "/scenarios/Multiplying two numbers"
     Then the response should be NOT FOUND

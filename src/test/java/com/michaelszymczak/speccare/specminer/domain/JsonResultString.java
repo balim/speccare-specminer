@@ -26,7 +26,14 @@ public class JsonResultString {
         public Builder result(ResultStatus val) {
             results = new ArrayList<>();
             results.add(val);
-            result = val; return this;
+            result = val;
+            return this;
+        }
+
+        public Builder noResult() {
+            results = new ArrayList<>();
+            result = null;
+            return this;
         }
 
         public Builder nextResult(ResultStatus val) {
@@ -44,6 +51,14 @@ public class JsonResultString {
         public String asString() {
             return new JsonResultString(this).toString();
         }
+
+        public String asOneEntryString() {
+            return new JsonResultString(this).toOneEntryString();
+        }
+
+        public String asOneScenarioString() {
+            return new JsonResultString(this).toOneScenarioString();
+        }
     }
 
     private JsonResultString(Builder builder) {
@@ -53,16 +68,29 @@ public class JsonResultString {
         type = builder.type;
     }
 
+
     @Override
     public String toString() {
-        StringBuilder resultPart = new StringBuilder();
+        return "[" + toOneEntryString() + "]";
+    }
+
+    private String toOneEntryString() {
+        return "{\"elements\": [" + toOneScenarioString() + "]}";
+    }
+
+    private String toOneScenarioString() {
+        return "{\"name\": \"" + name + "\",\"steps\": [" + resultPart() + "],\"type\": \"" + type + "\"}";
+    }
+
+    private String resultPart() {
+        StringBuilder stringBuilder = new StringBuilder();
         String separator = "";
         for (ResultStatus result : results) {
-            resultPart.append(separator);
-            resultPart.append("{\"result\": {\"status\": \"" + result + "\"}}");
+            stringBuilder.append(separator);
+            stringBuilder.append("{\"result\": {\"status\": \"" + result + "\"}}");
             separator = ",";
         }
-        return "[{\"elements\": [{\"name\": \"" + name + "\",\"steps\": [" + resultPart.toString() + "],\"type\": \"" + type + "\"}]}]";
+        return stringBuilder.toString();
     }
 
     public Reader toReader() {

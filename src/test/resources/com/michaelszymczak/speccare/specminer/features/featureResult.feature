@@ -52,10 +52,29 @@ Feature:
     """
     And result file with content from "com/michaelszymczak/speccare/specminer/specificationprovider/testfixture-cucumber-result.json"
 
-  Scenario: Existing and passing scenario searched by the scenario name fragment
+  Scenario: Passing scenario searched by the scenario name fragment
     Given result file with one "Feature A Scenario passed" passing scenario
     When I get "/scenarios/A Scenario passed"
     Then the response should be OK
+    And the response content should be JSON:
+    """
+    {
+      "result":"passed",
+      "name":"Feature A Scenario passed",
+      "path":"ABSOLUTE_PATH_TO_FEATURES_DIR/featureA.feature",
+      "content": [
+        "  Scenario: Feature A Scenario passed",
+        "    When OK",
+        "    Then OK",
+        ""
+      ]
+    }
+    """
+
+#  Scenario: Existing but failing scenario searched by the scenario name fragment
+#    Given result file with one "feature B Scenario failed" passing scenario
+#    When I get "/scenarios/A Scenario passed"
+#    Then the response should be OK
 #    And the response content should be JSON:
 #    """
 #    {

@@ -1,7 +1,6 @@
 package com.michaelszymczak.speccare.specminer.domain;
 
 import com.eclipsesource.json.JsonArray;
-import com.eclipsesource.json.JsonObject;
 import com.eclipsesource.json.JsonValue;
 
 import java.io.IOException;
@@ -25,52 +24,33 @@ public class JsonPartialResult implements PartialResult {
 
     @Override
     public ResultStatus getResult(String scenarioName) {
-        List<JsonObject> found = findScenarios(scenarioName);
-        if (found.isEmpty()) {
-            return ResultStatus.NOT_FOUND;
+        ResultAggregate aggregate = new ResultAggregate();
+        for (JsonValue each : jsonArray.asArray()) {
+            aggregate.add(new JsonObjectEntry(each.asObject()).getResult(scenarioName));
         }
-        if (found.size() > 1) {
-            return ResultStatus.AMBIGUOUS;
-        }
-        return getScenarioResult(found.get(0));
+        return aggregate.result();
     }
 
-    private List<JsonObject> findScenarios(String scenarioName) {
-        List<JsonObject> found = new ArrayList<>();
-        for (JsonValue value : jsonArray.get(0).asObject().get("elements").asArray()) {
-            JsonObject scenario = value.asObject();
-            if (scenario.get("name").asString().equals(scenarioName) && "scenario".equals(scenario.get("type").asString())) {
-                found.add(scenario);
+    private static class ResultAggregate {
+
+        private final List<ResultStatus> results = new ArrayList<>();
+
+        public void add(ResultStatus result) {
+            if (ResultStatus.NOT_FOUND != result) {
+                results.add(result);
             }
         }
-        return found;
-    }
 
-    private ResultStatus getScenarioResult(JsonObject foundScenario) {
-        for(JsonValue value : foundScenario.get("steps").asArray()) {
-            JsonObject step = value.asObject();
-            String status = step.get("result").asObject().get("status").asString();
-            ResultStatus result = resultFromStatus(status);
-            if (result != ResultStatus.PASSED) {
-                return result;
+        public ResultStatus result() {
+            if (results.isEmpty()) {
+                return ResultStatus.NOT_FOUND;
             }
-        }
-        return ResultStatus.PASSED;
-    }
+            if (results.size() > 1) {
+                return ResultStatus.AMBIGUOUS;
+            }
 
-    private ResultStatus resultFromStatus(String status) {
-        if ("failed".equals(status)) {
-            return ResultStatus.FAILED;
+            return results.get(0);
         }
-        if ("ignored".equals(status)) {
-            return ResultStatus.IGNORED;
-        }
-        if ("skipped".equals(status)) {
-            return ResultStatus.SKIPPED;
-        }
-        if ("passed".equals(status)) {
-            return ResultStatus.PASSED;
-        }
-        return ResultStatus.UNKNOWN;
+
     }
 }
