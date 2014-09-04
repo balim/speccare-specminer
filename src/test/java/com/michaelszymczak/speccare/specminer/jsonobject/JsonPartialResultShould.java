@@ -1,6 +1,10 @@
-package com.michaelszymczak.speccare.specminer.domain;
+package com.michaelszymczak.speccare.specminer.jsonobject;
 
 
+import com.michaelszymczak.speccare.specminer.domain.Determinable;
+import com.michaelszymczak.speccare.specminer.domain.JsonResultString;
+import com.michaelszymczak.speccare.specminer.domain.ResultStatus;
+import com.michaelszymczak.speccare.specminer.jsonobject.JsonPartialResult;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -118,11 +122,11 @@ public class JsonPartialResultShould {
         Assert.assertEquals(ResultStatus.AMBIGUOUS, result(json).getResult("Scenario A"));
     }
 
-    private PartialResult result(String jsonString) throws IOException {
+    private Determinable result(String jsonString) throws IOException {
         return new JsonPartialResult(jsonString);
     }
 
-    private PartialResult result(Reader jsonReader) throws IOException {
+    private Determinable result(Reader jsonReader) throws IOException {
         return new JsonPartialResult(jsonReader);
     }
 

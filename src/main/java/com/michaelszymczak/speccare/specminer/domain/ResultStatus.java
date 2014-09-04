@@ -20,4 +20,21 @@ public enum ResultStatus {
     public String toString() {
         return canonicalName;
     }
+
+    public static ResultStatus of(String name) {
+        for (ResultStatus each : ResultStatus.values()) {
+            if (each.toString().equals(name)) {
+                return each;
+            }
+        }
+        throw new IllegalArgumentException("No such ResultStatus name: " + name);
+    }
+
+    public static ResultStatus ofFallback(String name) {
+        try {
+            return of(name);
+        } catch (IllegalArgumentException e) {
+            return UNKNOWN;
+        }
+    }
 }

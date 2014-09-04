@@ -1,27 +1,27 @@
 package com.michaelszymczak.speccare.specminer.specificationprovider;
 
-import com.michaelszymczak.speccare.specminer.domain.PartialResult;
+import com.michaelszymczak.speccare.specminer.domain.Determinable;
 import com.michaelszymczak.speccare.specminer.domain.ResultStatus;
 
 import java.util.Map;
 
-public class PartialResultStub implements PartialResult {
+public class DeterminableStub implements Determinable {
 
     private ResultStatus returnedStatus = null;
     private Map<String,ResultStatus> returnedStatusForScenarioName = null;
 
-    private PartialResultStub() {
+    private DeterminableStub() {
     }
 
 
-    public static PartialResult buildReturningStatus(ResultStatus returnedStatus) {
-        PartialResultStub result = new PartialResultStub();
+    public static Determinable buildReturningStatus(ResultStatus returnedStatus) {
+        DeterminableStub result = new DeterminableStub();
         result.returnedStatus = returnedStatus;
         return result;
     }
 
-    public static PartialResult buildReturningStatusForScenarioName(Map<String,ResultStatus> returnedStatusForScenarioName) {
-        PartialResultStub result = new PartialResultStub();
+    public static Determinable buildReturningStatusForScenarioName(Map<String,ResultStatus> returnedStatusForScenarioName) {
+        DeterminableStub result = new DeterminableStub();
         result.returnedStatusForScenarioName = returnedStatusForScenarioName;
         return result;
     }

@@ -1,11 +1,13 @@
 package com.michaelszymczak.speccare.specminer.domain;
 
+import com.michaelszymczak.speccare.specminer.jsonobject.JsonPartialResult;
+
 import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AggregatedPartialResult implements PartialResult {
+public class AggregatedPartialResult implements Determinable {
     private final ResultSource source;
     public AggregatedPartialResult(ResultSource source) {
         this.source = source;

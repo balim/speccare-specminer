@@ -2,7 +2,7 @@ package com.michaelszymczak.speccare.specminer.cucumberSteps;
 
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
-import com.michaelszymczak.speccare.specminer.domain.JsonPartialResult;
+import com.michaelszymczak.speccare.specminer.jsonobject.JsonPartialResult;
 import com.michaelszymczak.speccare.specminer.domain.ResultStatus;
 import com.michaelszymczak.speccare.specminer.specificationprovider.EncodingDetector;
 import cucumber.api.java.After;

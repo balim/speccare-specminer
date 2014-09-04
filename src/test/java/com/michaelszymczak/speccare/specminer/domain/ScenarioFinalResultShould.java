@@ -1,6 +1,6 @@
 package com.michaelszymczak.speccare.specminer.domain;
 
-import com.michaelszymczak.speccare.specminer.specificationprovider.PartialResultStub;
+import com.michaelszymczak.speccare.specminer.specificationprovider.DeterminableStub;
 import org.junit.Assert;
 import org.junit.Test;
 import java.io.IOException;
@@ -13,7 +13,7 @@ public class ScenarioFinalResultShould {
     produceResponseBasedOnScenarioFoundUsingProvidedText() throws IOException {
         ScenarioFinalResult result = new ScenarioFinalResult(
                 repositoryFindingScenarioByGivenKey("Foo", ScenarioStub.use().withContent("Scenario: Foo scenario").build()),
-                PartialResultStub.buildReturningStatus(ResultStatus.UNKNOWN)
+                DeterminableStub.buildReturningStatus(ResultStatus.UNKNOWN)
         );
 
         ScenarioResponse response = result.createResponse("Foo");
@@ -36,7 +36,7 @@ public class ScenarioFinalResultShould {
     askExaminedScenarioResultsForFinalResultIfScenarioHasFoundResult() throws IOException {
         ScenarioFinalResult finalResult = new ScenarioFinalResult(
                 repositoryReturningScenarioWIthStatus(ResultStatus.FOUND),
-                PartialResultStub.buildReturningStatus(ResultStatus.PASSED)
+                DeterminableStub.buildReturningStatus(ResultStatus.PASSED)
         );
 
         Assert.assertEquals(ResultStatus.PASSED, finalResult.createResponse("some scenario").getStatus());
@@ -51,7 +51,7 @@ public class ScenarioFinalResultShould {
 
         ScenarioFinalResult result = new ScenarioFinalResult(
                 repositoryFindingScenarioByGivenKey("Bar", ScenarioStub.use().withResult(ResultStatus.FOUND).withName("Foo Bar scenario").build()),
-                PartialResultStub.buildReturningStatusForScenarioName(examinedScenarioStatuses)
+                DeterminableStub.buildReturningStatusForScenarioName(examinedScenarioStatuses)
         );
 
         Assert.assertEquals(ResultStatus.FAILED, result.createResponse("Bar").getStatus());
@@ -60,7 +60,7 @@ public class ScenarioFinalResultShould {
     private void assertResponseWithSameStatusAsScenarioFromRepository(ResultStatus expectedResultStatus) throws IOException {
         ScenarioFinalResult finalResult = new ScenarioFinalResult(
                 repositoryReturningScenarioWIthStatus(expectedResultStatus),
-                PartialResultStub.buildReturningStatus(ResultStatus.UNKNOWN)
+                DeterminableStub.buildReturningStatus(ResultStatus.UNKNOWN)
         );
 
         Assert.assertEquals(expectedResultStatus, finalResult.createResponse("whatever").getStatus());

@@ -5,9 +5,9 @@ import java.io.IOException;
 public class ScenarioFinalResult {
 
     private final ScenarioRepository repository;
-    private final PartialResult resultAfterExaminingScenarios;
+    private final Determinable resultAfterExaminingScenarios;
 
-    public ScenarioFinalResult(ScenarioRepository repository, PartialResult resultAfterExaminingScenarios) {
+    public ScenarioFinalResult(ScenarioRepository repository, Determinable resultAfterExaminingScenarios) {
         this.repository = repository;
         this.resultAfterExaminingScenarios = resultAfterExaminingScenarios;
     }
