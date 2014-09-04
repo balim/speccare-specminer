@@ -3,7 +3,6 @@ package com.michaelszymczak.speccare.specminer.jsonobject;
 import com.eclipsesource.json.JsonArray;
 import com.eclipsesource.json.JsonObject;
 import com.eclipsesource.json.JsonValue;
-import com.michaelszymczak.speccare.specminer.domain.Determinable;
 import com.michaelszymczak.speccare.specminer.domain.ResultStatus;
 
 class ScenarioJsonObject {

@@ -1,19 +1,21 @@
 package com.michaelszymczak.speccare.specminer.domain;
 
-import com.michaelszymczak.speccare.specminer.jsonobject.JsonPartialResult;
+import com.michaelszymczak.speccare.specminer.jsonobject.DeterminableCucumberJsonReport;
 
 import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AggregatedPartialResult implements Determinable {
+public class AggregatedPartialResult {
     private final ResultSource source;
+    private final DeterminableCucumberJsonReport determinable;
+
     public AggregatedPartialResult(ResultSource source) {
+        determinable = new DeterminableCucumberJsonReport();
         this.source = source;
     }
 
-    @Override
     public ResultStatus getResult(String scenarioName) throws IOException {
         List<ResultStatus> foundStatuses = getFoundStatuses(scenarioName);
         if (foundStatuses.isEmpty()) {
@@ -28,7 +30,7 @@ public class AggregatedPartialResult implements Determinable {
     private List<ResultStatus> getFoundStatuses(String scenarioName) throws IOException {
         List<ResultStatus> foundStatuses = new ArrayList<>();
         for (Reader resultSource : source.getSources()) {
-            ResultStatus scenarioStatus = new JsonPartialResult(resultSource).getResult(scenarioName);
+            ResultStatus scenarioStatus = determinable.getResult(resultSource, scenarioName);
             if (ResultStatus.NOT_FOUND != scenarioStatus) {
                 foundStatuses.add(scenarioStatus);
             }

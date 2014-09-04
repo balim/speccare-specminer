@@ -2,7 +2,7 @@ package com.michaelszymczak.speccare.specminer.cucumberSteps;
 
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
-import com.michaelszymczak.speccare.specminer.jsonobject.JsonPartialResult;
+import com.michaelszymczak.speccare.specminer.jsonobject.DeterminableCucumberJsonReport;
 import com.michaelszymczak.speccare.specminer.domain.ResultStatus;
 import com.michaelszymczak.speccare.specminer.specificationprovider.EncodingDetector;
 import cucumber.api.java.After;
@@ -75,7 +75,7 @@ public class FeaturePresenceSteps {
 
     @Given("^result file with one \"(.*?)\" passing scenario$")
     public void result_file_with_one_scenario_with_all_passing_steps(String scenarioName) throws Throwable {
-        ResultStatus result = new JsonPartialResult(new FileReader(resultFilePath)).getResult(scenarioName);
+        ResultStatus result = new DeterminableCucumberJsonReport().getResult(new FileReader(resultFilePath), scenarioName);
         Assert.assertEquals(ResultStatus.PASSED, result);
     }
 

@@ -11,22 +11,15 @@ import java.io.Reader;
 import java.io.StringReader;
 
 
-public class JsonPartialResult implements Determinable {
+public class DeterminableCucumberJsonReport implements Determinable {
 
-    private final JsonArray jsonArray;
-
-    public JsonPartialResult(String json) throws IOException {
-        this(new StringReader(json));
+    public ResultStatus getResult(String json, String scenarioName)  throws IOException {
+        return getResult(new StringReader(json), scenarioName);
     }
 
-    public JsonPartialResult(Reader json) throws IOException {
-        jsonArray = JsonArray.readFrom(json);
-    }
-
-    @Override
-    public ResultStatus getResult(String scenarioName) {
+    public ResultStatus getResult(Reader reader, String scenarioName) throws IOException {
         ResultAggregate aggregate = new ResultAggregate();
-        for (JsonValue each : jsonArray.asArray()) {
+        for (JsonValue each : JsonArray.readFrom(reader).asArray()) {
             aggregate.add(new EntryJsonObject(each).getResult(scenarioName));
         }
         return aggregate.result();
