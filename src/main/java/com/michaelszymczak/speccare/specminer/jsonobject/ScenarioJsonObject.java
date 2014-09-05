@@ -5,6 +5,8 @@ import com.eclipsesource.json.JsonObject;
 import com.eclipsesource.json.JsonValue;
 import com.michaelszymczak.speccare.specminer.domain.ResultStatus;
 
+import static com.michaelszymczak.speccare.specminer.domain.ResultStatus.*;
+
 class ScenarioJsonObject {
 
     private final JsonObject scenario;
@@ -17,22 +19,22 @@ class ScenarioJsonObject {
         if (scenario.get("name").asString().equals(scenarioName) && "scenario".equals(scenario.get("type").asString())) {
             return result();
         } else {
-            return ResultStatus.NOT_FOUND;
+            return NOT_FOUND;
         }
     }
 
     private ResultStatus result() {
         JsonArray steps = steps(scenario);
         if (steps.isEmpty()) {
-            return ResultStatus.UNKNOWN;
+            return UNKNOWN;
         }
         for(JsonValue step : steps) {
             ResultStatus result = stepResult(step);
-            if (result != ResultStatus.PASSED) {
+            if (result != PASSED) {
                 return result;
             }
         }
-        return ResultStatus.PASSED;
+        return PASSED;
     }
 
     private JsonArray steps(JsonObject foundScenario) {
@@ -42,6 +44,6 @@ class ScenarioJsonObject {
     private ResultStatus stepResult(JsonValue value) {
         JsonObject step = value.asObject();
         String status = step.get("result").asObject().get("status").asString();
-        return ResultStatus.ofFallback(status);
+        return ofFallback(status);
     }
 }

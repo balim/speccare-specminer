@@ -3,55 +3,57 @@ package com.michaelszymczak.speccare.specminer.domain;
 import org.junit.Assert;
 import org.junit.Test;
 
+import static com.michaelszymczak.speccare.specminer.domain.ResultStatus.*;
+
 
 public class ResultStatusShould {
     @Test public void
     stringifyItselfSoThatCanBeUsedInJsonResponse() {
-        assertToStringEquals("failed", ResultStatus.FAILED);
-        assertToStringEquals("notfound", ResultStatus.NOT_FOUND);
-        assertToStringEquals("ignored", ResultStatus.IGNORED);
-        assertToStringEquals("skipped", ResultStatus.SKIPPED);
-        assertToStringEquals("ambiguous", ResultStatus.AMBIGUOUS);
-        assertToStringEquals("unknown", ResultStatus.UNKNOWN);
-        assertToStringEquals("passed", ResultStatus.PASSED);
-        assertToStringEquals("found", ResultStatus.FOUND);
+        assertToStringEquals("failed", FAILED);
+        assertToStringEquals("notfound", NOT_FOUND);
+        assertToStringEquals("ignored", IGNORED);
+        assertToStringEquals("skipped", SKIPPED);
+        assertToStringEquals("ambiguous", AMBIGUOUS);
+        assertToStringEquals("unknown", UNKNOWN);
+        assertToStringEquals("passed", PASSED);
+        assertToStringEquals("found", FOUND);
     }
 
     @Test public void
     createEnumFromString() {
-        Assert.assertEquals(ResultStatus.FAILED, ResultStatus.of("failed"));
-        Assert.assertEquals(ResultStatus.NOT_FOUND, ResultStatus.of("notfound"));
-        Assert.assertEquals(ResultStatus.IGNORED, ResultStatus.of("ignored"));
-        Assert.assertEquals(ResultStatus.SKIPPED, ResultStatus.of("skipped"));
-        Assert.assertEquals(ResultStatus.AMBIGUOUS, ResultStatus.of("ambiguous"));
-        Assert.assertEquals(ResultStatus.UNKNOWN, ResultStatus.of("unknown"));
-        Assert.assertEquals(ResultStatus.PASSED, ResultStatus.of("passed"));
-        Assert.assertEquals(ResultStatus.FOUND, ResultStatus.of("found"));
+        Assert.assertEquals(FAILED, of("failed"));
+        Assert.assertEquals(NOT_FOUND, of("notfound"));
+        Assert.assertEquals(IGNORED, of("ignored"));
+        Assert.assertEquals(SKIPPED, of("skipped"));
+        Assert.assertEquals(AMBIGUOUS, of("ambiguous"));
+        Assert.assertEquals(UNKNOWN, of("unknown"));
+        Assert.assertEquals(PASSED, of("passed"));
+        Assert.assertEquals(FOUND, of("found"));
     }
 
     @Test public void
     createEnumFromStringBasedOnStringEqualityNotIdentity() {
-        Assert.assertEquals(ResultStatus.PASSED, ResultStatus.of(new String ("passed")));
+        Assert.assertEquals(PASSED, of(new String("passed")));
     }
 
     @Test public void
     inFallbackModeReturnUnknownIfTriesToCreateUsingIllegalName() {
-        Assert.assertEquals(ResultStatus.UNKNOWN, ResultStatus.ofFallback("wrong"));
+        Assert.assertEquals(UNKNOWN, ofFallback("wrong"));
     }
 
     @Test public void
     inFallbackModeReturnSameAsInNormalModeIfFound() {
-        Assert.assertEquals(ResultStatus.PASSED, ResultStatus.ofFallback("passed"));
+        Assert.assertEquals(PASSED, ofFallback("passed"));
     }
 
     @Test(expected = IllegalArgumentException.class) public void
     throwExceptionIfIllegalStringUsedToCreateEnum() {
-        ResultStatus.of("wrong");
+        of("wrong");
     }
 
     @Test(expected = IllegalArgumentException.class) public void
     throwExceptionIfINullUsedToCreateEnum() {
-        ResultStatus.of(null);
+        of(null);
     }
 
     private void assertToStringEquals(String expectedOutput, ResultStatus status) {

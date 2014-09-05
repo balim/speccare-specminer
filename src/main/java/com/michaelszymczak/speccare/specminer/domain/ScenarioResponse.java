@@ -5,6 +5,8 @@ import org.springframework.http.HttpStatus;
 
 import java.util.List;
 
+import static com.michaelszymczak.speccare.specminer.domain.ResultStatus.*;
+
 public class ScenarioResponse {
 
     private final Content content;
@@ -29,10 +31,10 @@ public class ScenarioResponse {
     }
 
     public HttpStatus getHttpStatus() {
-        if (ResultStatus.AMBIGUOUS == status || ResultStatus.UNKNOWN == status) {
+        if (AMBIGUOUS == status || UNKNOWN == status) {
             return HttpStatus.UNPROCESSABLE_ENTITY;
         }
-        if (ResultStatus.NOT_FOUND == status) {
+        if (NOT_FOUND == status) {
             return HttpStatus.NOT_FOUND;
         }
 

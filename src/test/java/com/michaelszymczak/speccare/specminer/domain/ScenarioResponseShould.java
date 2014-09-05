@@ -1,23 +1,22 @@
 package com.michaelszymczak.speccare.specminer.domain;
 
+import com.eclipsesource.json.JsonObject;
 import org.junit.Assert;
 import org.junit.Test;
+import org.springframework.http.HttpStatus;
 
-import java.io.StringReader;
 import java.util.Arrays;
 import java.util.List;
-import com.eclipsesource.json.JsonArray;
-import com.eclipsesource.json.JsonObject;
-import com.eclipsesource.json.JsonValue;
-import org.springframework.http.HttpStatus;
+
+import static com.michaelszymczak.speccare.specminer.domain.ResultStatus.*;
 
 public class ScenarioResponseShould {
 
     @Test public void
     returnContentUsingScenarioData() {
-        Scenario scenario = getScenario("Foo scenario name", "Scenario: Foo scenario name", ResultStatus.FOUND, "/path/to/foo.feature");
+        Scenario scenario = getScenario("Foo scenario name", "Scenario: Foo scenario name", FOUND, "/path/to/foo.feature");
 
-        ScenarioResponse response = new ScenarioResponse(scenario, ResultStatus.FOUND);
+        ScenarioResponse response = new ScenarioResponse(scenario, FOUND);
 
         Assert.assertEquals(
                 "{\"name\":\"Foo scenario name\",\"path\":\"/path/to/foo.feature\",\"content\":[\"Scenario: Foo scenario name\"],\"result\":\"found\"}",
@@ -27,49 +26,49 @@ public class ScenarioResponseShould {
 
     @Test public void
     useScenarioResultAsIsIfNoOtherResultPassed() {
-        Scenario scenario = getScenarioWithResult(ResultStatus.NOT_FOUND);
+        Scenario scenario = getScenarioWithResult(NOT_FOUND);
         ScenarioResponse response = new ScenarioResponse(scenario);
-        assertResult(ResultStatus.NOT_FOUND, response);
+        assertResult(NOT_FOUND, response);
     }
 
     @Test public void
     overwriteScenarioResultWithTheNewOneIfPassed() {
-        Scenario scenario = getScenarioWithResult(ResultStatus.PASSED);
-        ScenarioResponse response = new ScenarioResponse(scenario, ResultStatus.AMBIGUOUS);
-        assertResult(ResultStatus.AMBIGUOUS, response);
+        Scenario scenario = getScenarioWithResult(PASSED);
+        ScenarioResponse response = new ScenarioResponse(scenario, AMBIGUOUS);
+        assertResult(AMBIGUOUS, response);
     }
 
     @Test public void
     returnOKHttpStatusForPositiveResults() {
-        assertHttpStatusForScenarioStatus(HttpStatus.OK, ResultStatus.PASSED);
-        assertHttpStatusForScenarioStatus(HttpStatus.OK, ResultStatus.FOUND);
+        assertHttpStatusForScenarioStatus(HttpStatus.OK, PASSED);
+        assertHttpStatusForScenarioStatus(HttpStatus.OK, FOUND);
     }
 
     @Test public void
     returnOKHttpStatusForResponsesThatValidatesDocumentationEvenIfTheValidationIsNegative() {
-        assertHttpStatusForScenarioStatus(HttpStatus.OK, ResultStatus.IGNORED);
-        assertHttpStatusForScenarioStatus(HttpStatus.OK, ResultStatus.SKIPPED);
-        assertHttpStatusForScenarioStatus(HttpStatus.OK, ResultStatus.FAILED);
+        assertHttpStatusForScenarioStatus(HttpStatus.OK, IGNORED);
+        assertHttpStatusForScenarioStatus(HttpStatus.OK, SKIPPED);
+        assertHttpStatusForScenarioStatus(HttpStatus.OK, FAILED);
     }
 
     @Test public void
     returnNotFoundHttpStatusForNotFoundResults() {
-        assertHttpStatusForScenarioStatus(HttpStatus.NOT_FOUND, ResultStatus.NOT_FOUND);
+        assertHttpStatusForScenarioStatus(HttpStatus.NOT_FOUND, NOT_FOUND);
     }
 
     @Test public void
     returnUnprocessableEntityHttpStatusWhenProblemWithScenarioOccurred() {
-        assertHttpStatusForScenarioStatus(HttpStatus.UNPROCESSABLE_ENTITY, ResultStatus.AMBIGUOUS);
-        assertHttpStatusForScenarioStatus(HttpStatus.UNPROCESSABLE_ENTITY, ResultStatus.UNKNOWN);
+        assertHttpStatusForScenarioStatus(HttpStatus.UNPROCESSABLE_ENTITY, AMBIGUOUS);
+        assertHttpStatusForScenarioStatus(HttpStatus.UNPROCESSABLE_ENTITY, UNKNOWN);
     }
 
     @Test public void
     provideEasyAccessToTheNonHttpResultStatus() {
-        Assert.assertEquals(ResultStatus.SKIPPED, responseWithScenarioStatus(ResultStatus.SKIPPED).getStatus());
+        Assert.assertEquals(SKIPPED, responseWithScenarioStatus(SKIPPED).getStatus());
     }
 
     private Scenario scenario() {
-        return getScenarioWithResult(ResultStatus.PASSED);
+        return getScenarioWithResult(PASSED);
     }
 
     private void assertHttpStatusForScenarioStatus(HttpStatus expectedHttpStatus, ResultStatus originalResponseStatus) {

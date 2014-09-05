@@ -3,25 +3,30 @@ package com.michaelszymczak.speccare.specminer.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.michaelszymczak.speccare.specminer.domain.ResultStatus.*;
+
 public class ResultAggregate {
 
     private final List<ResultStatus> results = new ArrayList<>();
 
     public void add(ResultStatus result) {
-        if (ResultStatus.NOT_FOUND != result) {
+        if (NOT_FOUND != result) {
             results.add(result);
         }
     }
 
     public ResultStatus result() {
-        if (results.isEmpty()) {
-            return ResultStatus.NOT_FOUND;
-        }
-        if (results.size() > 1) {
-            return ResultStatus.AMBIGUOUS;
-        }
+        return (results.isEmpty()) ? NOT_FOUND : pickResult();
+    }
 
-        return results.get(0);
+    private ResultStatus pickResult() {
+        ResultStatus firstResult = results.get(0);
+        for (ResultStatus result : results) {
+            if (!result.equals(firstResult)) {
+                return AMBIGUOUS;
+            }
+        }
+        return firstResult;
     }
 
 }
