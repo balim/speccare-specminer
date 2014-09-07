@@ -16,13 +16,14 @@ public class AggregatedPartialResultShould {
     @Test public void
     useSourceToGenerateResult() throws IOException {
         ResultSource source = resultSource(json().name("Scenario A").result(PASSED));
-        Assert.assertEquals(PASSED, new AggregatedPartialResult(source).getResult("Scenario A"));
+        String scenarioName = "Scenario A";
+        Assert.assertEquals(PASSED, determine(source, scenarioName).getResult());
     }
 
     @Test public void
     returnNotFoundIfScenarioOfMatchingNameNotPresent() throws IOException {
         ResultSource source = resultSource(json().name("Scenario A").result(PASSED));
-        Assert.assertEquals(NOT_FOUND, new AggregatedPartialResult(source).getResult("Scenario B"));
+        Assert.assertEquals(NOT_FOUND, determine(source, "Scenario B").getResult());
     }
 
     @Test public void
@@ -32,7 +33,7 @@ public class AggregatedPartialResultShould {
                 json().name("Scenario B").result(FAILED),
                 json().name("Scenario C").result(SKIPPED)
         );
-        Assert.assertEquals(FAILED, new AggregatedPartialResult(source).getResult("Scenario B"));
+        Assert.assertEquals(FAILED, determine(source, "Scenario B").getResult());
     }
 
     @Test public void
@@ -42,7 +43,7 @@ public class AggregatedPartialResultShould {
                 json().name("Scenario B").result(FAILED),
                 json().name("Scenario B").result(PASSED)
         );
-        Assert.assertEquals(AMBIGUOUS, new AggregatedPartialResult(source).getResult("Scenario B"));
+        Assert.assertEquals(AMBIGUOUS, determine(source, "Scenario B").getResult());
     }
 
     @Test public void
@@ -52,7 +53,13 @@ public class AggregatedPartialResultShould {
                 json().name("Scenario B").result(FAILED),
                 json().name("Scenario B").result(FAILED)
         );
-        Assert.assertEquals(FAILED, new AggregatedPartialResult(source).getResult("Scenario B"));
+        Assert.assertEquals(FAILED, determine(source, "Scenario B").getResult());
+    }
+
+    private Scenario determine(ResultSource source, String scenarioName) throws IOException {
+        Scenario scenario = new SoughtScenario(scenarioName);
+        return new AggregatedPartialResult(source).determine(scenario);
+//        return new AggregatedPartialResult(source).getResult(scenarioName);
     }
 
     private ResultSource resultSource(final JsonResultString.Builder... jsonBuilder) {

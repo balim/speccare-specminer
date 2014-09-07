@@ -14,11 +14,11 @@ public class ScenarioFinalResult {
 
     public ScenarioResponse createResponse(String scenarioNameFragment) throws IOException {
         Scenario scenario = repository.find(scenarioNameFragment);
-        if (ResultStatus.FOUND != scenario.getResult()) {
-            return new ScenarioResponse(scenario);
+        if (ResultStatus.FOUND == scenario.getResult()) {
+            scenario = resultAfterExaminingScenarios.determine(scenario);
         }
-        ResultStatus resultStatusAfterRunningScenarios = resultAfterExaminingScenarios.getResult(scenario.getName());
-        return new ScenarioResponse(scenario, resultStatusAfterRunningScenarios);
+        return new ScenarioResponse(scenario);
+
     }
 
 }

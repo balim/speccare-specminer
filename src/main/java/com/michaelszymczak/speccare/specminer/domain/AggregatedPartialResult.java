@@ -14,7 +14,11 @@ public class AggregatedPartialResult {
         this.source = source;
     }
 
-    public ResultStatus getResult(String scenarioName) throws IOException {
+    public Scenario determine(Scenario inputScenario) throws IOException {
+        return Scenario.copyWithNewResult(inputScenario, getResult(inputScenario.getName()));
+    }
+
+    protected ResultStatus getResult(String scenarioName) throws IOException {
         ResultAggregate aggregate = new ResultAggregate();
         for (Reader resultSource : source.getSources()) {
             aggregate.add(determinable.getResult(resultSource, scenarioName));
