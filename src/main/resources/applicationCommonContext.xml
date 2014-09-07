@@ -15,12 +15,12 @@
         <constructor-arg ref="resultLocator"/>
     </bean>
 
-    <bean id="partialResult" class="com.michaelszymczak.speccare.specminer.domain.AggregatedPartialResult">
+    <bean id="partialResult" class="com.michaelszymczak.speccare.specminer.cucumber.DeterminableCumulativeCucumberReport">
         <constructor-arg ref="resultSource"/>
     </bean>
 
-    <bean id="finalResult" class="com.michaelszymczak.speccare.specminer.domain.ScenarioFinalResult">
-        <constructor-arg ref="scenariosRepository"/>
+    <bean id="finalResult" class="com.michaelszymczak.speccare.specminer.core.ScenarioFinalResult">
+        <constructor-arg ref="determinableFeatureScenario"/>
         <constructor-arg ref="partialResult"/>
     </bean>
 
@@ -36,7 +36,7 @@
         <constructor-arg index="1" ref="featuresCreator"/>
     </bean>
 
-    <bean id="scenariosRepository" class="com.michaelszymczak.speccare.specminer.specificationprovider.ObjectScenarioRepository">
+    <bean id="determinableFeatureScenario" class="com.michaelszymczak.speccare.specminer.specificationprovider.DeterminableScenarioNameFinder">
         <constructor-arg ref="scenariosCreator"/>
     </bean>
 

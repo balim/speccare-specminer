@@ -1,7 +1,7 @@
 package com.michaelszymczak.speccare.specminer.view;
 
-import com.michaelszymczak.speccare.specminer.domain.NotFoundScenario;
-import com.michaelszymczak.speccare.specminer.domain.Scenario;
+import com.michaelszymczak.speccare.specminer.core.NotFoundScenario;
+import com.michaelszymczak.speccare.specminer.core.Scenario;
 import com.michaelszymczak.speccare.specminer.specificationprovider.ExistingFeatureBuilder;
 import com.michaelszymczak.speccare.specminer.specificationprovider.ExistingScenarioBuilder;
 import org.junit.Assert;

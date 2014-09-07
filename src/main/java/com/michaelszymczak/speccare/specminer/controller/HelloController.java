@@ -1,6 +1,6 @@
 package com.michaelszymczak.speccare.specminer.controller;
 
-import com.michaelszymczak.speccare.specminer.domain.ResultLocator;
+import com.michaelszymczak.speccare.specminer.core.ResultLocator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;

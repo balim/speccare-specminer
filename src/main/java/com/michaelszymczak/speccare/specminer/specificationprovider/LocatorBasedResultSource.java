@@ -1,12 +1,10 @@
 package com.michaelszymczak.speccare.specminer.specificationprovider;
 
 
-import com.michaelszymczak.speccare.specminer.domain.ResultLocator;
-import com.michaelszymczak.speccare.specminer.domain.ResultSource;
-import com.michaelszymczak.speccare.specminer.domain.SourceNotFound;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.michaelszymczak.speccare.specminer.core.ResultLocator;
+import com.michaelszymczak.speccare.specminer.core.ResultSource;
+import com.michaelszymczak.speccare.specminer.core.SourceNotFound;
 
-import javax.annotation.Resource;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;

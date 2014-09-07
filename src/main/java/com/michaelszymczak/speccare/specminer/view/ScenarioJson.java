@@ -1,7 +1,7 @@
 package com.michaelszymczak.speccare.specminer.view;
 
 import com.google.gson.Gson;
-import com.michaelszymczak.speccare.specminer.domain.Scenario;
+import com.michaelszymczak.speccare.specminer.core.Scenario;
 
 import java.util.List;
 

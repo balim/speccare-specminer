@@ -1,7 +1,7 @@
 package com.michaelszymczak.speccare.specminer.specificationprovider;
 
 
-import com.michaelszymczak.speccare.specminer.domain.ExistingFeature;
+import com.michaelszymczak.speccare.specminer.core.ExistingFeature;
 
 import java.util.Arrays;
 import java.util.List;

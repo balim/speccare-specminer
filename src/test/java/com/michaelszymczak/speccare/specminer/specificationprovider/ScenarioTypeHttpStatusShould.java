@@ -2,7 +2,7 @@ package com.michaelszymczak.speccare.specminer.specificationprovider;
 
 import static org.springframework.http.HttpStatus.*;
 
-import com.michaelszymczak.speccare.specminer.domain.*;
+import com.michaelszymczak.speccare.specminer.core.*;
 import org.junit.Assert;
 import org.junit.Test;
 

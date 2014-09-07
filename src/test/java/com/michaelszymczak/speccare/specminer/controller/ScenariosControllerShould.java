@@ -1,8 +1,8 @@
 package com.michaelszymczak.speccare.specminer.controller;
 // TODO: http://stackoverflow.com/questions/16170572/unable-to-mock-service-class-in-spring-mvc-controller-tests
 
-import com.michaelszymczak.speccare.specminer.domain.ScenarioFinalResult;
-import com.michaelszymczak.speccare.specminer.domain.ScenarioResponse;
+import com.michaelszymczak.speccare.specminer.core.ScenarioFinalResult;
+import com.michaelszymczak.speccare.specminer.core.ScenarioResponse;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

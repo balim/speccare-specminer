@@ -1,6 +1,6 @@
 package com.michaelszymczak.speccare.specminer.specificationprovider;
 
-import com.michaelszymczak.speccare.specminer.domain.Feature;
+import com.michaelszymczak.speccare.specminer.core.Feature;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

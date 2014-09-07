@@ -1,7 +1,7 @@
 package com.michaelszymczak.speccare.specminer.specificationprovider;
 
-import com.michaelszymczak.speccare.specminer.domain.ResultLocator;
-import com.michaelszymczak.speccare.specminer.domain.SourceNotFound;
+import com.michaelszymczak.speccare.specminer.core.ResultLocator;
+import com.michaelszymczak.speccare.specminer.core.SourceNotFound;
 import org.junit.*;
 import org.junit.rules.ExpectedException;
 

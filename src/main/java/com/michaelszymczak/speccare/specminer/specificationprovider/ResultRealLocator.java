@@ -1,6 +1,6 @@
 package com.michaelszymczak.speccare.specminer.specificationprovider;
 
-import com.michaelszymczak.speccare.specminer.domain.ResultLocator;
+import com.michaelszymczak.speccare.specminer.core.ResultLocator;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;

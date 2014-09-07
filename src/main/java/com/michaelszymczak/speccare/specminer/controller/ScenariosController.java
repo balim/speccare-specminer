@@ -1,13 +1,8 @@
 package com.michaelszymczak.speccare.specminer.controller;
 
-import com.michaelszymczak.speccare.specminer.domain.ScenarioFinalResult;
-import com.michaelszymczak.speccare.specminer.domain.ScenarioResponse;
-import com.michaelszymczak.speccare.specminer.specificationprovider.ObjectScenarioRepository;
-import com.michaelszymczak.speccare.specminer.domain.Scenario;
-import com.michaelszymczak.speccare.specminer.specificationprovider.ScenarioTypeHttpStatus;
-import com.michaelszymczak.speccare.specminer.view.ScenarioJson;
+import com.michaelszymczak.speccare.specminer.core.ScenarioFinalResult;
+import com.michaelszymczak.speccare.specminer.core.ScenarioResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
