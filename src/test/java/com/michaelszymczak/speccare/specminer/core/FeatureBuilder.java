@@ -1,19 +1,22 @@
 package com.michaelszymczak.speccare.specminer.core;
 
 
-import com.michaelszymczak.speccare.specminer.featurefiles.TextFragmentProvider;
-
 import java.util.Arrays;
 import java.util.List;
 
 public class FeatureBuilder {
-    private final TextFragmentProvider tfp = new TextFragmentProvider();
+    private String name = "Default feature";
     private String pathToFeatureFile = "/default/path/Feature.feature";
     private List<String> featureFileContent = Arrays.asList("Feature: Default feature", "  Scenario: Default scenario");
 
     public static FeatureBuilder use()
     {
         return new FeatureBuilder();
+    }
+
+    public FeatureBuilder withName(String name) {
+        this.name = name;
+        return this;
     }
 
     public FeatureBuilder withPath(String pathToFeatureFile) {
@@ -27,7 +30,22 @@ public class FeatureBuilder {
     }
 
     public Feature build() {
-        return new ExistingFeature(tfp, pathToFeatureFile, featureFileContent);
+        return new Feature() {
+            @Override
+            public String getName() {
+                return name;
+            }
+
+            @Override
+            public String getPath() {
+                return pathToFeatureFile;
+            }
+
+            @Override
+            public List<String> getContent() {
+                return featureFileContent;
+            }
+        };
     }
 
 

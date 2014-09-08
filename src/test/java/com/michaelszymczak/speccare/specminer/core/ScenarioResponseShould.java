@@ -11,28 +11,20 @@ public class ScenarioResponseShould {
 
     @Test public void
     returnContentUsingScenarioData() {
-        Scenario scenario = getScenario("Foo scenario name", "Scenario: Foo scenario name", FOUND, "/path/to/foo.feature");
+        Scenario scenario = ScenarioBuilder.use()
+                .withName("Foo scenario name")
+                .withContent("Scenario: Foo scenario name")
+                .withResult(ResultStatus.FOUND)
+                .withWrappingFeature(FeatureBuilder.use()
+                        .withPath("/path/to/foo.feature").build()
+                ).build();
 
-        ScenarioResponse response = new ScenarioResponse(scenario, FOUND);
+        ScenarioResponse response = new ScenarioResponse(scenario);
 
         Assert.assertEquals(
                 "{\"name\":\"Foo scenario name\",\"path\":\"/path/to/foo.feature\",\"content\":[\"Scenario: Foo scenario name\"],\"result\":\"found\"}",
                 response.getContent()
         );
-    }
-
-    @Test public void
-    useScenarioResultAsIsIfNoOtherResultPassed() {
-        Scenario scenario = getScenarioWithResult(NOT_FOUND);
-        ScenarioResponse response = new ScenarioResponse(scenario);
-        assertResult(NOT_FOUND, response);
-    }
-
-    @Test public void
-    overwriteScenarioResultWithTheNewOneIfPassed() {
-        Scenario scenario = getScenarioWithResult(PASSED);
-        ScenarioResponse response = new ScenarioResponse(scenario, AMBIGUOUS);
-        assertResult(AMBIGUOUS, response);
     }
 
     @Test public void
@@ -64,29 +56,13 @@ public class ScenarioResponseShould {
         Assert.assertEquals(SKIPPED, responseWithScenarioStatus(SKIPPED).getStatus());
     }
 
-    private Scenario scenario() {
-        return getScenarioWithResult(PASSED);
-    }
-
     private void assertHttpStatusForScenarioStatus(HttpStatus expectedHttpStatus, ResultStatus originalResponseStatus) {
         Assert.assertEquals(expectedHttpStatus, responseWithScenarioStatus(originalResponseStatus).getHttpStatus());
     }
 
     private ScenarioResponse responseWithScenarioStatus(ResultStatus status) {
-        return new ScenarioResponse(scenario(), status);
+        return new ScenarioResponse(ScenarioBuilder.use().withResult(status).build());
     }
-
-
-    private Scenario getScenario(final String name, final String content, final ResultStatus status, final String featurePath) {
-        return ScenarioBuilder.use().withName(name).withContent(content).withResult(status).withWrappingFeature(FeatureBuilder.use().withPath(featurePath).build()).build();
-    }
-
-
-
-    private Scenario getScenarioWithResult(ResultStatus status) {
-        return getScenario("Some scenario name", "Scenario: Some scenario name", status, "/some/path/foo.feature");
-    }
-
 
     private void assertResult(ResultStatus expectedResult, ScenarioResponse response) {
         Assert.assertEquals(expectedResult.toString(), JsonObject.readFrom(response.getContent()).get("result").asString());

@@ -1,5 +1,9 @@
-package com.michaelszymczak.speccare.specminer.core;
+package com.michaelszymczak.speccare.specminer.featurefiles;
 
+
+import com.michaelszymczak.speccare.specminer.core.FeatureBuilder;
+import com.michaelszymczak.speccare.specminer.core.Scenario;
+import com.michaelszymczak.speccare.specminer.core.ScenarioBuilder;
 
 import java.util.ArrayList;
 import java.util.List;

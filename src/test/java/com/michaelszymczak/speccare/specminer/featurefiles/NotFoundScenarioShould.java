@@ -1,7 +1,6 @@
 package com.michaelszymczak.speccare.specminer.featurefiles;
 
 
-import com.michaelszymczak.speccare.specminer.core.Feature;
 import com.michaelszymczak.speccare.specminer.core.ResultStatus;
 import org.junit.Assert;
 import org.junit.Test;
@@ -26,6 +25,6 @@ public class NotFoundScenarioShould {
 
     @Test public void haveNotFoundFeatureAsItsFeatureObject() {
         NotFoundScenario scenario = NotFoundScenario.getInstance();
-        Assert.assertSame(Feature.getNotFound(), scenario.getFeature());
+        Assert.assertSame(NotFoundFeature.getInstance(), scenario.getFeature());
     }
 }

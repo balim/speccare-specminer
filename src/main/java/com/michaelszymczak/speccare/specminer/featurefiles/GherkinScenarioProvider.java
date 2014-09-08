@@ -11,18 +11,18 @@ import java.util.List;
 class GherkinScenarioProvider implements ScenarioProvider {
 
     private final TextFragmentProvider tfp;
-    private final FeaturesCreator featuresCreator;
+    private final FeaturesFromFilesCreator featuresFromFilesCreator;
     private final ScenarioCreator scenarioCreator;
 
-    public GherkinScenarioProvider(TextFragmentProvider textFragmentProvider, FeaturesCreator featuresCreator) {
+    public GherkinScenarioProvider(TextFragmentProvider textFragmentProvider, FeaturesFromFilesCreator featuresFromFilesCreator) {
         this.tfp = textFragmentProvider;
-        this.featuresCreator = featuresCreator;
+        this.featuresFromFilesCreator = featuresFromFilesCreator;
         this.scenarioCreator = new ScenarioCreator(this.tfp);
     }
 
     public List<Scenario> create() throws IOException {
         List<Scenario> scenarios = new ArrayList<>();
-        for (Feature feature : featuresCreator.create()) {
+        for (Feature feature : featuresFromFilesCreator.create()) {
             for (Scenario scenario : createFromOneFeature(feature)) {
                 scenarios.add(scenario);
             }

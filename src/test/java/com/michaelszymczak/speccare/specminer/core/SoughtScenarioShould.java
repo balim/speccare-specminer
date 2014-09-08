@@ -18,7 +18,7 @@ public class SoughtScenarioShould {
 
     @Test public void
     haveNotFoundFeatureAsItsFeature() {
-        assertSame(Feature.getNotFound(), soughtScenario.getFeature());
+        assertSame(Feature.getEmpty(), soughtScenario.getFeature());
     }
 
     @Test public void

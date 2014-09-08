@@ -1,6 +1,5 @@
 package com.michaelszymczak.speccare.specminer.core;
 
-import com.michaelszymczak.speccare.specminer.cucumber.DeterminableCumulativeCucumberReportStub;
 import org.junit.Assert;
 import org.junit.Test;
 import java.io.IOException;
@@ -15,7 +14,7 @@ public class ScenarioFinalResultShould {
     produceResponseBasedOnScenarioFoundUsingProvidedText() throws IOException {
         ScenarioResultJudge result = new ScenarioResultJudge(
                 repositoryFindingScenarioByGivenKey("Foo", ScenarioBuilder.use().withContent("Scenario: Foo scenario").build()),
-                DeterminableCumulativeCucumberReportStub.buildReturningStatus(UNKNOWN)
+                new AllwaysSameResultDeterminableStub(UNKNOWN)
         );
 
         ScenarioResponse response = result.createResponse("Foo");
@@ -37,8 +36,8 @@ public class ScenarioFinalResultShould {
     @Test public void
     askExaminedScenarioResultsForFinalResultIfScenarioHasFoundResult() throws IOException {
         ScenarioResultJudge finalResult = new ScenarioResultJudge(
-                repositoryReturningScenarioWIthStatus(FOUND),
-                DeterminableCumulativeCucumberReportStub.buildReturningStatus(PASSED)
+                repositoryReturningScenarioWithStatus(FOUND),
+                DeterminableStub.buildReturningStatus(PASSED)
         );
 
         Assert.assertEquals(PASSED, finalResult.createResponse("some scenario").getStatus());
@@ -53,7 +52,7 @@ public class ScenarioFinalResultShould {
 
         ScenarioResultJudge result = new ScenarioResultJudge(
                 repositoryFindingScenarioByGivenKey("Bar", ScenarioBuilder.use().withResult(FOUND).withName("Foo Bar scenario").build()),
-                DeterminableCumulativeCucumberReportStub.buildReturningStatusForScenarioName(examinedScenarioStatuses)
+                DeterminableStub.buildReturningStatusForScenarioName(examinedScenarioStatuses)
         );
 
         Assert.assertEquals(FAILED, result.createResponse("Bar").getStatus());
@@ -61,14 +60,14 @@ public class ScenarioFinalResultShould {
 
     private void assertResponseWithSameStatusAsScenarioFromRepository(ResultStatus expectedResultStatus) throws IOException {
         ScenarioResultJudge finalResult = new ScenarioResultJudge(
-                repositoryReturningScenarioWIthStatus(expectedResultStatus),
-                DeterminableCumulativeCucumberReportStub.buildReturningStatus(UNKNOWN)
+                repositoryReturningScenarioWithStatus(expectedResultStatus),
+                new AllwaysSameResultDeterminableStub(UNKNOWN)
         );
 
         Assert.assertEquals(expectedResultStatus, finalResult.createResponse("whatever").getStatus());
     }
 
-    private Determinable repositoryReturningScenarioWIthStatus(final ResultStatus scenarioResult) {
+    private Determinable repositoryReturningScenarioWithStatus(final ResultStatus scenarioResult) {
         return new Determinable() {
             @Override
             public Scenario determine(Scenario soughtScenario) throws IOException {

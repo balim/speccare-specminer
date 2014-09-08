@@ -26,14 +26,14 @@
 
     <bean id="textFragmentProvider" class="com.michaelszymczak.speccare.specminer.featurefiles.TextFragmentProvider"/>
 
-    <bean id="featuresCreator" class="com.michaelszymczak.speccare.specminer.featurefiles.FeaturesCreator">
+    <bean id="featuresFromFilesCreator" class="com.michaelszymczak.speccare.specminer.featurefiles.FeaturesFromFilesCreator">
         <constructor-arg index="0" ref="textFragmentProvider"/>
         <constructor-arg index="1" ref="filesystemFeatureFilesRetriever"/>
     </bean>
 
     <bean id="scenarioProvider" class="com.michaelszymczak.speccare.specminer.featurefiles.GherkinScenarioProvider">
         <constructor-arg index="0" ref="textFragmentProvider"/>
-        <constructor-arg index="1" ref="featuresCreator"/>
+        <constructor-arg index="1" ref="featuresFromFilesCreator"/>
     </bean>
 
     <bean id="determinableScenarioByNameFinder" class="com.michaelszymczak.speccare.specminer.featurefiles.DeterminableScenarioByNameFinder">

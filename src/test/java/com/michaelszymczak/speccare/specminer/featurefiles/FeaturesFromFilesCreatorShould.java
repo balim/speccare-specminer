@@ -9,10 +9,10 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-public class FeaturesCreatorShould {
+public class FeaturesFromFilesCreatorShould {
 
     private FeatureFilesRetrieverStub retriever;
-    private FeaturesCreator fc;
+    private FeaturesFromFilesCreator fc;
 
     @Test public void createFeatureWithDataFromFeatureFilesRetriever() throws IOException {
         givenRetrieverReturningOneFeatureFile();
@@ -76,6 +76,6 @@ public class FeaturesCreatorShould {
 
     @Before public void setUp() {
         retriever = new FeatureFilesRetrieverStub();
-        fc = new FeaturesCreator(new TextFragmentProvider(), retriever);
+        fc = new FeaturesFromFilesCreator(new TextFragmentProvider(), retriever);
     }
 }

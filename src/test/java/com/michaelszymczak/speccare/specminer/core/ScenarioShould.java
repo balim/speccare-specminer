@@ -27,6 +27,7 @@ public class ScenarioShould {
                 .withName("Scenario: Foo")
                 .withWrappingFeature(FeatureBuilder.use()
                             .withPath("/bar/foo.feature")
+                            .withName("Bar")
                             .withContent("Feature: Bar", "Scenario: Foo")
                             .build()
                 ).build();

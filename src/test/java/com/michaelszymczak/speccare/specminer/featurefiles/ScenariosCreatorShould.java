@@ -63,12 +63,12 @@ public class ScenariosCreatorShould {
     }
 
 
-    @Test(expected = InvalidScenarioContentException.class)
+    @Test(expected = InvalidScenarioContent.class)
     public void throwExceptionIfNoScenarioLine() {
         tryToCreateUsingContent("Given foo");
     }
 
-    @Test(expected = InvalidScenarioContentException.class)
+    @Test(expected = InvalidScenarioContent.class)
     public void throwExceptionIfTooManyScenarioLines() {
         tryToCreateUsingContent(
                 "Scenario: Foo",
@@ -76,7 +76,7 @@ public class ScenariosCreatorShould {
         );
     }
 
-    @Test(expected = InvalidScenarioContentException.class)
+    @Test(expected = InvalidScenarioContent.class)
     public void throwExceptionIfBothScenarioAndScenarioOutlinePresent() {
         tryToCreateUsingContent(
                 "Scenario: Foo",
@@ -97,7 +97,7 @@ public class ScenariosCreatorShould {
         );
     }
 
-    @Test(expected = InvalidScenarioContentException.class) public void
+    @Test(expected = InvalidScenarioContent.class) public void
     spotAProblemWhenFeatureKeywordOutsideQuotation() {
         tryToCreateUsingContent(
                 "Scenario: too many scenario keywords",

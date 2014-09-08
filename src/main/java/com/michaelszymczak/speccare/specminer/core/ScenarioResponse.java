@@ -17,13 +17,15 @@ public class ScenarioResponse {
     // So, you are free to reuse the same object for multiple Json serialization and deserialization operations.
     private static final Gson GSON = new Gson();
 
+    @Deprecated
     public ScenarioResponse(Scenario scenario, ResultStatus status) {
         this.content = new Content(scenario, status);
         this.status = status;
     }
 
     public ScenarioResponse(Scenario scenario) {
-        this(scenario, scenario.getResult());
+        this.content = new Content(scenario, scenario.getResult());
+        this.status = scenario.getResult();
     }
 
     public String getContent() {

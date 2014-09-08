@@ -7,7 +7,22 @@ import java.util.List;
 public class ScenarioBuilder {
     private String name = "Default scenario";
     private List<String> scenarioContent = Arrays.asList("Scenario: Default scenario");
-    private Feature wrappingFeature = FeatureBuilder.use().build();
+    private Feature wrappingFeature = new Feature() {
+        @Override
+        public String getName() {
+            return "Default feature";
+        }
+
+        @Override
+        public String getPath() {
+            return "/bar/foo.feature";
+        }
+
+        @Override
+        public List<String> getContent() {
+            return Arrays.asList("Feature: Default feature", "  Scenario: Default scenario");
+        }
+    };
     private ResultStatus result = ResultStatus.UNKNOWN;
     public static ScenarioBuilder use()
     {

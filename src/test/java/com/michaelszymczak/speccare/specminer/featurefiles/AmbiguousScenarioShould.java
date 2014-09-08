@@ -1,6 +1,7 @@
-package com.michaelszymczak.speccare.specminer.core;
+package com.michaelszymczak.speccare.specminer.featurefiles;
 
 
+import com.michaelszymczak.speccare.specminer.core.*;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
@@ -26,7 +27,7 @@ public class AmbiguousScenarioShould {
     }
 
     @Test public void haveNotFoundFeatureAsItsFeatureObject() {
-        Assert.assertSame(Feature.getNotFound(), getAmbiguousScenarioPointingToTwoFeatures().getFeature());
+        Assert.assertSame(NotFoundFeature.getInstance(), getAmbiguousScenarioPointingToTwoFeatures().getFeature());
     }
 
     @Test public void throwExceptionIfLessThanTwoScenariosUsedToCreate() {

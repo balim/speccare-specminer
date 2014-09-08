@@ -37,8 +37,8 @@ public class FoundScenarioShould {
     }
 
 
-    private NotFoundFeature validFeature() {
-        return Feature.getNotFound();
+    private Feature validFeature() {
+        return Feature.getEmpty();
     }
 
     private String validName() {

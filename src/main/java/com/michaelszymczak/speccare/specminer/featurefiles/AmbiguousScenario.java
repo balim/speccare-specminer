@@ -1,12 +1,15 @@
-package com.michaelszymczak.speccare.specminer.core;
+package com.michaelszymczak.speccare.specminer.featurefiles;
+
+import com.michaelszymczak.speccare.specminer.core.ResultStatus;
+import com.michaelszymczak.speccare.specminer.core.Scenario;
 
 import java.util.Collections;
 import java.util.List;
 
-public class AmbiguousScenario extends Scenario {
+class AmbiguousScenario extends Scenario {
     private final List<Scenario> foundScenarios;
     public AmbiguousScenario(List<Scenario> foundScenarios) {
-        super("Too many scenarios matching searched phrase", Feature.getNotFound(), Collections.<String>emptyList(), ResultStatus.AMBIGUOUS);
+        super("Too many scenarios matching searched phrase", NotFoundFeature.getInstance(), Collections.<String>emptyList(), ResultStatus.AMBIGUOUS);
         if (foundScenarios.size() < 2) {
             throw new IllegalArgumentException("At least two found scenarios make for ambiguity");
         }

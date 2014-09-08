@@ -1,8 +1,7 @@
 package com.michaelszymczak.speccare.specminer.featurefiles;
 
-import com.michaelszymczak.speccare.specminer.core.ExistingFeature;
-import com.michaelszymczak.speccare.specminer.core.FeatureBuilder;
 import com.michaelszymczak.speccare.specminer.core.Feature;
+import com.michaelszymczak.speccare.specminer.core.FeatureBuilder;
 import com.michaelszymczak.speccare.specminer.core.Scenario;
 import org.junit.Assert;
 import org.junit.Before;
@@ -53,7 +52,7 @@ public class GherkinScenarioProviderShould {
     }
 
     @Test public void createScenariosUsingSingleFeatureContent() {
-        ExistingFeature feature = createFeatureWithContent(
+        Feature feature = createFeatureWithContent(
                 "Feature: Foo feature",
                 "",
                 "  Scenario: Bar scenario",
@@ -77,7 +76,7 @@ public class GherkinScenarioProviderShould {
     }
 
     @Test public void createAllFoundScenarios() {
-        ExistingFeature feature = createFeatureWithContent(
+        Feature feature = createFeatureWithContent(
                 "Feature: Foo feature",
                 "",
                 "  Scenario: First scenario",
@@ -97,7 +96,7 @@ public class GherkinScenarioProviderShould {
     }
 
     @Test public void treatScenarioOutlineAsAKindOfScenario() {
-        ExistingFeature feature = createFeatureWithContent(
+        Feature feature = createFeatureWithContent(
                 "Feature: Foo feature",
                 "",
                 "  Scenario: First scenario",
@@ -115,7 +114,7 @@ public class GherkinScenarioProviderShould {
     }
 
     @Test public void ignoreScenariosInsideInlineQuotation() {
-        ExistingFeature feature = createFeatureWithContent(
+        Feature feature = createFeatureWithContent(
                 "Feature: Foo feature",
                 "",
                 "  Scenario: First scenario",
@@ -132,7 +131,7 @@ public class GherkinScenarioProviderShould {
     }
 
     @Test public void ignoreScenariosInsideMultilineQuotation() {
-        ExistingFeature feature = createFeatureWithContent(
+        Feature feature = createFeatureWithContent(
                 "Feature: Foo feature",
                 "",
                 "  Scenario: First scenario",
@@ -152,11 +151,13 @@ public class GherkinScenarioProviderShould {
 
     private GherkinScenarioProvider sc;
     private FeatureFilesRetrieverStub retriever;
+    private FeatureCreator featureCreator;
 
     @Before
     public void setUp() throws Exception {
         retriever = new FeatureFilesRetrieverStub();
-        sc = new GherkinScenarioProvider(new TextFragmentProvider(), new FeaturesCreator(new TextFragmentProvider(), retriever));
+        sc = new GherkinScenarioProvider(new TextFragmentProvider(), new FeaturesFromFilesCreator(new TextFragmentProvider(), retriever));
+        featureCreator = new FeatureCreator(new TextFragmentProvider());
     }
 
     private void assertLastScenarioCreatedWithFollowingContentAndFeatureContent(List<Scenario> scenarios, List<String> lastScenarioContent, List<String> lastScenarioFeatureContent) {
@@ -191,7 +192,7 @@ public class GherkinScenarioProviderShould {
         ));
     }
 
-    private ExistingFeature createFeatureWithContent(String... content) {
-        return new ExistingFeature(new TextFragmentProvider(), "path/to/Feature.feature", Arrays.asList(content));
+    private Feature createFeatureWithContent(String... content) {
+        return featureCreator.create(Arrays.asList(content), "path/to/Feature.feature");
     }
 }
