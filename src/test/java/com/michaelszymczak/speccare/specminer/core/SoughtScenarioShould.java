@@ -27,8 +27,8 @@ public class SoughtScenarioShould {
     }
 
     @Test public void
-    haveAmbiguousResult() {
-        assertEquals(ResultStatus.AMBIGUOUS, soughtScenario.getResult());
+    haveUnknownResult() {
+        assertEquals(ResultStatus.UNKNOWN, soughtScenario.getResult());
     }
 
     private Scenario soughtScenario;

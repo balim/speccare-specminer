@@ -1,7 +1,7 @@
 package com.michaelszymczak.speccare.specminer.repository;
 
+import com.michaelszymczak.speccare.specminer.core.ScenarioBuilder;
 import com.michaelszymczak.speccare.specminer.core.Scenario;
-import com.michaelszymczak.speccare.specminer.core.ExistingScenarioBuilder;
 import com.michaelszymczak.speccare.specminer.featurefiles.ScenarioProviderStub;
 import org.junit.Before;
 import org.junit.Test;
@@ -58,7 +58,7 @@ public class ProviderBasedScenarioRepositoryShould {
     private void configureProviderToHaveScenarioOfGivenNames(String... names) {
         provider.scenarios = new ArrayList<>();
         for (String name : names) {
-            provider.scenarios.add(ExistingScenarioBuilder.use().withName(name).build());
+            provider.scenarios.add(ScenarioBuilder.use().withName(name).build());
         }
     }
 

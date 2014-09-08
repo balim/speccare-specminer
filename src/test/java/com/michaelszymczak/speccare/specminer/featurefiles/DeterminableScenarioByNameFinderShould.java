@@ -1,9 +1,6 @@
 package com.michaelszymczak.speccare.specminer.featurefiles;
 
-import com.michaelszymczak.speccare.specminer.core.AmbiguousScenario;
-import com.michaelszymczak.speccare.specminer.core.ExistingScenarioBuilder;
-import com.michaelszymczak.speccare.specminer.core.Scenario;
-import com.michaelszymczak.speccare.specminer.core.SoughtScenario;
+import com.michaelszymczak.speccare.specminer.core.*;
 import com.michaelszymczak.speccare.specminer.repository.ScenarioRepository;
 import org.junit.Assert;
 import org.junit.Before;
@@ -21,12 +18,12 @@ public class DeterminableScenarioByNameFinderShould {
 
     @Test public void returnNotFoundScenarioIfNoScenarioFound() throws IOException {
         givenRepositoryReturningNumberOfScenariosForTheFooPhrase(0);
-        Assert.assertSame(Scenario.getNotFound(), determineUsingSoughtScenarioWithGivenName("Foo"));
+        Assert.assertSame(NotFoundScenario.getInstance(), determineUsingSoughtScenarioWithGivenName("Foo"));
     }
 
     @Test public void returnNotFoundScenarioIfNoScenarioMatchesSearchedPhrase() throws IOException {
         givenRepositoryReturningNumberOfScenariosForTheFooPhrase(1);
-        Assert.assertSame(Scenario.getNotFound(), determineUsingSoughtScenarioWithGivenName("Bar"));
+        Assert.assertSame(NotFoundScenario.getInstance(), determineUsingSoughtScenarioWithGivenName("Bar"));
     }
 
     @Test public void returnAmbiguousScenarioIfMoreThanOneScenarioFound() throws IOException {
@@ -48,7 +45,7 @@ public class DeterminableScenarioByNameFinderShould {
 
     private void givenRepositoryReturningNumberOfScenariosForTheFooPhrase(int numberOfFoundScenarios) {
         for (int i = 0; i < numberOfFoundScenarios; i++) {
-            repository.scenariosUnderFooPhrase.add(new ExistingScenarioBuilder().build());
+            repository.scenariosUnderFooPhrase.add(new ScenarioBuilder().build());
         }
     }
 

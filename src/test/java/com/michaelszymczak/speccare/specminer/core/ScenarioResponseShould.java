@@ -5,9 +5,6 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.http.HttpStatus;
 
-import java.util.Arrays;
-import java.util.List;
-
 import static com.michaelszymczak.speccare.specminer.core.ResultStatus.*;
 
 public class ScenarioResponseShould {
@@ -81,31 +78,7 @@ public class ScenarioResponseShould {
 
 
     private Scenario getScenario(final String name, final String content, final ResultStatus status, final String featurePath) {
-        return new Scenario() {
-                @Override
-                public String getName() {
-                    return name;
-                }
-
-                @Override
-                public Feature getFeature() {
-                    return null;
-                }
-
-                @Override
-                public List<String> getContent() {
-                    return Arrays.asList(content);
-                }
-
-                @Override
-                public ResultStatus getResult() {
-                    return status;
-                }
-
-                public String getFeaturePath() {
-                    return featurePath;
-                }
-            };
+        return ScenarioBuilder.use().withName(name).withContent(content).withResult(status).withWrappingFeature(FeatureBuilder.use().withPath(featurePath).build()).build();
     }
 
 

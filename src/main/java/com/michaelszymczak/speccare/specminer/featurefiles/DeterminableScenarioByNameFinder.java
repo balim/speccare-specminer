@@ -23,7 +23,7 @@ public class DeterminableScenarioByNameFinder implements Determinable {
             return new AmbiguousScenario(foundScenarios);
         }
         if (foundScenarios.isEmpty()) {
-            return Scenario.getNotFound();
+            return NotFoundScenario.getInstance();
         }
         return foundScenarios.remove(0);
     }

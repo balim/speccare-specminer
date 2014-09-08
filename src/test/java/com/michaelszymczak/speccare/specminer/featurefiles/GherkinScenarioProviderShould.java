@@ -1,7 +1,8 @@
 package com.michaelszymczak.speccare.specminer.featurefiles;
 
 import com.michaelszymczak.speccare.specminer.core.ExistingFeature;
-import com.michaelszymczak.speccare.specminer.core.ExistingFeatureBuilder;
+import com.michaelszymczak.speccare.specminer.core.FeatureBuilder;
+import com.michaelszymczak.speccare.specminer.core.Feature;
 import com.michaelszymczak.speccare.specminer.core.Scenario;
 import org.junit.Assert;
 import org.junit.Before;
@@ -70,7 +71,7 @@ public class GherkinScenarioProviderShould {
     }
 
     @Test public void usePassedFeatureAsScenariosWrappingFeature() {
-        ExistingFeature feature = ExistingFeatureBuilder.use().build();
+        Feature feature = FeatureBuilder.use().build();
         List<Scenario> scenarios = sc.createFromOneFeature(feature);
         Assert.assertSame(feature, scenarios.get(0).getFeature());
     }

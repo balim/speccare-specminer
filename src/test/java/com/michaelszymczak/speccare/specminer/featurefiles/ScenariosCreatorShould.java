@@ -13,7 +13,7 @@ public class ScenariosCreatorShould {
 
     @Test
     public void storeReferenceToTheWrappingFeatureSoThatOnaCanFindTheFeaturesFile() {
-        ExistingFeature feature = ExistingFeatureBuilder.use().build();
+        Feature feature = FeatureBuilder.use().build();
         Scenario scenario = scenarioCreator.create(validContent(), feature);
         Assert.assertSame(feature, scenario.getFeature());
     }
@@ -123,8 +123,8 @@ public class ScenariosCreatorShould {
         return Arrays.asList("Scenario: foo");
     }
 
-    private ExistingFeature validFeature() {
-        return ExistingFeatureBuilder.use().build();
+    private Feature validFeature() {
+        return FeatureBuilder.use().build();
     }
 
     private void tryToCreateUsingContent(String... lines) {

@@ -44,6 +44,6 @@ public class AmbiguousScenarioShould {
 
 
     private Scenario scenarioWithFeaturePath(String foo) {
-        return ExistingScenarioBuilder.use().withWrappingFeature(ExistingFeatureBuilder.use().withPath(foo).build()).build();
+        return ScenarioBuilder.use().withWrappingFeature(FeatureBuilder.use().withPath(foo).build()).build();
     }
 }

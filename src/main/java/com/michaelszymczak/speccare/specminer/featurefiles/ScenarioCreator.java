@@ -1,6 +1,5 @@
 package com.michaelszymczak.speccare.specminer.featurefiles;
 
-import com.michaelszymczak.speccare.specminer.core.ExistingScenario;
 import com.michaelszymczak.speccare.specminer.core.Feature;
 import com.michaelszymczak.speccare.specminer.core.InvalidScenarioContentException;
 import com.michaelszymczak.speccare.specminer.core.Scenario;
@@ -22,6 +21,6 @@ public class ScenarioCreator {
         if (scenarioNames.size() > 1) {
             throw new InvalidScenarioContentException("Too many 'Scenario:' or 'Scenario Outline:' lines in scenario content: " + content.toString());
         }
-        return new ExistingScenario(scenarioNames.get(0), content, feature);
+        return new FoundScenario(scenarioNames.get(0), content, feature);
     }
 }

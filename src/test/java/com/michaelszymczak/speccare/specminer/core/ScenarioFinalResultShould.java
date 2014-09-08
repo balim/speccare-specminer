@@ -14,7 +14,7 @@ public class ScenarioFinalResultShould {
     @Test public void
     produceResponseBasedOnScenarioFoundUsingProvidedText() throws IOException {
         ScenarioResultJudge result = new ScenarioResultJudge(
-                repositoryFindingScenarioByGivenKey("Foo", ScenarioStub.use().withContent("Scenario: Foo scenario").build()),
+                repositoryFindingScenarioByGivenKey("Foo", ScenarioBuilder.use().withContent("Scenario: Foo scenario").build()),
                 DeterminableCumulativeCucumberReportStub.buildReturningStatus(UNKNOWN)
         );
 
@@ -52,7 +52,7 @@ public class ScenarioFinalResultShould {
 
 
         ScenarioResultJudge result = new ScenarioResultJudge(
-                repositoryFindingScenarioByGivenKey("Bar", ScenarioStub.use().withResult(FOUND).withName("Foo Bar scenario").build()),
+                repositoryFindingScenarioByGivenKey("Bar", ScenarioBuilder.use().withResult(FOUND).withName("Foo Bar scenario").build()),
                 DeterminableCumulativeCucumberReportStub.buildReturningStatusForScenarioName(examinedScenarioStatuses)
         );
 
@@ -72,7 +72,7 @@ public class ScenarioFinalResultShould {
         return new Determinable() {
             @Override
             public Scenario determine(Scenario soughtScenario) throws IOException {
-                return ScenarioStub.use().withResult(scenarioResult).build();
+                return ScenarioBuilder.use().withResult(scenarioResult).build();
             }
         };
     }

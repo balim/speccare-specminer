@@ -7,16 +7,21 @@ import java.util.List;
 
 public class ExistingFeature extends Feature {
 
-    private final String name;
-    private final TextFragmentProvider tfp;
+    private TextFragmentProvider tfp;
+    private String name;
     private final String path;
     private final List<String> content;
 
+    public ExistingFeature(String name, String pathToFeatureFile, List<String> featureFileContent) {
+        this.path = pathToFeatureFile;
+        this.content = Collections.unmodifiableList(featureFileContent);
+        this.name = name;
+    }
+
+    @Deprecated
     public ExistingFeature(TextFragmentProvider textFragmentProvider, String pathToFeatureFile, List<String> featureFileContent) {
-        tfp = textFragmentProvider;
-        path = pathToFeatureFile;
-        content = Collections.unmodifiableList(featureFileContent);
-        name = extractName(featureFileContent);
+        this("", pathToFeatureFile, featureFileContent);
+        name = extractName(textFragmentProvider, featureFileContent);
     }
 
     public String getName() {
@@ -31,7 +36,7 @@ public class ExistingFeature extends Feature {
         return content;
     }
 
-    private String extractName(List<String> featureFileContent) {
+    private String extractName(TextFragmentProvider tfp, List<String> featureFileContent) {
         List<String> names = tfp.getAllFragmentsThatFollows(featureFileContent, new String[]{FEATURE_START});
         if (names.isEmpty()) {
             throw new InvalidFeatureContentException("No 'Feature:' line in feature content: " + featureFileContent.toString());

@@ -6,30 +6,11 @@ import java.util.List;
 public class AmbiguousScenario extends Scenario {
     private final List<Scenario> foundScenarios;
     public AmbiguousScenario(List<Scenario> foundScenarios) {
+        super("Too many scenarios matching searched phrase", Feature.getNotFound(), Collections.<String>emptyList(), ResultStatus.AMBIGUOUS);
         if (foundScenarios.size() < 2) {
             throw new IllegalArgumentException("At least two found scenarios make for ambiguity");
         }
         this.foundScenarios = foundScenarios;
-    }
-
-    @Override
-    public String getName() {
-        return "Too many scenarios matching searched phrase";
-    }
-
-    @Override
-    public Feature getFeature() {
-        return Feature.getNotFound();
-    }
-
-    @Override
-    public List<String> getContent() {
-        return Collections.emptyList();
-    }
-
-    @Override
-    public ResultStatus getResult() {
-        return ResultStatus.AMBIGUOUS;
     }
 
     @Override

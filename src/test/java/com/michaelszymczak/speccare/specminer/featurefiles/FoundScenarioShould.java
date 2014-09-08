@@ -1,26 +1,28 @@
-package com.michaelszymczak.speccare.specminer.core;
+package com.michaelszymczak.speccare.specminer.featurefiles;
 
+import com.michaelszymczak.speccare.specminer.core.*;
 import org.junit.Assert;
 import org.junit.Test;
+
 import java.util.Arrays;
 import java.util.List;
 
-public class ExistingScenarioShould {
+public class FoundScenarioShould {
 
     @Test public void storeReferenceToTheWrappingFeatureSoThatOnaCanFindTheFeaturesFile() {
-        ExistingFeature feature = ExistingFeatureBuilder.use().build();
-        Scenario scenario = new ExistingScenario(validName(), validContent(), feature);
+        Feature feature = FeatureBuilder.use().build();
+        Scenario scenario = new FoundScenario(validName(), validContent(), feature);
         Assert.assertSame(feature, scenario.getFeature());
     }
 
     @Test public void useFoundAsItsResult() {
-        Scenario scenario = new ExistingScenario(validName(), validContent(), validFeature());
+        Scenario scenario = new FoundScenario(validName(), validContent(), validFeature());
         Assert.assertSame(ResultStatus.FOUND, scenario.getResult());
     }
 
     @Test public void provideWrappingFeaturePath() {
-        ExistingFeature feature = ExistingFeatureBuilder.use().withPath("/some/path/foo.feature").build();
-        Scenario scenario = new ExistingScenario(validName(), validContent(), feature);
+        Feature feature = FeatureBuilder.use().withPath("/some/path/foo.feature").build();
+        Scenario scenario = new FoundScenario(validName(), validContent(), feature);
         Assert.assertSame("/some/path/foo.feature", scenario.getFeaturePath());
     }
 
@@ -30,7 +32,7 @@ public class ExistingScenarioShould {
                 "Scenario: Foo title",
                 "    Given bar"
         );
-        Scenario scenario = new ExistingScenario(validName(), lines, validFeature());
+        Scenario scenario = new FoundScenario(validName(), lines, validFeature());
         Assert.assertEquals(lines, scenario.getContent());
     }
 
