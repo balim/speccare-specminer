@@ -1,6 +1,8 @@
 SpecMiner (part of SpecCare) - WIP
 ===================
 
+Travis build status: [![Build Status](https://travis-ci.org/michaelszymczak/speccare-specminer.svg?branch=master)](https://travis-ci.org/michaelszymczak/speccare-specminer)
+
 A tool that provides a RESTful API to retrieve projects' actual specification.
 
 Supported spec types:
