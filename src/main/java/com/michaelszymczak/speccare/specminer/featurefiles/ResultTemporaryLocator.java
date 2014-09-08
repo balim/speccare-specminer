@@ -1,4 +1,4 @@
-package com.michaelszymczak.speccare.specminer.specificationprovider;
+package com.michaelszymczak.speccare.specminer.featurefiles;
 
 import com.michaelszymczak.speccare.specminer.core.ResultLocator;
 
@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class ResultTemporaryLocator implements ResultLocator {
+class ResultTemporaryLocator implements ResultLocator {
 
     private Path path;
     private Path resultFilePath;

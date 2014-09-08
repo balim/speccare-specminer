@@ -2,7 +2,7 @@ package com.michaelszymczak.speccare.specminer.repository;
 
 import com.michaelszymczak.speccare.specminer.core.Scenario;
 import com.michaelszymczak.speccare.specminer.core.ExistingScenarioBuilder;
-import com.michaelszymczak.speccare.specminer.specificationprovider.ScenarioProviderStub;
+import com.michaelszymczak.speccare.specminer.featurefiles.ScenarioProviderStub;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -15,50 +15,50 @@ import static org.junit.Assert.assertEquals;
 public class ProviderBasedScenarioRepositoryShould {
     @Test public void
     returnScenarioMatchingSearchedPhrase() throws IOException {
-        configureProviderToHaveScenarioOfGivenNames("Scenario: foo");
+        configureProviderToHaveScenarioOfGivenNames("foo");
         List<Scenario> foundScenarios = repository.findByNameFragment("foo");
-        assertContentOfEachFoundScenarioIs(foundScenarios, "Scenario: foo");
+        assertContentOfEachFoundScenarioIs(foundScenarios, "foo");
     }
 
     @Test public void
     returnScenarioWhenOnlyPartOfTheNameFound() throws IOException {
-        configureProviderToHaveScenarioOfGivenNames("Scenario: foobar");
+        configureProviderToHaveScenarioOfGivenNames("foobar");
         List<Scenario> foundScenarios = repository.findByNameFragment("oba");
-        assertContentOfEachFoundScenarioIs(foundScenarios, "Scenario: foobar");
+        assertContentOfEachFoundScenarioIs(foundScenarios, "foobar");
     }
 
     @Test public void
     beCaseInsensitive() throws IOException {
-        configureProviderToHaveScenarioOfGivenNames("Scenario: Foobar");
+        configureProviderToHaveScenarioOfGivenNames("Foobar");
         List<Scenario> foundScenarios = repository.findByNameFragment("fooBar");
-        assertContentOfEachFoundScenarioIs(foundScenarios, "Scenario: Foobar");
+        assertContentOfEachFoundScenarioIs(foundScenarios, "Foobar");
     }
 
     @Test public void
     ignoreScenariosNotMatchingThePhrase() throws IOException {
-        configureProviderToHaveScenarioOfGivenNames("Scenario: foo", "Scenario: bar", "Scenario: baz");
+        configureProviderToHaveScenarioOfGivenNames("foo", "bar", "baz");
         List<Scenario> foundScenarios = repository.findByNameFragment("bar");
-        assertContentOfEachFoundScenarioIs(foundScenarios, "Scenario: bar");
+        assertContentOfEachFoundScenarioIs(foundScenarios, "bar");
     }
 
     @Test public void
     returnAllMatchingScenarios() throws IOException {
-        configureProviderToHaveScenarioOfGivenNames("Scenario: foo A", "Scenario: bar B", "Scenario: foo C");
+        configureProviderToHaveScenarioOfGivenNames("foo A", "bar B", "foo C");
         List<Scenario> foundScenarios = repository.findByNameFragment("foo");
-        assertContentOfEachFoundScenarioIs(foundScenarios, "Scenario: foo A", "Scenario: foo C");
+        assertContentOfEachFoundScenarioIs(foundScenarios, "foo A", "foo C");
     }
 
     private void assertContentOfEachFoundScenarioIs(List<Scenario> foundScenarios, String... eachScenarioContent) {
         int scenarioNo = 0;
         for (String firstLine : eachScenarioContent) {
-            assertEquals(firstLine, foundScenarios.get(scenarioNo++).getContent().get(0));
+            assertEquals(firstLine, foundScenarios.get(scenarioNo++).getName());
         }
     }
 
     private void configureProviderToHaveScenarioOfGivenNames(String... names) {
         provider.scenarios = new ArrayList<>();
         for (String name : names) {
-            provider.scenarios.add(ExistingScenarioBuilder.use().withContent(name).build());
+            provider.scenarios.add(ExistingScenarioBuilder.use().withName(name).build());
         }
     }
 

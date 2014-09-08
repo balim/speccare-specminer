@@ -1,6 +1,5 @@
-package com.michaelszymczak.speccare.specminer.specificationprovider;
+package com.michaelszymczak.speccare.specminer.featurefiles;
 
-import com.michaelszymczak.speccare.specminer.core.ExistingScenario;
 import com.michaelszymczak.speccare.specminer.core.Feature;
 import com.michaelszymczak.speccare.specminer.core.Scenario;
 
@@ -8,15 +7,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-// http://mvnrepository.com/artifact/info.cukes/gherkin/2.7.3 instead
+// Take a look at http://mvnrepository.com/artifact/info.cukes/gherkin/2.7.3 instead
 class GherkinScenarioProvider implements ScenarioProvider {
 
     private final TextFragmentProvider tfp;
     private final FeaturesCreator featuresCreator;
+    private final ScenarioCreator scenarioCreator;
 
     public GherkinScenarioProvider(TextFragmentProvider textFragmentProvider, FeaturesCreator featuresCreator) {
         this.tfp = textFragmentProvider;
         this.featuresCreator = featuresCreator;
+        this.scenarioCreator = new ScenarioCreator(this.tfp);
     }
 
     public List<Scenario> create() throws IOException {
@@ -30,9 +31,6 @@ class GherkinScenarioProvider implements ScenarioProvider {
     }
 
     public List<Scenario> createFromOneFeature(Feature feature) {
-
-        SingleScenarioCreator ssc = new SingleScenarioCreator(tfp, feature);
-
         List<List<String>> scenariosContent = new ArrayList<>();
         List<String> currentScenarioLines = null;
         List<Scenario> scenarios = new ArrayList<>();
@@ -43,7 +41,7 @@ class GherkinScenarioProvider implements ScenarioProvider {
                 isInMultilineQuotation = !isInMultilineQuotation;
             }
             if (isScenarioStartingLine(line) && !isInMultilineQuotation) {
-                ssc.addNewScenario(scenarios, currentScenarioLines);
+                addNewScenario(scenarios, currentScenarioLines, feature);
                 currentScenarioLines = createPlaceholderForNewScenarioLines(scenariosContent);
             }
             if (null != currentScenarioLines) {
@@ -51,7 +49,7 @@ class GherkinScenarioProvider implements ScenarioProvider {
             }
         }
 
-        ssc.addNewScenario(scenarios, currentScenarioLines);
+        addNewScenario(scenarios, currentScenarioLines, feature);
         return scenarios;
     }
 
@@ -66,22 +64,9 @@ class GherkinScenarioProvider implements ScenarioProvider {
         return tfp.returnStringFollowingAnyOf(line, new String[]{Scenario.SCENARIO_START, Scenario.SCENARIO_OUTLINE_START}) != null;
     }
 
-    private class SingleScenarioCreator {
-        private final TextFragmentProvider tfp;
-        private final Feature feature;
-        public SingleScenarioCreator(TextFragmentProvider tfp, Feature feature) {
-            this.tfp = tfp;
-            this.feature = feature;
-        }
-
-        public void addNewScenario(List<Scenario> scenarios, List<String> scenarioContent) {
-            if (null != scenarioContent) {
-                scenarios.add(create(scenarioContent));
-            }
-        }
-
-        private Scenario create(List<String> scenarioContent) {
-            return new ExistingScenario(tfp, scenarioContent, feature);
+    private void addNewScenario(List<Scenario> scenarios, List<String> scenarioContent, Feature feature) {
+        if (null != scenarioContent) {
+            scenarios.add(scenarioCreator.create(scenarioContent, feature));
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.michaelszymczak.speccare.specminer.specificationprovider;
+package com.michaelszymczak.speccare.specminer.featurefiles;
 
 import com.michaelszymczak.speccare.specminer.core.Scenario;
 

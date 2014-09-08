@@ -1,7 +1,7 @@
 package com.michaelszymczak.speccare.specminer.controller;
 // TODO: http://stackoverflow.com/questions/16170572/unable-to-mock-service-class-in-spring-mvc-controller-tests
 
-import com.michaelszymczak.speccare.specminer.core.ScenarioFinalResult;
+import com.michaelszymczak.speccare.specminer.core.ScenarioResultJudge;
 import com.michaelszymczak.speccare.specminer.core.ScenarioResponse;
 import org.junit.Assert;
 import org.junit.Before;
@@ -27,7 +27,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 @WebAppConfiguration
 @ContextConfiguration("/applicationTestContext.xml")
 public class ScenariosControllerShould {
-    @Mock private ScenarioFinalResult finalResult;
+    @Mock private ScenarioResultJudge finalResult;
     @Mock private ScenarioResponse scenarioResponse;
     @InjectMocks ScenariosController controllerUnderTest;
     private MockMvc mockMvc;

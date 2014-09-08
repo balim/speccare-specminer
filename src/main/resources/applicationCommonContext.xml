@@ -7,41 +7,41 @@
 
     <context:component-scan base-package="com.michaelszymczak.speccare.specminer"/>
 
-    <bean id="filesystemFeatureFilesRetriever" class="com.michaelszymczak.speccare.specminer.specificationprovider.FilesystemFeatureFilesRetriever">
+    <bean id="filesystemFeatureFilesRetriever" class="com.michaelszymczak.speccare.specminer.featurefiles.FilesystemFeatureFilesRetriever">
         <constructor-arg ref="resultLocator"/>
     </bean>
 
-    <bean id="resultSource" class="com.michaelszymczak.speccare.specminer.specificationprovider.LocatorBasedResultSource">
+    <bean id="resultSource" class="com.michaelszymczak.speccare.specminer.featurefiles.LocatorBasedResultSource">
         <constructor-arg ref="resultLocator"/>
     </bean>
 
-    <bean id="partialResult" class="com.michaelszymczak.speccare.specminer.cucumber.DeterminableCumulativeCucumberReport">
+    <bean id="determinableCumulativeCucumberReport" class="com.michaelszymczak.speccare.specminer.cucumber.DeterminableCumulativeCucumberReport">
         <constructor-arg ref="resultSource"/>
     </bean>
 
-    <bean id="finalResult" class="com.michaelszymczak.speccare.specminer.core.ScenarioFinalResult">
-        <constructor-arg ref="determinableScenarioByNameFinder"/>
-        <constructor-arg ref="partialResult"/>
+    <bean id="finalResult" class="com.michaelszymczak.speccare.specminer.core.ScenarioResultJudge">
+        <constructor-arg index="0" ref="determinableScenarioByNameFinder"/>
+        <constructor-arg index="1" ref="determinableCumulativeCucumberReport"/>
     </bean>
 
-    <bean id="textFragmentProvider" class="com.michaelszymczak.speccare.specminer.specificationprovider.TextFragmentProvider"/>
+    <bean id="textFragmentProvider" class="com.michaelszymczak.speccare.specminer.featurefiles.TextFragmentProvider"/>
 
-    <bean id="featuresCreator" class="com.michaelszymczak.speccare.specminer.specificationprovider.FeaturesCreator">
+    <bean id="featuresCreator" class="com.michaelszymczak.speccare.specminer.featurefiles.FeaturesCreator">
         <constructor-arg index="0" ref="textFragmentProvider"/>
         <constructor-arg index="1" ref="filesystemFeatureFilesRetriever"/>
     </bean>
 
-    <bean id="scenariosCreator" class="com.michaelszymczak.speccare.specminer.specificationprovider.GherkinScenarioProvider">
+    <bean id="scenarioProvider" class="com.michaelszymczak.speccare.specminer.featurefiles.GherkinScenarioProvider">
         <constructor-arg index="0" ref="textFragmentProvider"/>
         <constructor-arg index="1" ref="featuresCreator"/>
     </bean>
 
-    <bean id="determinableScenarioByNameFinder" class="com.michaelszymczak.speccare.specminer.specificationprovider.DeterminableScenarioByNameFinder">
+    <bean id="determinableScenarioByNameFinder" class="com.michaelszymczak.speccare.specminer.featurefiles.DeterminableScenarioByNameFinder">
         <constructor-arg ref="scenarioRepository"/>
     </bean>
 
     <bean id="scenarioRepository" class="com.michaelszymczak.speccare.specminer.repository.ProviderBasedScenarioRepository">
-        <constructor-arg ref="scenariosCreator"/>
+        <constructor-arg ref="scenarioProvider"/>
     </bean>
 
 </beans>

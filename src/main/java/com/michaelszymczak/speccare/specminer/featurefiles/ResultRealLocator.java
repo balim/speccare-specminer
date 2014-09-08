@@ -1,11 +1,11 @@
-package com.michaelszymczak.speccare.specminer.specificationprovider;
+package com.michaelszymczak.speccare.specminer.featurefiles;
 
 import com.michaelszymczak.speccare.specminer.core.ResultLocator;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class ResultRealLocator implements ResultLocator {
+class ResultRealLocator implements ResultLocator {
     private final Path featuresDirPath;
     private final Path resultFilePath;
 

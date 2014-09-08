@@ -1,6 +1,6 @@
 package com.michaelszymczak.speccare.specminer.core;
 
-import com.michaelszymczak.speccare.specminer.specificationprovider.TextFragmentProvider;
+import com.michaelszymczak.speccare.specminer.featurefiles.TextFragmentProvider;
 
 import java.util.Collections;
 import java.util.List;

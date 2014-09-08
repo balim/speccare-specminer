@@ -50,7 +50,7 @@ Feature:
         When NOTFOUND
         Then OK
     """
-    And result file with content from "com/michaelszymczak/speccare/specminer/specificationprovider/testfixture-cucumber-result.json"
+    And result file with content from "com/michaelszymczak/speccare/specminer/featurefiles/testfixture-cucumber-result.json"
 
   Scenario: Passing scenario searched by the scenario name fragment
     Given result file with one "Feature A Scenario passed" passing scenario

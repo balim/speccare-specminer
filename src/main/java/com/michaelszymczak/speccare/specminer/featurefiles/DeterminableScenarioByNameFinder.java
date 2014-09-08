@@ -1,9 +1,8 @@
-package com.michaelszymczak.speccare.specminer.specificationprovider;
+package com.michaelszymczak.speccare.specminer.featurefiles;
 
 import com.michaelszymczak.speccare.specminer.core.AmbiguousScenario;
 import com.michaelszymczak.speccare.specminer.core.Determinable;
 import com.michaelszymczak.speccare.specminer.core.Scenario;
-import com.michaelszymczak.speccare.specminer.repository.ProviderBasedScenarioRepository;
 import com.michaelszymczak.speccare.specminer.repository.ScenarioRepository;
 
 import java.io.IOException;
@@ -13,9 +12,6 @@ public class DeterminableScenarioByNameFinder implements Determinable {
     private final ScenarioRepository repository;
     public DeterminableScenarioByNameFinder(ScenarioRepository repository) {
         this.repository = repository;
-    }
-    public DeterminableScenarioByNameFinder(ScenarioProvider sc) {
-        repository = new ProviderBasedScenarioRepository(sc);
     }
 
     public Scenario determine(Scenario soughtScenario) throws IOException {

@@ -2,7 +2,7 @@ package com.michaelszymczak.speccare.specminer.repository;
 
 
 import com.michaelszymczak.speccare.specminer.core.Scenario;
-import com.michaelszymczak.speccare.specminer.specificationprovider.ScenarioProvider;
+import com.michaelszymczak.speccare.specminer.featurefiles.ScenarioProvider;
 
 import java.io.IOException;
 import java.util.ArrayList;

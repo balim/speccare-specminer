@@ -1,4 +1,4 @@
-package com.michaelszymczak.speccare.specminer.specificationprovider;
+package com.michaelszymczak.speccare.specminer.featurefiles;
 
 import java.util.ArrayList;
 import java.util.List;

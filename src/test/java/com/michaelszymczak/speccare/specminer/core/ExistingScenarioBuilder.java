@@ -1,20 +1,21 @@
 package com.michaelszymczak.speccare.specminer.core;
 
 
-import com.michaelszymczak.speccare.specminer.specificationprovider.TextFragmentProvider;
-
 import java.util.Arrays;
 import java.util.List;
 
 public class ExistingScenarioBuilder {
-    private final TextFragmentProvider tfp = new TextFragmentProvider();
+    private String name = "Default scenario";
     private List<String> scenarioContent = Arrays.asList("Scenario: Default scenario");
     private ExistingFeature wrappingFeature = ExistingFeatureBuilder.use().build();
-    private ResultStatus result;
-
     public static ExistingScenarioBuilder use()
     {
         return new ExistingScenarioBuilder();
+    }
+
+    public ExistingScenarioBuilder withName(String name) {
+        this.name = name;
+        return this;
     }
 
     public ExistingScenarioBuilder withContent(String... lines) {
@@ -27,12 +28,7 @@ public class ExistingScenarioBuilder {
         return this;
     }
 
-    public ExistingScenarioBuilder withResult(ResultStatus result) {
-        this.result = result;
-        return this;
-    }
-
     public ExistingScenario build() {
-        return new ExistingScenario(tfp, scenarioContent, wrappingFeature);
+        return new ExistingScenario(name, scenarioContent, wrappingFeature);
     }
 }

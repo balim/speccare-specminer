@@ -1,22 +1,18 @@
 package com.michaelszymczak.speccare.specminer.core;
 
 
-import com.michaelszymczak.speccare.specminer.specificationprovider.TextFragmentProvider;
-
 import java.util.Collections;
 import java.util.List;
 
 public class ExistingScenario extends Scenario {
-    private final String name;
-    private final TextFragmentProvider tfp;
+    private String name;
     private final Feature feature;
     private final List<String> content;
 
-    public ExistingScenario(TextFragmentProvider textFragmentProvider, List<String> scenarioContent, Feature wrappingFeature) {
-        tfp = textFragmentProvider;
+    public ExistingScenario(String name, List<String> scenarioContent, Feature wrappingFeature) {
         feature = wrappingFeature;
         content = Collections.unmodifiableList(scenarioContent);
-        name = extractName(content);
+        this.name = name;
     }
 
     @Override
@@ -39,14 +35,4 @@ public class ExistingScenario extends Scenario {
         return ResultStatus.FOUND;
     }
 
-    private String extractName(List<String> scenarioContent) {
-        List<String> scenarioNames = tfp.getAllFragmentsThatFollows(scenarioContent, new String[]{SCENARIO_START, SCENARIO_OUTLINE_START});
-        if (scenarioNames.isEmpty()) {
-            throw new InvalidScenarioContentException("No 'Scenario:' nor 'Scenario Outline:' line in scenario content: " + scenarioContent.toString());
-        }
-        if (scenarioNames.size() > 1) {
-            throw new InvalidScenarioContentException("Too many 'Scenario:' or 'Scenario Outline:' lines in scenario content: " + scenarioContent.toString());
-        }
-        return scenarioNames.get(0);
-    }
 }

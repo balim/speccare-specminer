@@ -2,9 +2,8 @@ package com.michaelszymczak.speccare.specminer.cucumberSteps;
 
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
-import com.michaelszymczak.speccare.specminer.cucumber.ResultKnowingCucumberJsonReport;
 import com.michaelszymczak.speccare.specminer.core.ResultStatus;
-import com.michaelszymczak.speccare.specminer.specificationprovider.EncodingDetector;
+import com.michaelszymczak.speccare.specminer.cucumber.ResultKnowingCucumberJsonReport;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.And;
@@ -101,7 +100,6 @@ public class FeaturePresenceSteps {
     private final List<Path> tempFilesToRemove = new ArrayList<>();
 
     @Autowired private TemporaryFileCreator temporaryFileCreator;
-    private final EncodingDetector encodingDetector = new EncodingDetector();
 
     @Before
     public void setUp() throws IOException {

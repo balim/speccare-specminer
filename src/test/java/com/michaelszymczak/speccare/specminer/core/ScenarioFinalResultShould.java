@@ -13,7 +13,7 @@ public class ScenarioFinalResultShould {
 
     @Test public void
     produceResponseBasedOnScenarioFoundUsingProvidedText() throws IOException {
-        ScenarioFinalResult result = new ScenarioFinalResult(
+        ScenarioResultJudge result = new ScenarioResultJudge(
                 repositoryFindingScenarioByGivenKey("Foo", ScenarioStub.use().withContent("Scenario: Foo scenario").build()),
                 DeterminableCumulativeCucumberReportStub.buildReturningStatus(UNKNOWN)
         );
@@ -36,7 +36,7 @@ public class ScenarioFinalResultShould {
 
     @Test public void
     askExaminedScenarioResultsForFinalResultIfScenarioHasFoundResult() throws IOException {
-        ScenarioFinalResult finalResult = new ScenarioFinalResult(
+        ScenarioResultJudge finalResult = new ScenarioResultJudge(
                 repositoryReturningScenarioWIthStatus(FOUND),
                 DeterminableCumulativeCucumberReportStub.buildReturningStatus(PASSED)
         );
@@ -51,7 +51,7 @@ public class ScenarioFinalResultShould {
         examinedScenarioStatuses.put("Foo Bar scenario", FAILED);
 
 
-        ScenarioFinalResult result = new ScenarioFinalResult(
+        ScenarioResultJudge result = new ScenarioResultJudge(
                 repositoryFindingScenarioByGivenKey("Bar", ScenarioStub.use().withResult(FOUND).withName("Foo Bar scenario").build()),
                 DeterminableCumulativeCucumberReportStub.buildReturningStatusForScenarioName(examinedScenarioStatuses)
         );
@@ -60,7 +60,7 @@ public class ScenarioFinalResultShould {
     }
 
     private void assertResponseWithSameStatusAsScenarioFromRepository(ResultStatus expectedResultStatus) throws IOException {
-        ScenarioFinalResult finalResult = new ScenarioFinalResult(
+        ScenarioResultJudge finalResult = new ScenarioResultJudge(
                 repositoryReturningScenarioWIthStatus(expectedResultStatus),
                 DeterminableCumulativeCucumberReportStub.buildReturningStatus(UNKNOWN)
         );

@@ -1,4 +1,4 @@
-package com.michaelszymczak.speccare.specminer.specificationprovider;
+package com.michaelszymczak.speccare.specminer.featurefiles;
 
 
 import com.michaelszymczak.speccare.specminer.core.ResultLocator;
@@ -12,7 +12,7 @@ import java.io.Reader;
 import java.util.Arrays;
 import java.util.List;
 
-public class LocatorBasedResultSource extends ResultSource {
+class LocatorBasedResultSource extends ResultSource {
     private final ResultLocator locator;
 
     public LocatorBasedResultSource(ResultLocator locator) {

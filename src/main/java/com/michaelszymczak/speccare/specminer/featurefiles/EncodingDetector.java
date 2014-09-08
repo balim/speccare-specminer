@@ -1,4 +1,4 @@
-package com.michaelszymczak.speccare.specminer.specificationprovider;
+package com.michaelszymczak.speccare.specminer.featurefiles;
 
 import org.codehaus.plexus.util.IOUtil;
 import org.mozilla.universalchardet.UniversalDetector;
@@ -10,7 +10,7 @@ import java.nio.file.Path;
 import java.util.List;
 
 // From: http://www.programcreek.com/java-api-examples/index.php?api=org.mozilla.universalchardet.UniversalDetector
-public class EncodingDetector {
+class EncodingDetector {
 
     public List<String> getContent(Path path) throws IOException {
         return Files.readAllLines(path, Charset.forName(detect(path.toFile())));

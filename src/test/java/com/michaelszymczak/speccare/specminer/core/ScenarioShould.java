@@ -23,12 +23,12 @@ public class ScenarioShould {
 
     private Scenario createScenarioWithStatus(ResultStatus result) {
         return ExistingScenarioBuilder.use()
-                    .withContent("Scenario: Foo")
-                    .withResult(result)
-                    .withWrappingFeature(ExistingFeatureBuilder.use()
-                                    .withPath("/bar/foo.feature")
-                                    .withContent("Feature: Bar", "Scenario: Foo")
-                                    .build()
-                    ).build();
+                .withContent("Scenario: Foo")
+                .withName("Scenario: Foo")
+                .withWrappingFeature(ExistingFeatureBuilder.use()
+                            .withPath("/bar/foo.feature")
+                            .withContent("Feature: Bar", "Scenario: Foo")
+                            .build()
+                ).build();
     }
 }

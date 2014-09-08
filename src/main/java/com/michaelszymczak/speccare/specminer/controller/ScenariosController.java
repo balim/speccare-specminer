@@ -1,6 +1,6 @@
 package com.michaelszymczak.speccare.specminer.controller;
 
-import com.michaelszymczak.speccare.specminer.core.ScenarioFinalResult;
+import com.michaelszymczak.speccare.specminer.core.ScenarioResultJudge;
 import com.michaelszymczak.speccare.specminer.core.ScenarioResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,12 +15,12 @@ import java.io.IOException;
 @Controller
 @RequestMapping("/scenarios")
 class ScenariosController {
-    @Autowired private ScenarioFinalResult finalResult;
+    @Autowired private ScenarioResultJudge judge;
 
     @RequestMapping(value="/{scenarioNameFragment}", method=RequestMethod.GET,  produces = { "application/json"})
     @ResponseBody
     public ResponseEntity<String> find(@PathVariable String scenarioNameFragment) throws IOException {
-        ScenarioResponse scenarioResponse = finalResult.createResponse(scenarioNameFragment);
+        ScenarioResponse scenarioResponse = judge.createResponse(scenarioNameFragment);
         return new ResponseEntity<>(scenarioResponse.getContent(), scenarioResponse.getHttpStatus());
     }
 }

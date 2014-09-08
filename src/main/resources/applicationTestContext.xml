@@ -9,7 +9,7 @@
     <context:component-scan base-package="com.michaelszymczak.speccare.specminer"/>
     <context:property-placeholder location="classpath:app.test.properties"/>
 
-    <bean id="resultLocator" class="com.michaelszymczak.speccare.specminer.specificationprovider.ResultTemporaryLocator">
+    <bean id="resultLocator" class="com.michaelszymczak.speccare.specminer.featurefiles.ResultTemporaryLocator">
         <constructor-arg value="cucumberResult.json"/>
     </bean>
 
