@@ -1,6 +1,7 @@
 package com.michaelszymczak.speccare.specminer.specificationprovider;
 
 import com.michaelszymczak.speccare.specminer.core.ExistingFeature;
+import com.michaelszymczak.speccare.specminer.core.ExistingFeatureBuilder;
 import com.michaelszymczak.speccare.specminer.core.Scenario;
 import org.junit.Assert;
 import org.junit.Before;
@@ -10,7 +11,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-public class ScenariosCreatorShould {
+public class GherkinScenarioProviderShould {
 
     @Test public void createAllScenariosFoundInAllFeatureFiles() throws IOException {
         givenFeatureFilesRetrieverHasTwoFeatureFilesContainingTwoScenariosEach();
@@ -148,13 +149,13 @@ public class ScenariosCreatorShould {
         Assert.assertEquals(2, scenarios.size());
     }
 
-    private ScenariosCreator sc;
+    private GherkinScenarioProvider sc;
     private FeatureFilesRetrieverStub retriever;
 
     @Before
     public void setUp() throws Exception {
         retriever = new FeatureFilesRetrieverStub();
-        sc = new ScenariosCreator(new TextFragmentProvider(), new FeaturesCreator(new TextFragmentProvider(), retriever));
+        sc = new GherkinScenarioProvider(new TextFragmentProvider(), new FeaturesCreator(new TextFragmentProvider(), retriever));
     }
 
     private void assertLastScenarioCreatedWithFollowingContentAndFeatureContent(List<Scenario> scenarios, List<String> lastScenarioContent, List<String> lastScenarioFeatureContent) {

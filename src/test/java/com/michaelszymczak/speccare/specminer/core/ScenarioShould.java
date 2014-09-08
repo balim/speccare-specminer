@@ -1,8 +1,6 @@
 package com.michaelszymczak.speccare.specminer.core;
 
 
-import com.michaelszymczak.speccare.specminer.specificationprovider.ExistingFeatureBuilder;
-import com.michaelszymczak.speccare.specminer.specificationprovider.ExistingScenarioBuilder;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

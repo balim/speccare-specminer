@@ -1,6 +1,5 @@
 package com.michaelszymczak.speccare.specminer.core;
 
-import com.michaelszymczak.speccare.specminer.specificationprovider.ExistingFeatureBuilder;
 import org.junit.Assert;
 import org.junit.Test;
 

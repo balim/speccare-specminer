@@ -20,7 +20,7 @@
     </bean>
 
     <bean id="finalResult" class="com.michaelszymczak.speccare.specminer.core.ScenarioFinalResult">
-        <constructor-arg ref="determinableFeatureScenario"/>
+        <constructor-arg ref="determinableScenarioByNameFinder"/>
         <constructor-arg ref="partialResult"/>
     </bean>
 
@@ -31,12 +31,16 @@
         <constructor-arg index="1" ref="filesystemFeatureFilesRetriever"/>
     </bean>
 
-    <bean id="scenariosCreator" class="com.michaelszymczak.speccare.specminer.specificationprovider.ScenariosCreator">
+    <bean id="scenariosCreator" class="com.michaelszymczak.speccare.specminer.specificationprovider.GherkinScenarioProvider">
         <constructor-arg index="0" ref="textFragmentProvider"/>
         <constructor-arg index="1" ref="featuresCreator"/>
     </bean>
 
-    <bean id="determinableFeatureScenario" class="com.michaelszymczak.speccare.specminer.specificationprovider.DeterminableScenarioNameFinder">
+    <bean id="determinableScenarioByNameFinder" class="com.michaelszymczak.speccare.specminer.specificationprovider.DeterminableScenarioByNameFinder">
+        <constructor-arg ref="scenarioRepository"/>
+    </bean>
+
+    <bean id="scenarioRepository" class="com.michaelszymczak.speccare.specminer.repository.ProviderBasedScenarioRepository">
         <constructor-arg ref="scenariosCreator"/>
     </bean>
 

@@ -1,6 +1,6 @@
 package com.michaelszymczak.speccare.specminer.core;
 
-import com.michaelszymczak.speccare.specminer.specificationprovider.DeterminableCumulativeCucumberReportStub;
+import com.michaelszymczak.speccare.specminer.cucumber.DeterminableCumulativeCucumberReportStub;
 import org.junit.Assert;
 import org.junit.Test;
 import java.io.IOException;

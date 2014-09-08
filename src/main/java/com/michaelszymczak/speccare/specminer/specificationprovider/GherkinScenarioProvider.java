@@ -8,13 +8,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-// TODO: use http://mvnrepository.com/artifact/info.cukes/gherkin/2.7.3 instead
-class ScenariosCreator implements ScenariosCreatable {
+// http://mvnrepository.com/artifact/info.cukes/gherkin/2.7.3 instead
+class GherkinScenarioProvider implements ScenarioProvider {
 
     private final TextFragmentProvider tfp;
     private final FeaturesCreator featuresCreator;
 
-    public ScenariosCreator(TextFragmentProvider textFragmentProvider, FeaturesCreator featuresCreator) {
+    public GherkinScenarioProvider(TextFragmentProvider textFragmentProvider, FeaturesCreator featuresCreator) {
         this.tfp = textFragmentProvider;
         this.featuresCreator = featuresCreator;
     }

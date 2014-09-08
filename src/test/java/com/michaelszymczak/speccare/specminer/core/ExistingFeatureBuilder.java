@@ -1,7 +1,7 @@
-package com.michaelszymczak.speccare.specminer.specificationprovider;
+package com.michaelszymczak.speccare.specminer.core;
 
 
-import com.michaelszymczak.speccare.specminer.core.ExistingFeature;
+import com.michaelszymczak.speccare.specminer.specificationprovider.TextFragmentProvider;
 
 import java.util.Arrays;
 import java.util.List;

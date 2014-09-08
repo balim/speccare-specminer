@@ -1,7 +1,6 @@
-package com.michaelszymczak.speccare.specminer.specificationprovider;
+package com.michaelszymczak.speccare.specminer.cucumber;
 
 import com.michaelszymczak.speccare.specminer.core.*;
-import com.michaelszymczak.speccare.specminer.cucumber.DeterminableCumulativeCucumberReport;
 
 import java.io.Reader;
 import java.util.List;

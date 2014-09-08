@@ -1,8 +1,5 @@
-package com.michaelszymczak.speccare.specminer.specificationprovider;
+package com.michaelszymczak.speccare.specminer.core;
 
-
-import com.michaelszymczak.speccare.specminer.core.AmbiguousScenario;
-import com.michaelszymczak.speccare.specminer.core.Scenario;
 
 import java.util.ArrayList;
 import java.util.List;

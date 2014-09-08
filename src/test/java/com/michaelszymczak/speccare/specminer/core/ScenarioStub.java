@@ -1,8 +1,6 @@
 package com.michaelszymczak.speccare.specminer.core;
 
 
-import com.michaelszymczak.speccare.specminer.specificationprovider.ExistingFeatureBuilder;
-
 import java.util.Arrays;
 import java.util.List;
 

@@ -6,9 +6,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-class ScenariosCreatorStub implements ScenariosCreatable {
+public class ScenarioProviderStub implements ScenarioProvider {
 
-    public final List<Scenario> scenarios = new ArrayList<>();
+    public List<Scenario> scenarios = new ArrayList<>();
 
     @Override
     public List<Scenario> create() throws IOException {

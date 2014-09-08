@@ -5,7 +5,7 @@ import com.eclipsesource.json.JsonValue;
 import com.michaelszymczak.speccare.specminer.core.ResultAggregate;
 import com.michaelszymczak.speccare.specminer.core.ResultStatus;
 
-public class EntryJsonObject {
+class EntryJsonObject {
     private JsonObject object;
 
     public EntryJsonObject(JsonValue value) {

@@ -1,7 +1,5 @@
 package com.michaelszymczak.speccare.specminer.core;
 
-import com.michaelszymczak.speccare.specminer.specificationprovider.ExistingFeatureBuilder;
-import com.michaelszymczak.speccare.specminer.specificationprovider.ExistingScenarioBuilder;
 import org.junit.Assert;
 import org.junit.Test;
 import java.util.Arrays;

@@ -11,7 +11,7 @@ import java.io.Reader;
 
 import static com.michaelszymczak.speccare.specminer.core.ResultStatus.*;
 
-public class DeterminableCucumberJsonReportShould {
+public class ResultKnowingCucumberJsonReportShould {
 
     @Test public void
     informAboutPassedScenario() throws IOException {
