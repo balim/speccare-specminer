@@ -48,6 +48,24 @@ public class ScenariosCreatorShould {
         Assert.assertEquals("Bar title", scenario.getName());
     }
 
+    @Test public void ignoreEmptyLines() {
+        Scenario scenario = givenCreatedPassingContent(
+                "",
+                "    ",
+                "  Scenario: Bar title    ",
+                "    Given bar",
+                "    ",
+                ""
+        );
+
+        List<String> expectedLines = Arrays.asList(
+                "  Scenario: Bar title    ",
+                "    Given bar"
+        );
+
+        Assert.assertEquals(expectedLines, scenario.getContent());
+    }
+
     @Test public void treatScenarioTemplateAsAScenarioNameAsWell() {
         Scenario scenario = givenCreatedPassingContent(
                 "  Scenario Outline: Foo scenario outline name",

@@ -74,8 +74,17 @@ public class FeaturePresenceSteps {
 
     @Given("^result file with one \"(.*?)\" passing scenario$")
     public void result_file_with_one_scenario_with_all_passing_steps(String scenarioName) throws Throwable {
+        resultWithOneScenario(scenarioName, ResultStatus.PASSED);
+    }
+
+    @Given("^result file with one \"([^\"]*)\" failed scenario$")
+    public void result_file_with_one_failed_scenario(String scenarioName) throws Throwable {
+        resultWithOneScenario(scenarioName, ResultStatus.FAILED);
+    }
+
+    private void resultWithOneScenario(String scenarioName, ResultStatus expectedResultStatus) throws IOException {
         ResultStatus result = new ResultKnowingCucumberJsonReport().getResult(new FileReader(resultFilePath), scenarioName);
-        Assert.assertEquals(ResultStatus.PASSED, result);
+        Assert.assertEquals(expectedResultStatus, result);
     }
 
     @Given("^OK$")
@@ -83,20 +92,20 @@ public class FeaturePresenceSteps {
         Assert.assertTrue(true);
     }
 
+
+
+
     @Then("^FAIL$")
     public void tfail() throws Throwable {
         Assert.assertTrue(false);
     }
-
-
-
-
     private String siteUrl;
-    private final WebClient client = new WebClient();
 
+    private final WebClient client = new WebClient();
     private String featuresDir;
     private String resultFilePath;
     private WebResponse response;
+
     private final List<Path> tempFilesToRemove = new ArrayList<>();
 
     @Autowired private TemporaryFileCreator temporaryFileCreator;
@@ -114,12 +123,12 @@ public class FeaturePresenceSteps {
         assertNoFilesInFeaturesDir();
     }
 
+
     @After
     public void tearDown() throws IOException {
         removeAllTmpFiles();
         assertNoFilesInFeaturesDir();
     }
-
 
     private void assertNoFilesInFeaturesDir() {
         File[] files = Paths.get(featuresDir).toFile().listFiles();
